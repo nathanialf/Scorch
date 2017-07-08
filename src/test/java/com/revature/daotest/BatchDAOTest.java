@@ -34,7 +34,7 @@ public class BatchDAOTest {
 	@Test
 	public void test() {
 		BatchDAO test = new BatchDAOImpl();
-		
+		//ok..
 //		User t = new User("Bobbert", "java", "Bob", "Tester", 1, null);
 //		//Create first batch
 //		test.createBatch(t, "Java 404", null, null, null);
