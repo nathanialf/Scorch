@@ -69,6 +69,6 @@ public class Topic {
 
 	@Override
 	public String toString() {
-		return "Topic [id=" + id + ", week=" + week + ", topic=" + topic + "]";
+		return "Topic [id=" + id + ", topic=" + topic + "]";
 	}
 }
