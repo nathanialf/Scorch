@@ -18,7 +18,11 @@
 		<property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
 				
 		<!-- Mapping CLASSES with hibernate -->
-		<mapping class="com.example.bean.User" />
-		<mapping class="com.example.bean.Role" />
+		<mapping class="com.revature.bean.User" />
+		<mapping class="com.revature.bean.Role" />
+		<mapping class="com.revature.bean.Batch" />
+		<mapping class="com.revature.bean.Week" />
+		<mapping class="com.revature.bean.Topic" />
+		
 	</session-factory>
 </hibernate-configuration>
