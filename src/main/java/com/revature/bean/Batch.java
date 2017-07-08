@@ -26,8 +26,8 @@ public class Batch {
 	
 	@Id
 	@Column(name="BATCH_ID")
-	@SequenceGenerator(name="BATCH_SEQ", sequenceName="BATCH_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BATCH_SEQ")
+	@SequenceGenerator(name="BATCHID_SEQ", sequenceName="BATCHID_SEQ")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BATCHID_SEQ")
 	private int id;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -42,17 +42,22 @@ public class Batch {
 	
 	@OneToMany(mappedBy="batch")
 	private List<Week> weeks;
-
+	
+	@OneToMany(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name="USER_ID")
+	private List<User> associates;
+	
 	public Batch() {
 		super();
 	}
 	
-	public Batch(User trainer, String name, Date startDate, List<Week> weeks) {
+	public Batch(User trainer, String name, Date startDate, List<Week> weeks, List<User> associates) {
 		super();
 		this.trainer = trainer;
 		this.name = name;
 		this.startDate = startDate;
 		this.weeks = weeks;
+		this.associates = associates;
 	}
 
 	public int getId() {
@@ -95,10 +100,19 @@ public class Batch {
 		this.weeks = weeks;
 	}
 
+	
+	public List<User> getAssociates() {
+		return associates;
+	}
+
+	
+	public void setAssociates(List<User> associates) {
+		this.associates = associates;
+	}
+
 	@Override
 	public String toString() {
 		return "Batch [id=" + id + ", trainer=" + trainer + ", name=" + name + ", startDate=" + startDate + ", weeks="
-				+ weeks + "]";
+				+ weeks + ", associates=" + associates + "]";
 	}
-	
 }
