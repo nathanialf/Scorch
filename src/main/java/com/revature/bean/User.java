@@ -42,7 +42,7 @@ public class User {
 	private int active;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="USER_ROLE")
+	@JoinColumn(name="ROLE_NAME")
 	private Role role;
 	
 	public User(){
