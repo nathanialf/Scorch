@@ -15,7 +15,7 @@ public class UserDAOImpl implements UserDAO {
 	public int insertUser(User user) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
-		int userId = null;
+		int userId = 0;
 		
 		try {
 			tx = session.beginTransaction();
