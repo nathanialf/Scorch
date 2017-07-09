@@ -1,9 +1,10 @@
 package com.revature.bean;
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,7 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -44,15 +46,18 @@ public class Batch {
 	private List<User> associates;
 	*/
 	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name="BATCH_ASSOC", joinColumns = @JoinColumn(name="BATCH_ID"), inverseJoinColumns = @JoinColumn(name="ASSOCIATE_ID"))
+	private Set<User> associates = new HashSet<>();
+	
 	public Batch() {
 		super();
 	}
 	
-	public Batch(String name, Date startDate, List<Week> weeks) {
+	public Batch(String name, Date startDate) {
 		super();
 		this.name = name;
 		this.startDate = startDate;
-		this.weeks = weeks;
 	}
 
 	public int getId() {
@@ -87,9 +92,17 @@ public class Batch {
 		this.weeks = weeks;
 	}
 
+	public Set<User> getAssociates() {
+		return associates;
+	}
+
+	public void setAssociates(Set<User> associates) {
+		this.associates = associates;
+	}
+
 	@Override
 	public String toString() {
-		return "Batch [id=" + id + ", name=" + name + ", startDate=" + startDate + ", weeks="
-				+ weeks + "]";
+		return "Batch [id=" + id + ", name=" + name + ", startDate=" + startDate + ", weeks=" + weeks + ", associates="
+				+ associates + "]";
 	}
 }
