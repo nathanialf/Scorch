@@ -1,22 +1,26 @@
 package com.revature.daotest;
 
-import static org.junit.Assert.assertNotNull;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.revature.bean.Batch;
-import com.revature.bean.User;
 import com.revature.dao.BatchDAO;
 import com.revature.dao.BatchDAOImpl;
+import com.revature.dao.UserDAO;
+import com.revature.dao.UserDAOImpl;
+import com.revature.dao.WeekDAO;
 
 public class BatchDAOTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		//From DB tables
+		//Batches has-a User
+		//				Week
+		UserDAO bs1 = new UserDAOImpl();
+		//WeekDAO bs2 = new WeekDAOImpl();
 	}
 
 	@AfterClass
