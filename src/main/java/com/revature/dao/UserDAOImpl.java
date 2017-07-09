@@ -67,7 +67,7 @@ public class UserDAOImpl implements UserDAO {
 		
 		try {
 	            tx = session.beginTransaction();
-		        users = session.createQuery("FROM Employee").list();
+		        users = session.createQuery("FROM User").list();
 	            
 	        }
 	        catch(HibernateException e) {
