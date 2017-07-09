@@ -38,21 +38,21 @@ public class Batch {
 	
 	@OneToMany(mappedBy="batch")
 	private List<Week> weeks;
-	
+	/*
 	@OneToMany(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="USER_ID")
 	private List<User> associates;
+	*/
 	
 	public Batch() {
 		super();
 	}
 	
-	public Batch(String name, Date startDate, List<Week> weeks, List<User> associates) {
+	public Batch(String name, Date startDate, List<Week> weeks) {
 		super();
 		this.name = name;
 		this.startDate = startDate;
 		this.weeks = weeks;
-		this.associates = associates;
 	}
 
 	public int getId() {
@@ -87,19 +87,9 @@ public class Batch {
 		this.weeks = weeks;
 	}
 
-	
-	public List<User> getAssociates() {
-		return associates;
-	}
-
-	
-	public void setAssociates(List<User> associates) {
-		this.associates = associates;
-	}
-
 	@Override
 	public String toString() {
 		return "Batch [id=" + id + ", name=" + name + ", startDate=" + startDate + ", weeks="
-				+ weeks + ", associates=" + associates + "]";
+				+ weeks + "]";
 	}
 }
