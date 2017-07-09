@@ -3,8 +3,6 @@ package com.revature.daotest;
 import static org.junit.Assert.assertNotNull;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -13,9 +11,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.revature.bean.Batch;
+import com.revature.bean.Role;
 import com.revature.bean.User;
 import com.revature.dao.BatchDAO;
 import com.revature.dao.BatchDAOImpl;
+import com.revature.dao.UserDAO;
+import com.revature.dao.UserDAOImpl;
 
 public class BatchDAOTest {
 
@@ -41,33 +42,36 @@ public class BatchDAOTest {
 	public void test() {
 		BatchDAO test = new BatchDAOImpl();
 		
+		//After ensuring UserDAOTest worked perfectly...
+		UserDAO udao = new UserDAOImpl();
+	
 		Batch x = new Batch();
 		
-		List<User> us = new ArrayList<User>();
+		//Assign to handle referential integrity
+		x.getAssociates().add(udao.getUserById(udao.insertUser(
+				new User("bdaotest","bdaopass","Batcher","Batchmen",1,new Role("Associate"),null))));
 		
+		x.setWeeks(null);
+		x.setName("Java 404");
+		x.setStartDate(new Date(System.currentTimeMillis()));
+	
+		int xn = test.insertBatch(x);
+		//int y = test.insertBatch(new Batch("Java 405", new Date(System.currentTimeMillis())));
+		//int z = test.insertBatch(new Batch("Java 406", new Date(System.currentTimeMillis())));
 		
-//		x.setAssociates(us);
-//		x.setWeeks(null);
-//		x.setName("Java 404");
-//		x.setStartDate(new Date(System.currentTimeMillis()));
-//	
-//		int xn = test.insertBatch(x);
-//		//int y = test.insertBatch(new Batch("Java 405", new Date(System.currentTimeMillis())));
-//		//int z = test.insertBatch(new Batch("Java 406", new Date(System.currentTimeMillis())));
-//		
-//		assertNotNull(test.getBatchById(xn));
-//		//assertNotNull(test.getBatchById(y));
-//		//assertNotNull(test.getBatchById(z));
-//		
-//		System.out.println(test.getAllBatches());
-//		assertNotNull(test.getAllBatches());
-//		
-//		x.setName("New Name For Upd");
-//		test.updateBatch(x);
-//		assert(test.getBatchById(xn).getName().equals("New Name For Upd"));
-//		
-//		System.out.println(test.getAllBatches());
-//		assertNotNull(test.getAllBatches());
+		assertNotNull(test.getBatchById(xn));
+		//assertNotNull(test.getBatchById(y));
+		//assertNotNull(test.getBatchById(z));
+		
+		System.out.println(test.getAllBatches());
+		assertNotNull(test.getAllBatches());
+		
+		x.setName("New Name For Upd");
+		test.updateBatch(x);
+		assert(test.getBatchById(xn).getName().equals("New Name For Upd"));
+		
+		System.out.println(test.getAllBatches());
+		assertNotNull(test.getAllBatches());
 	}
 
 }
