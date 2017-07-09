@@ -30,10 +30,6 @@ public class Batch {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BATCHID_SEQ")
 	private int id;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="USER_ID")
-	private User trainer;
-	
 	@Column(name="BATCH_NAME")
 	private String name;
 	
@@ -51,9 +47,8 @@ public class Batch {
 		super();
 	}
 	
-	public Batch(User trainer, String name, Date startDate, List<Week> weeks, List<User> associates) {
+	public Batch(String name, Date startDate, List<Week> weeks, List<User> associates) {
 		super();
-		this.trainer = trainer;
 		this.name = name;
 		this.startDate = startDate;
 		this.weeks = weeks;
@@ -66,14 +61,6 @@ public class Batch {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public User getTrainer() {
-		return trainer;
-	}
-
-	public void setTrainer(User trainer) {
-		this.trainer = trainer;
 	}
 
 	public String getName() {
@@ -112,7 +99,7 @@ public class Batch {
 
 	@Override
 	public String toString() {
-		return "Batch [id=" + id + ", trainer=" + trainer + ", name=" + name + ", startDate=" + startDate + ", weeks="
+		return "Batch [id=" + id + ", name=" + name + ", startDate=" + startDate + ", weeks="
 				+ weeks + ", associates=" + associates + "]";
 	}
 }

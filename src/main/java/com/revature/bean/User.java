@@ -1,5 +1,7 @@
 package com.revature.bean;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -45,11 +48,15 @@ public class User {
 	@JoinColumn(name="ROLE_ID")
 	private Role role;
 	
+	@OneToMany(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name="BATCH_ID")
+	private List<Batch> batches;
+	
 	public User(){
 		super();
 	}
 
-	public User(String username, String password, String firstname, String lastname, int active, Role role) {
+	public User(String username, String password, String firstname, String lastname, int active, Role role, List<Batch> batches) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -57,6 +64,7 @@ public class User {
 		this.lastname = lastname;
 		this.active = active;
 		this.role = role;
+		this.batches = batches;
 	}
 
 	public int getId() {
@@ -115,9 +123,19 @@ public class User {
 		this.role = role;
 	}
 
+	public List<Batch> getBatches() {
+		return batches;
+	}
+
+	public void setBatches(List<Batch> batches) {
+		this.batches = batches;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstname=" + firstname
-				+ ", lastname=" + lastname + ", active=" + active + ", role=" + role + "]";
-	}	
+				+ ", lastname=" + lastname + ", active=" + active + ", role=" + role + ", batches=" + batches + "]";
+	}
+	
+	
 }
