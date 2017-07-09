@@ -1,26 +1,28 @@
 package com.revature.daotest;
 
+import static org.junit.Assert.assertNotNull;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.revature.bean.Batch;
+import com.revature.bean.User;
 import com.revature.dao.BatchDAO;
 import com.revature.dao.BatchDAOImpl;
-import com.revature.dao.UserDAO;
-import com.revature.dao.UserDAOImpl;
-import com.revature.dao.WeekDAO;
 
 public class BatchDAOTest {
 
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		//From DB tables
-		//Batches has-a User
-		//				Week
-		UserDAO bs1 = new UserDAOImpl();
-		//WeekDAO bs2 = new WeekDAOImpl();
+	
 	}
 
 	@AfterClass
@@ -38,32 +40,34 @@ public class BatchDAOTest {
 	@Test
 	public void test() {
 		BatchDAO test = new BatchDAOImpl();
-		//ok..
-//		User t = new User("Bobbert", "java", "Bob", "Tester", 1, null);
-//		//Create first batch
-//		test.createBatch(t, "Java 404", null, null, null);
+		
+		Batch x = new Batch();
+		
+		List<User> us = new ArrayList<User>();
+		
+		
+//		x.setAssociates(us);
+//		x.setWeeks(null);
+//		x.setName("Java 404");
+//		x.setStartDate(new Date(System.currentTimeMillis()));
+//	
+//		int xn = test.insertBatch(x);
+//		//int y = test.insertBatch(new Batch("Java 405", new Date(System.currentTimeMillis())));
+//		//int z = test.insertBatch(new Batch("Java 406", new Date(System.currentTimeMillis())));
 //		
-//		//get batch 1
-//		assertNotNull(test.getBatchById(1));
-//		Batch toupd = test.getBatchById(1);
-//				
-//		//create 2nd batch
-//		test.createBatch(t, "Java 404", null, null, null);
-//
-//		//get batch 2
-//		assertNotNull(test.getBatchById(2));
+//		assertNotNull(test.getBatchById(xn));
+//		//assertNotNull(test.getBatchById(y));
+//		//assertNotNull(test.getBatchById(z));
 //		
-//		//update an existing batch
-//		toupd.setName("Java 300");
-//		test.setBatch(toupd);
-//		
-//		//get batch with update
-//		System.out.println(test.getBatchById(1));
-//		
-//		//get all batches
+//		System.out.println(test.getAllBatches());
 //		assertNotNull(test.getAllBatches());
-		
-		
+//		
+//		x.setName("New Name For Upd");
+//		test.updateBatch(x);
+//		assert(test.getBatchById(xn).getName().equals("New Name For Upd"));
+//		
+//		System.out.println(test.getAllBatches());
+//		assertNotNull(test.getAllBatches());
 	}
 
 }
