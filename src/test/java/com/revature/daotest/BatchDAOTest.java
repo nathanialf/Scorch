@@ -28,7 +28,14 @@ public class BatchDAOTest {
 		//Role setup
 		RoleDAO x = new RoleDAOImpl();
 		Role a = new Role("Associate");
+		Role b = new Role("Trainer");
 		x.insertRole(a);
+		x.insertRole(b);
+		
+		//Setup for having at least one user
+		UserDAO y = new UserDAOImpl();
+		User u = new User("mandatoryu","pass","Adam","Smith",1,b,null);
+		y.insertUser(u);
 	
 	}
 
