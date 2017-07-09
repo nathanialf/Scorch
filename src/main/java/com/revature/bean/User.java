@@ -16,7 +16,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "EMPLOYEE")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region="tapCache")
 public class User {
 	
