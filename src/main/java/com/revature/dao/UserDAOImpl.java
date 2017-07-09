@@ -91,7 +91,7 @@ public class UserDAOImpl implements UserDAO {
 		try {
 			tx = session.beginTransaction();
 			if (session.contains(user)) {
-				session.save(user);
+				session.update(user);
 			}
 			tx.commit();
 		} catch (HibernateException e) {

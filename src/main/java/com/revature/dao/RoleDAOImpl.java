@@ -72,7 +72,7 @@ public class RoleDAOImpl implements RoleDAO {
 		try {
 			tx = session.beginTransaction();
 			if (session.contains(r)) {
-				session.save(r);
+				session.update(r);
 			}
 			tx.commit();
 		} catch (HibernateException e) {
