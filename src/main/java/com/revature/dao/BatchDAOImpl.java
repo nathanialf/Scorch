@@ -58,11 +58,10 @@ public class BatchDAOImpl implements BatchDAO {
 
 		try {
 			tx = session.beginTransaction();
-			// Check if batch already exists
-			if (session.contains(batch)) {
-				// Update batch with new changes...
-				session.update(batch);
-			}
+
+			// Update batch with new changes...
+			session.update(batch);
+			
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null) {
