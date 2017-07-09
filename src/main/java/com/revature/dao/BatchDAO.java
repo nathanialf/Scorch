@@ -10,7 +10,7 @@ public interface BatchDAO {
 	
 	public int insertBatch(Batch batch);
 	
-	public void setBatch(Batch batch);
+	public void updateBatch(Batch batch);
 	
 	public List<Batch> getAllBatches();
 	
