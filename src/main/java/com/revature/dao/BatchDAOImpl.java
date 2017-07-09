@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.revature.bean.Batch;
+import com.revature.bean.Review;
 import com.revature.util.HibernateUtil;
 
 public class BatchDAOImpl implements BatchDAO {
@@ -75,17 +76,46 @@ public class BatchDAOImpl implements BatchDAO {
 
 	@Override
 	public List<Batch> getAllBatches() {
-		Session session = HibernateUtil.getSession();
 		List<Batch> batches = null;
-		
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+
 		try {
-			batches = session.createCriteria(Batch.class).list();
+			tx = session.beginTransaction();
+			batches = session.createQuery("FROM Batch").list();
+
 		} catch (HibernateException e) {
+			if (tx != null) {
+				tx.rollback();
+			}
 			e.printStackTrace();
 		} finally {
 			session.close();
 		}
+
 		return batches;
+	}
+
+	@Override
+	public void deleteBatch(Batch batch) {
+
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+
+		try {
+			tx = session.beginTransaction();
+			session.delete(batch);
+			tx.commit();
+
+		} catch (HibernateException e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
 	}
 
 }

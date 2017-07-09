@@ -6,21 +6,21 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.revature.bean.Review;
+import com.revature.bean.ReviewType;
 import com.revature.bean.User;
 import com.revature.util.HibernateUtil;
 
-public class ReviewDAOImpl implements ReviewDAO {
+public class ReviewTypeDAOImpl implements ReviewTypeDAO{
 
 	@Override
-	public int insertReview(Review r) {
+	public int insertReviewType(ReviewType t) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
-		int reviewId = 0;
+		int id = 0;
 
 		try {
 			tx = session.beginTransaction();
-			reviewId = (Integer) session.save(r);
+			id = (Integer) session.save(t);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null) {
@@ -31,18 +31,18 @@ public class ReviewDAOImpl implements ReviewDAO {
 			session.close();
 		}
 
-		return reviewId;
+		return id;
 	}
 
 	@Override
-	public Review getReviewById(int id) {
+	public ReviewType getReviewTypeById(int id) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
-		Review review = null;
+		ReviewType type = null;
 
 		try {
 			tx = session.beginTransaction();
-			review = (Review) session.get(Review.class, id);
+			type = (ReviewType) session.get(ReviewType.class, id);
 
 		} catch (HibernateException e) {
 			if (tx != null) {
@@ -53,18 +53,18 @@ public class ReviewDAOImpl implements ReviewDAO {
 			session.close();
 		}
 
-		return review;
+		return type;
 	}
 
 	@Override
-	public List<Review> getAllReviews() {
-		List<Review> reviews = null;
+	public List<ReviewType> getAllReviewTypes() {
+		List<ReviewType> types = null;
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
 
 		try {
 			tx = session.beginTransaction();
-			reviews = session.createQuery("FROM Review").list();
+			types = session.createQuery("FROM ReviewType").list();
 
 		} catch (HibernateException e) {
 			if (tx != null) {
@@ -75,17 +75,17 @@ public class ReviewDAOImpl implements ReviewDAO {
 			session.close();
 		}
 
-		return reviews;
+		return types;
 	}
 
 	@Override
-	public void updateReview(Review r) {
+	public void updateReviewType(ReviewType t) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
 
 		try {
 			tx = session.beginTransaction();
-			session.update(r);
+			session.update(t);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null) {
@@ -98,14 +98,14 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 
 	@Override
-	public void deleteReview(Review r) {
+	public void deleteReviewType(ReviewType t) {
 
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
 
 		try {
 			tx = session.beginTransaction();
-			session.delete(r);
+			session.delete(t);
 			tx.commit();
 
 		} catch (HibernateException e) {
