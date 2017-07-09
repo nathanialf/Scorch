@@ -15,6 +15,8 @@ import com.revature.bean.Role;
 import com.revature.bean.User;
 import com.revature.dao.BatchDAO;
 import com.revature.dao.BatchDAOImpl;
+import com.revature.dao.RoleDAO;
+import com.revature.dao.RoleDAOImpl;
 import com.revature.dao.UserDAO;
 import com.revature.dao.UserDAOImpl;
 
@@ -23,6 +25,10 @@ public class BatchDAOTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		//Role setup
+		RoleDAO x = new RoleDAOImpl();
+		Role a = new Role("Associate");
+		x.insertRole(a);
 	
 	}
 
@@ -54,7 +60,7 @@ public class BatchDAOTest {
 		x.setWeeks(null);
 		x.setName("Java 404");
 		x.setStartDate(new Date(System.currentTimeMillis()));
-	
+		
 		int xn = test.insertBatch(x);
 		//int y = test.insertBatch(new Batch("Java 405", new Date(System.currentTimeMillis())));
 		//int z = test.insertBatch(new Batch("Java 406", new Date(System.currentTimeMillis())));
