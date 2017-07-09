@@ -16,7 +16,7 @@ public interface BatchDAO {
 			List<Week> weeks,
 			List<User> associates);
 	
-	public void setBatch(Batch batch);
+	public void updateBatch(Batch batch);
 	
 	public List<Batch> getAllBatches();
 	

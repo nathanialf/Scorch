@@ -84,7 +84,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public void setUser(User user) {
+	public void updateUser(User user) {
 		
 		Session session = HibernateUtil.getSession();
         Transaction tx = null;

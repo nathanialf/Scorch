@@ -45,7 +45,7 @@ public class BatchDAOImpl implements BatchDAO {
 	}
 
 	@Override
-	public void setBatch(Batch batch) {
+	public void updateBatch(Batch batch) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = session.beginTransaction();
 		
