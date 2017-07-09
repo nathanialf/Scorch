@@ -34,7 +34,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public User getUserById(Integer id) {
+	public User getUserById(int  id) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
 		User user = null;

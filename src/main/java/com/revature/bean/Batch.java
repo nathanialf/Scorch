@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,14 +38,10 @@ public class Batch {
 	
 	@Column(name="BATCH_START")
 	private Date startDate;
-	
-	@OneToMany(mappedBy="batch")
-	private List<Week> weeks;
-	/*
+
 	@OneToMany(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="USER_ID")
-	private List<User> associates;
-	*/
+	@JoinColumn(name="WEEK_ID")
+	private List<Week> weeks;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="BATCH_ASSOC", joinColumns = @JoinColumn(name="BATCH_ID"), inverseJoinColumns = @JoinColumn(name="ASSOCIATE_ID"))

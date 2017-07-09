@@ -6,6 +6,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.revature.bean.User;
 import com.revature.bean.Week;
 import com.revature.util.HibernateUtil;
 
@@ -35,26 +36,66 @@ public class WeekDAOImpl implements WeekDAO {
 
 	@Override
 	public Week getWeekById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+		Week week = null;
 
-	@Override
-	public void createWeek() {
-		// TODO Auto-generated method stub
+		try {
+			tx = session.beginTransaction();
+			week = (Week) session.get(Week.class, id);
 
+		} catch (HibernateException e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return week;
 	}
 
 	@Override
 	public void updateWeek(Week week) {
-		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+
+		try {
+			tx = session.beginTransaction();
+			session.update(week);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
 
 	}
 
 	@Override
 	public List<Week> getAllWeeks() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Week> weeks = null;
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+
+		try {
+			tx = session.beginTransaction();
+			weeks = session.createQuery("FROM Week").list();
+
+		} catch (HibernateException e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return weeks;
 	}
 
 }

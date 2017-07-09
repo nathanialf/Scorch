@@ -7,7 +7,7 @@ import com.revature.bean.User;
 public interface UserDAO {
 	
 	public int insertUser(User u);
-	public User getUserById(Integer id);
+	public User getUserById(int id);
 	public List<User> getAllUsers();
 	public void updateUser(User u);
 	public void deleteUser(User u);
