@@ -8,7 +8,6 @@ import org.hibernate.Transaction;
 
 import com.revature.bean.Batch;
 import com.revature.bean.Role;
-import com.revature.bean.User;
 import com.revature.util.HibernateUtil;
 
 public class RoleDAOImpl implements RoleDAO {
@@ -68,23 +67,22 @@ public class RoleDAOImpl implements RoleDAO {
 	@Override
 	public void updateRole(Role r) {
 		Session session = HibernateUtil.getSession();
-        Transaction tx = null;
-        
-        try {
-            tx = session.beginTransaction();
-            r = (Role)session.get(Role.class, r.getId());
-            tx.commit();
-            
-        }
-        catch(HibernateException e) {
-            if(tx != null) {
-            	tx.rollback();
-            }
-            e.printStackTrace();
-        }
-        finally {
-        	session.close();
-        }
+		Transaction tx = null;
+
+		try {
+			tx = session.beginTransaction();
+			if (session.contains(r)) {
+				session.save(r);
+			}
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
 	}
 
 	@Override

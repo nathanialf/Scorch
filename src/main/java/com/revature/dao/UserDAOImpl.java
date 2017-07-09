@@ -15,7 +15,7 @@ public class UserDAOImpl implements UserDAO {
 	public int insertUser(User user) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
-		Integer userId = null;
+		int userId = null;
 		
 		try {
 			tx = session.beginTransaction();
@@ -85,38 +85,34 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public void updateUser(User user) {
-		
 		Session session = HibernateUtil.getSession();
-        Transaction tx = null;
-        
-        try {
-            tx = session.beginTransaction();
-            user = (User)session.get(User.class, user.getId());
-            tx.commit();
-            
-        }
-        catch(HibernateException e) {
-            if(tx != null) {
-            	tx.rollback();
-            }
-            e.printStackTrace();
-        }
-        finally {
-        	session.close();
-        }
+		Transaction tx = null;
+
+		try {
+			tx = session.beginTransaction();
+			if (session.contains(user)) {
+				session.save(user);
+			}
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
 	}
 
 	@Override
-	public void deleteUser(Integer id) {
+	public void deleteUser(User u) {
 		
 		Session session = HibernateUtil.getSession();
         Transaction tx = null;
-        User user = null;
         
         try {
             tx = session.beginTransaction();
-            user = (User)session.get(User.class, id);
-            session.delete(user);
+            session.delete(u);
             tx.commit();
             
         }
