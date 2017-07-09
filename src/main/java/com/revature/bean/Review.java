@@ -34,28 +34,21 @@ public class Review {
 	@JoinColumn(name="WEEK_ID")
 	private Week week;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="REVIEWTYPE_ID")
-	private ReviewType type;
-	
 	@Column(name="REVIEW_REVIEW")
 	private String review;
-	
-	@Column(name="REVIEW_RATING")
-	private int rating;
 	
 	public Review(){
 		super();
 	}
 
-	public Review(User user, Week week, ReviewType type, String review, int rating) {
+
+	public Review(User user, Week week, String review) {
 		super();
 		this.user = user;
 		this.week = week;
-		this.type = type;
 		this.review = review;
-		this.rating = rating;
 	}
+
 
 	public int getId() {
 		return id;
@@ -81,14 +74,6 @@ public class Review {
 		this.week = week;
 	}
 
-	public ReviewType getType() {
-		return type;
-	}
-
-	public void setType(ReviewType type) {
-		this.type = type;
-	}
-
 	public String getReview() {
 		return review;
 	}
@@ -97,19 +82,12 @@ public class Review {
 		this.review = review;
 	}
 
-	public int getRating() {
-		return rating;
-	}
-
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
 
 	@Override
 	public String toString() {
-		return "Review [id=" + id + ", user=" + user + ", type=" + type + ", review=" + review + ", rating=" + rating
-				+ "]";
+		return "Review [id=" + id + ", user=" + user + ", week=" + week + ", review=" + review + "]";
 	}
+
 	
 	
 }
