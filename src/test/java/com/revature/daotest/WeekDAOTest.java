@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.revature.dao.WeekDAO;
@@ -29,6 +30,7 @@ public class WeekDAOTest {
 	public void tearDown() throws Exception {
 	}
 
+	@Ignore
 	@Test
 	public void test() {
 		WeekDAO wdao = new WeekDAOImpl();

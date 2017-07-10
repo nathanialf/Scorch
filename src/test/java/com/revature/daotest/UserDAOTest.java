@@ -1,11 +1,12 @@
 package com.revature.daotest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.revature.bean.Role;
@@ -45,7 +46,8 @@ public class UserDAOTest {
 	public void tearDown() throws Exception {
 		System.out.println("---AFTER THE TEST---");
 	}
-
+	
+	@Ignore
 	@Test
 	public void insertUser() {
 		System.out.println("-STARTING INSERTUSER-");
@@ -77,6 +79,7 @@ public class UserDAOTest {
 //		System.out.println(x.getUserById(50));
 //	}
 	
+	@Ignore
 	@Test
 	public void getAllUsers() {
 		System.out.println("-STARTING GET_ALL_USERS-");
@@ -86,6 +89,7 @@ public class UserDAOTest {
 		System.out.println(x.getAllUsers());
 	}
 	
+	@Ignore
 	@Test
 	public void updateUser() {
 		System.out.println("-STARTING UPDATE_USER-");
@@ -102,6 +106,7 @@ public class UserDAOTest {
 		assert(x.getUserById(50).getFirstname().equals("UPDATEDTEST"));
 	}
 	
+	@Ignore
 	@Test
 	public void deleteUser() {
 		System.out.println("-STARTING DELETE_USER-");
