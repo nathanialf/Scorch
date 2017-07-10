@@ -3,6 +3,7 @@ package com.revature.dao;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -115,6 +116,34 @@ public class UserDAOImpl implements UserDAO {
 		} finally {
 			session.close();
 		}
+	}
+
+	@Override
+	public User getUserByLogin(String username, String password) {
+		User user = null;
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+
+		try {
+			tx = session.beginTransaction();
+			Query psQuery = session.createQuery("FROM User WHERE USER_USERNAME = :user and USER_PASSWORD = :pass");
+			psQuery.setString("user", username);
+			psQuery.setString("pass", password);
+			List<User>users = psQuery.list();
+			if(users.size() > 0)
+				user = users.get(0);
+			
+
+		} catch (HibernateException e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return user;
 	}
 
 }

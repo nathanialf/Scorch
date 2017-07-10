@@ -3,17 +3,16 @@ package com.revature.service;
 import org.springframework.stereotype.Component;
 
 import com.revature.bean.User;
+import com.revature.dao.UserDAO;
+import com.revature.dao.UserDAOImpl;
 
 @Component
 public class UserService {
 
 	public User auth(User user){
 		User authUser = null;
-		
-		if(user.getUsername().equals("Bobbert") &&
-				user.getPassword().equals("stuff")){
-			authUser = user;
-		}
+		UserDAO uDao = new UserDAOImpl();
+		authUser = uDao.getUserByLogin(user.getUsername(), user.getPassword());
 		
 		return authUser;
 		/*
