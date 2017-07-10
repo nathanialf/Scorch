@@ -35,7 +35,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public User getUserById(int  id) {
+	public User getUserById(int id) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
 		User user = null;
@@ -128,9 +128,15 @@ public class UserDAOImpl implements UserDAO {
 			tx = session.beginTransaction();
 			List<User> users = session.createQuery("FROM User").list();
 			System.out.println(users.size());
-			for(User u : users)
-				user = u;
 			
+			
+			System.out.println("Called with: "+ username + " " + password);
+			for (User u : users) {
+				System.out.println(u.getUsername() + " " + u.getPassword());
+				if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
+					user = u;
+				}
+			}
 
 		} catch (HibernateException e) {
 			if (tx != null) {
