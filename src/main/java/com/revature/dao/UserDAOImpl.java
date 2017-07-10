@@ -127,11 +127,12 @@ public class UserDAOImpl implements UserDAO {
 		try {
 			tx = session.beginTransaction();
 			Query psQuery = session.createQuery("FROM User WHERE USER_USERNAME = :user and USER_PASSWORD = :pass");
-			psQuery.setString("user", username);
-			psQuery.setString("pass", password);
+			psQuery.setParameter("user", username);
+			psQuery.setParameter("pass", password);
 			List<User>users = psQuery.list();
-			if(users.size() > 0)
-				user = users.get(0);
+			System.out.println(users.size());
+			for(User u : users)
+				user = u;
 			
 
 		} catch (HibernateException e) {
