@@ -11,7 +11,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Revature TAP</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.css" />
+<!--  <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.css" />-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

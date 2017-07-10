@@ -11,16 +11,16 @@ public class UserService {
 
 	public User auth(User user){
 		User authUser = null;
-		
+		/*
 		UserDAO uDao = new UserDAOImpl();
 		authUser = uDao.getUserByLogin(user.getUsername(), user.getPassword());
+		*/
 		
-		/*
 		if(user.getUsername().equals("bobbert") &&
 				user.getPassword().equals("stuff")){
 			authUser = user;
 		}
-		*/
+		
 		return authUser;
 		/*
 		 * This authentication will return null in all situations where
