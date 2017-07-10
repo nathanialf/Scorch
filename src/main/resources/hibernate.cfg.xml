@@ -24,6 +24,7 @@
 		<mapping class="com.revature.bean.Week" />
 		<mapping class="com.revature.bean.Topic" />
 		<mapping class="com.revature.bean.Review" />
+		<mapping class="com.revature.bean.TopicRating" />
 		
 	</session-factory>
 </hibernate-configuration>
