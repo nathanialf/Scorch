@@ -43,7 +43,7 @@ public class Batch {
 	@JoinColumn(name="WEEK_ID")
 	private List<Week> weeks;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name="BATCH_ASSOC", joinColumns = @JoinColumn(name="BATCH_ID"), inverseJoinColumns = @JoinColumn(name="ASSOCIATE_ID"))
 	private Set<User> associates = new HashSet<>();
 	

@@ -18,6 +18,7 @@ import com.revature.dao.UserDAOImpl;
 
 public class UserDAOTest {
 
+	@Ignore
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		//Role setup
