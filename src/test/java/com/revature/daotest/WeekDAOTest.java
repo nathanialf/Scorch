@@ -30,7 +30,6 @@ public class WeekDAOTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Ignore
 	@Test
 	public void test() {
 		WeekDAO wdao = new WeekDAOImpl();

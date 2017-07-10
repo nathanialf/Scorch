@@ -47,7 +47,6 @@ public class UserDAOTest {
 		System.out.println("---AFTER THE TEST---");
 	}
 	
-	@Ignore
 	@Test
 	public void insertUser() {
 		System.out.println("-STARTING INSERTUSER-");
@@ -79,7 +78,6 @@ public class UserDAOTest {
 //		System.out.println(x.getUserById(50));
 //	}
 	
-	@Ignore
 	@Test
 	public void getAllUsers() {
 		System.out.println("-STARTING GET_ALL_USERS-");
@@ -89,7 +87,6 @@ public class UserDAOTest {
 		System.out.println(x.getAllUsers());
 	}
 	
-	@Ignore
 	@Test
 	public void updateUser() {
 		System.out.println("-STARTING UPDATE_USER-");
@@ -106,7 +103,6 @@ public class UserDAOTest {
 		assert(x.getUserById(50).getFirstname().equals("UPDATEDTEST"));
 	}
 	
-	@Ignore
 	@Test
 	public void deleteUser() {
 		System.out.println("-STARTING DELETE_USER-");
