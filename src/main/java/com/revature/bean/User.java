@@ -14,10 +14,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.stereotype.Component;
 
+@Component
 @Entity
 @Table(name = "EMPLOYEE")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region="tapCache")
@@ -29,9 +33,12 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USERID_SEQ")
 	private int id;
 	
+	@NotEmpty(message="Username cannot be empty")
+	@Size(min=4, max=20)
 	@Column(name="USER_USERNAME")
 	private String username;
 	
+	@NotEmpty(message="Password cannot be empty")
 	@Column(name="USER_PASSWORD")
 	private String password;
 	

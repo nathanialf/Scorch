@@ -41,7 +41,7 @@ public class BatchDAOTest {
 	public void tearDown() throws Exception {
 	}
 
-	
+	@Ignore
 	@Test
 	public void test() {
 		BatchDAO test = new BatchDAOImpl();
