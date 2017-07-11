@@ -4,23 +4,24 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 	<display-name>TAP</display-name>
-	<!-- Context-paramsm they're back. Parameters set in the context scope,
-	ie. application scope. Spring mvc will use these parameters to determine where to look for our bean definition -->
+	<!-- Context-paramsm they're back. Parameters set in the context scope, 
+		ie. application scope. Spring mvc will use these parameters to determine 
+		where to look for our bean definition -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/beans.xml</param-value>
 	</context-param>
-	
-	<!-- Next we hookup the spring mvc listener. this will take all requests and forward
-	them to our dispatcher servlet.
-	NORE: this is pulling from the spring-mvc library, syntax must be perfext -->
+
+	<!-- Next we hookup the spring mvc listener. this will take all requests 
+		and forward them to our dispatcher servlet. NORE: this is pulling from the 
+		spring-mvc library, syntax must be perfext -->
 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-	<!-- Here, we have the only servlet we map. Our dispatcher servlet. 
-	NOTE: we provide it to the config-scope parameter for info on where our beans are. -->
+	<!-- Here, we have the only servlet we map. Our dispatcher servlet. NOTE: 
+		we provide it to the config-scope parameter for info on where our beans are. -->
 	<servlet>
 		<servlet-name>SpringDispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -30,9 +31,13 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-	<!--  as all good servlets, it is hooked up to handle all patterns -->
+	<!-- as all good servlets, it is hooked up to handle all patterns -->
 	<servlet-mapping>
 		<servlet-name>SpringDispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
 </web-app>
