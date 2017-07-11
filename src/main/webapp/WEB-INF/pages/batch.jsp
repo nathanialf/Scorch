@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Revature TAP</title>
+<title>Batch</title>
 <!--  <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.css" />-->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
@@ -25,52 +25,58 @@
 </head>
 <body>
 
+	
 	<c:if test="${sessionScope.user == null}">
 		<jsp:forward page="Login" />
 	</c:if>
 
-	<c:if test="${user.getRole().getName() == \"Associate\"}">
+	<c:if test="${sessionScope.user.getRole().getName() == \"Associate\"}">
 		<jsp:include page="review.jsp" />
 	</c:if>
-
+	
+	
 	<c:if
-		test="${	user.getRole().getName() == \"Trainer\" || 
-					user.getRole().getName() == \"Evaluator\" ||
-					user.getRole().getName() == \"Manager\" }">
+		test="${	sessionScope.user.getRole().getName() == \"Trainer\" || 
+					sessionScope.user.getRole().getName() == \"Evaluator\" ||
+					sessionScope.user.getRole().getName() == \"Manager\" }">
 
-		<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Revature</a>
-			</div>
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home</a></li>
-				<li><a href="#">Page 1</a></li>
-				<li><a href="#">Page 2</a></li>
-				<li><a href="#">Page 3</a></li>
+	<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Revature</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li class="active"><a href="#">Home</a></li>
+			<li><a href="#">Page 1</a></li>
+			<li><a href="#">Page 2</a></li>
+			<li><a href="#">Page 3</a></li>
+		</ul>
+		<form:form method="GET" commandName="logout">
+			<button type="submit" class="btn btn-default btn-sm"
+				style="float: right; margin-top: 10px">
+				<span class="glyphicon glyphicon-log-out"></span>&nbsp;Log-Out
+			</button>
+		</form:form>
+	</div>
+	</nav>
+
+	<div class="container">
+		<div class="jumbotron">
+			<h1>List of Batches</h1>
+
+			<c:if test="${ sessionScope.user.getRole().getName() == \"Trainer\" }">
+				<form:form method="POST">
+					<input type="submit" value="Create User">
+				</form:form>
+			</c:if>
+
+			<ul>
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
 			</ul>
-			<form:form method="GET" commandName="logout">
-				<button type="submit" class="btn btn-default btn-sm"
-					style="float: right; margin-top: 10px">
-					<span class="glyphicon glyphicon-log-out"></span>&nbsp;Log-Out
-				</button>
-			</form:form>
 		</div>
-		</nav>
-
-		<div class="container">
-			<div class="jumbotron">
-				<h1>List of Batches</h1>
-
-
-				<ul>
-					<li>1</li>
-					<li>2</li>
-					<li>3</li>
-					<li>4</li>
-				</ul>
-			</div>
-		</div>
+	</div>
 
 	</c:if>
 

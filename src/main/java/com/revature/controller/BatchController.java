@@ -22,21 +22,22 @@ public class BatchController {
 	Batch emptyBatch;
 	
 	
-	@ModelAttribute("Some info")
+	@ModelAttribute("batch")
 	public String addInfotoRequestScope(){
-		System.out.println("Clicked on Create User from JSP Page...");
 		return "This is added information";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String getLoginPage(ModelMap modelMap){
+		System.out.println( modelMap.get("batch") );
+		System.out.println("GET: Do I play ever page hit?");
 		
 		return "batch";
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public String doLogin(@Valid User user, BindingResult bindingResult, ModelMap modelMap, HttpSession session){
-		
+		System.out.println("POST: Do I play every page hit?");
 		return "batch";
 	}
 }
