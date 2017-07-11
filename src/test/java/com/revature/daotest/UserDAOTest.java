@@ -21,16 +21,16 @@ public class UserDAOTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		//Role setup
-		RoleDAO x = new RoleDAOImpl();
-		Role a = new Role("Associate");
-		Role b = new Role("Trainer");
-		x.insertRole(a);
-		x.insertRole(b);
-		
-		//Setup for having at least one user
-		UserDAO y = new UserDAOImpl();
-		User u = new User("mandatoryu","pass","Adam","Smith",1,b,null);
-		y.insertUser(u);
+//		RoleDAO x = new RoleDAOImpl();
+//		Role a = new Role("Associate");
+//		Role b = new Role("Trainer");
+//		x.insertRole(a);
+//		x.insertRole(b);
+//		
+//		//Setup for having at least one user
+//		UserDAO y = new UserDAOImpl();
+//		User u = new User("mandatoryu","pass","Adam","Smith",1,b,null);
+//		y.insertUser(u);
 	}
 
 	@AfterClass
@@ -47,6 +47,7 @@ public class UserDAOTest {
 		System.out.println("---AFTER THE TEST---");
 	}
 	
+	@Ignore
 	@Test
 	public void insertUser() {
 		System.out.println("-STARTING INSERTUSER-");
@@ -78,6 +79,7 @@ public class UserDAOTest {
 //		System.out.println(x.getUserById(50));
 //	}
 	
+	@Ignore
 	@Test
 	public void getAllUsers() {
 		System.out.println("-STARTING GET_ALL_USERS-");
