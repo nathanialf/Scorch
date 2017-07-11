@@ -126,14 +126,10 @@ public class UserDAOImpl implements UserDAO {
 
 		try {
 			tx = session.beginTransaction();
-			List<User> users = session.createQuery("FROM User").list();
-			System.out.println(users.size());
+			List<User> users = session.createQuery("FROM User").list();			
 			
-			
-			System.out.println("Called with: "+ username + " " + password);
 			for (User u : users) {
-				System.out.println(u.getUsername() + " " + u.getPassword());
-				if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
+				if (u.getUsername().equals(username) && u.getPassword().equals(password) && u.getActive() == 1) {
 					user = u;
 				}
 			}
