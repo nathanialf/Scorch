@@ -19,6 +19,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -51,10 +52,12 @@ public class User {
 	@Column(name="USER_ACTIVE")
 	private int active;
 	
+	@Autowired
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="ROLE_ID")
 	private Role role;
 	
+	@Autowired
 	@OneToMany(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="BATCH_ID")
 	private List<Batch> batches;

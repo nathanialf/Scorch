@@ -21,7 +21,10 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 @Entity
 @Table(name = "BATCH")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region="tapCache")
@@ -39,10 +42,12 @@ public class Batch {
 	@Column(name="BATCH_START")
 	private Date startDate;
 
+	@Autowired
 	@OneToMany(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="WEEK_ID")
 	private List<Week> weeks;
 	
+	@Autowired
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name="BATCH_ASSOC", joinColumns = @JoinColumn(name="BATCH_ID"), inverseJoinColumns = @JoinColumn(name="ASSOCIATE_ID"))
 	private Set<User> associates = new HashSet<>();

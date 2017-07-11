@@ -14,7 +14,10 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 @Entity
 @Table(name="TOPIC")
 @Cache(usage=CacheConcurrencyStrategy.READ_WRITE, region="tapCache")
@@ -26,6 +29,7 @@ public class Topic {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TOPICID_SEQ")
 	private int id;
 	
+	@Autowired
 	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="WEEK_ID")
 	private Week week;
