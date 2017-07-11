@@ -21,24 +21,37 @@
 </head>
 <body>
 	<div class="container-fluid">
-		<div class="col-sm-4 col-sm-offset-4 login-card" style="">
-			<img src="static/img/revlogo.png" class="col-sm-12" style="background-color:#EFEFEF;border-bottom:1px solid lightgray;">
-			<br>
-			<br>
+		<div class="col-sm-4 col-sm-offset-4 login-card container-fluid" style="">
+			<img src="static/img/revlogo.png" class="col-sm-12"
+				style="background-color: #EFEFEF; border-bottom: 1px solid lightgray;">
+			<br> <br>
 			<c:if test="${errorMessage != null}">
-				<div class="alert alert-danger custom-alert" >${errorMessage}</div>
+				<div class="alert alert-danger custom-alert">${errorMessage}</div>
 			</c:if>
-			<form:form action="login" method="POST" commandName="user">
-		Username:<br><form:input path="username" />
-				<form:errors path="username" cssClass="alert alert-danger"
-					element="div" />
-				<br><br>
-		Password:<br><form:password path="password" />
-				<form:errors path="username" cssClass="alert alert-danger"
-					element="div" />
-				<br>
-				<input type="submit" class="login-button" value="Login">
-			</form:form>
+			<div class="container-fluid">
+				<form:form action="login" method="POST" commandName="user">
+		Username:<br>
+					<div class="input-group col-md-12">
+						<span class="input-group-addon"><i
+							class="glyphicon glyphicon-user"></i></span>
+						<form:input path="username" />
+					</div>
+					<form:errors path="username" cssClass="alert alert-danger"
+						element="div" />
+					<br>
+					<br>
+		Password:<br>
+					<div class="input-group col-md-12">
+						<span class="input-group-addon"><i
+							class="glyphicon glyphicon-user"></i></span>
+						<form:password path="password" />
+					</div>
+					<form:errors path="username" cssClass="alert alert-danger"
+						element="div" />
+					<br>
+					<input type="submit" class="login-button" value="Login">
+				</form:form>
+			</div>
 		</div>
 	</div>
 </body>

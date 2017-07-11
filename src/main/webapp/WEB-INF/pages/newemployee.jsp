@@ -39,9 +39,10 @@
 			<li><a href="#">Page 3</a></li>
 		</ul>
 		<form:form action="logout" method="GET">
-		<button type="submit" class="btn btn-default btn-sm" style="float:right;margin-top:10px">
-			<span class="glyphicon glyphicon-log-out"></span>&nbsp;Log-Out
-		</button>
+			<button type="submit" class="btn btn-default btn-sm"
+				style="float: right; margin-top: 10px">
+				<span class="glyphicon glyphicon-log-out"></span>&nbsp;Log-Out
+			</button>
 		</form:form>
 	</div>
 	</nav>
@@ -50,6 +51,26 @@
 			<h2>New Employee</h2>
 		</div>
 
+		<form:form method="post" action="employee/add" commandName="user">
+			<div class="input-group col-md-6">
+				<span class="input-group-addon"><i
+					class="glyphicon glyphicon-user"></i></span> <input type="text"
+					name="firstname" class="form-control" placeholder="First Name"
+					required>
+			</div><br>
+			<div class="input-group col-md-6">
+				<span class="input-group-addon"><i
+					class="glyphicon glyphicon-user"></i></span> <input type="text"
+					name="lastname" class="form-control" placeholder="Last Name"
+					required>
+			</div><br>
+			<div class="input-group col-md-6">
+				<span class="input-group-addon"><i
+					class="glyphicon glyphicon-user"></i></span> <input type="text"
+					name="username" class="form-control" placeholder="Username"
+					required>
+			</div>
+		</form:form>
 
 	</div>
 </body>
