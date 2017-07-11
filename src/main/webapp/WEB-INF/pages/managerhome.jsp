@@ -13,7 +13,7 @@
 			<li><a href="#">Page 2</a></li>
 			<li><a href="#">Page 3</a></li>
 		</ul>
-		<button type="button" class="btn btn-default btn-sm" style="float:right;margin-top:10px" onclick="window.open(\"Logout\", \"_self\");">
+		<button type="button" class="btn btn-default btn-sm" style="float:right;margin-top:10px">
 			<span class="glyphicon glyphicon-log-out"></span>Log-Out
 		</button>
 	</div>
