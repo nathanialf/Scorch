@@ -38,7 +38,7 @@
 			<li><a href="#">Page 2</a></li>
 			<li><a href="#">Page 3</a></li>
 		</ul>
-		<form:form method="get" commandName="logout">
+		<form:form method="GET" action="logout">
 		<button type="submit" class="btn btn-default btn-sm" style="float:right;margin-top:10px">
 			<span class="glyphicon glyphicon-log-out"></span>&nbsp;Log-Out
 		</button>
@@ -50,7 +50,7 @@
 			<h2>Employees</h2>
 			<br>
 			<br>
-		<form:form method="post" commandName="employee/new" action="employee/new">
+		<form:form method="post" action="employee/new">
 		<button type="submit" class="btn btn-default btn-sm">
 			<span class="glyphicon glyphicon-plus"></span>&nbsp;New Employee
 		</button>
