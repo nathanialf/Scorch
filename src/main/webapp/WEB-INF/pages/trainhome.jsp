@@ -17,7 +17,7 @@
 			<li><a href="#">Page 2</a></li>
 			<li><a href="#">Page 3</a></li>
 		</ul>
-		<form:form action="logout" method="GET">
+		<form:form method="GET" commandName="logout">
 		<button type="submit" class="btn btn-default btn-sm" style="float:right;margin-top:10px">
 			<span class="glyphicon glyphicon-log-out"></span>&nbsp;Log-Out
 		</button>
