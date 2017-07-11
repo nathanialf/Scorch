@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <body>
@@ -14,10 +15,9 @@
 			<li><a href="#">Page 2</a></li>
 			<li><a href="#">Page 3</a></li>
 		</ul>
-		<button type="button" class="btn btn-default btn-sm"
-			style="float: right; margin-top: 10px" onclick="window.open(\"Logout\", \"_self\");">
+		<form:form action="logout" method="GET"><input type="submit" class="btn btn-default btn-sm" style="float:right;margin-top:10px" onclick="window.open(\"Logout\", \"_self\");">
 			<span class="glyphicon glyphicon-log-out"></span>Log-Out
-		</button>
+		</form:form>
 	</div>
 	</nav>
 	<div class="container">
