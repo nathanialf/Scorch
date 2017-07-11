@@ -1,7 +1,5 @@
 package com.revature.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -11,8 +9,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.revature.bean.Role;
 import com.revature.bean.User;
 import com.revature.service.UserService;
 
@@ -24,8 +22,9 @@ public class InsertEmployeeController {
 	@Autowired
 	UserService userService;
 
+	
 	@RequestMapping(method = RequestMethod.GET)
-	public String getEmployees(@Valid User user, BindingResult bindingResult, ModelMap modelMap, HttpSession session) {
+	public String getEmployees(@Valid User user,@RequestParam("role") String role, BindingResult bindingResult, ModelMap modelMap, HttpSession session) {
 		user.setActive(1);
 		user.setPassword("generic");
 		userService.addEmployee(user);
@@ -34,7 +33,7 @@ public class InsertEmployeeController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String getEmployeesPost(@Valid User user, BindingResult bindingResult, ModelMap modelMap, HttpSession session) {
+	public String getEmployeesPost(@Valid User user,@RequestParam("role") String role, BindingResult bindingResult, ModelMap modelMap, HttpSession session) {
 		user.setActive(1);
 		user.setPassword("generic");
 		userService.addEmployee(user);

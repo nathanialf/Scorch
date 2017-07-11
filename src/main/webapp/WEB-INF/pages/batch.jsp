@@ -51,7 +51,7 @@
 			<li><a href="#">Page 2</a></li>
 			<li><a href="#">Page 3</a></li>
 		</ul>
-		<form:form method="GET" commandName="logout">
+		<form:form method="GET" action="logout">
 			<button type="submit" class="btn btn-default btn-sm"
 				style="float: right; margin-top: 10px">
 				<span class="glyphicon glyphicon-log-out"></span>&nbsp;Log-Out
@@ -66,7 +66,7 @@
 
 			<c:if test="${ sessionScope.user.getRole().getName() == \"Trainer\" }">
 				<form:form method="POST">
-					<input type="submit" value="Create User">
+					<input type="submit" value="Create Batch">
 				</form:form>
 			</c:if>
 

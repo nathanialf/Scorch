@@ -73,10 +73,10 @@
 					required>
 			</div><br>
 			<div class="form-group col-md-6">
-			<select class="form-control"
+			<select name="role" class="form-control"
 					id="sel1">
 					<c:forEach var="role" items="${roles}">
-						<option value="${role.getId()}">${role.getName()}</option>
+						<option value="${role.getName()}">${role.getName()}</option>
 					</c:forEach>
 				</select>
 			</div><br><br><br><br>
