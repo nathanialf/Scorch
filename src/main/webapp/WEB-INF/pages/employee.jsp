@@ -37,20 +37,41 @@
 			<li><a href="#">Page 2</a></li>
 			<li><a href="#">Page 3</a></li>
 		</ul>
-		<button type="button" class="btn btn-default btn-sm"
-			style="float: right; margin-top: 10px" onclick="window.open(\"Logout\", \"_self\");">
-			<span class="glyphicon glyphicon-log-out"></span>Log-Out
+		<form:form action="logout" method="GET">
+		<button type="submit" class="btn btn-default btn-sm" style="float:right;margin-top:10px">
+			<span class="glyphicon glyphicon-log-out"></span>&nbsp;Log-Out
 		</button>
+		</form:form>
 	</div>
 	</nav>
 	<div class="container">
 		<div class="jumbotron">
-			<h1>Welcome, ${user.getFirstname()} ${user.getLastname()}</h1>
-			<p>You are a Manager</p>
+			<h2>Employees</h2>
+			<br><br>
+			<button type="button" class="btn btn-default">
+			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;New Employee</button>
 		</div>
-		<c:forEach var="emp" items="${employees}">
-			<c:out value="${emp}" />
-		</c:forEach>
+
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Name
+					<th>Username
+					<th>Role
+					<th>Active
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="emp" items="${employees}">
+					<tr>
+					<td>${emp.getFirstname()}&nbsp;${emp.getLastname()}
+					<td>${emp.getUsername()}
+					<td>${emp.getRole().getName()}
+					<td>${emp.getActive()}
+				</c:forEach>
+			</tbody>
+		</table>
+
 	</div>
 
 </body>

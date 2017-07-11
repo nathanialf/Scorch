@@ -17,7 +17,7 @@
 		</ul>
 		<form:form action="logout" method="GET">
 		<button type="submit" class="btn btn-default btn-sm" style="float:right;margin-top:10px">
-			<span class="glyphicon glyphicon-log-out"></span>Log-Out
+			<span class="glyphicon glyphicon-log-out"></span>&nbsp;Log-Out
 		</button>
 		</form:form>
 	</div>

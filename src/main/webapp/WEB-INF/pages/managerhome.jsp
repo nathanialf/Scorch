@@ -13,9 +13,11 @@
 			<li><a href="#">Page 2</a></li>
 			<li><a href="#">Page 3</a></li>
 		</ul>
-		<button type="button" class="btn btn-default btn-sm" style="float:right;margin-top:10px">
-			<span class="glyphicon glyphicon-log-out"></span>Log-Out
+		<form:form action="logout" method="GET">
+		<button type="submit" class="btn btn-default btn-sm" style="float:right;margin-top:10px">
+			<span class="glyphicon glyphicon-log-out"></span>&nbsp;Log-Out
 		</button>
+		</form:form>
 	</div>
 	</nav>
 	<div class="container">
