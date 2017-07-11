@@ -36,7 +36,7 @@ public class User {
 	
 	@NotEmpty(message="Username cannot be empty")
 	@Size(min=4, max=20)
-	@Column(name="USER_USERNAME")
+	@Column(name="USER_USERNAME", unique = true)
 	private String username;
 	
 	@NotEmpty(message="Password cannot be empty")
