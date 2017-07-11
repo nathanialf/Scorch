@@ -62,11 +62,6 @@
 			<div class="jumbotron">
 				<h1>List of Batches</h1>
 
-				<c:if test="${ user.getRole().getName() == \"Trainer\" }">
-					<form:form commandName="batch" method="GET">
-						<input type="submit" value="Create User">
-					</form:form>
-				</c:if>
 
 				<ul>
 					<li>1</li>
