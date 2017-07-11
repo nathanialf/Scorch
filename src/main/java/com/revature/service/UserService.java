@@ -49,4 +49,9 @@ public class UserService {
 		RoleDAO rDAO = new RoleDAOImpl();
 		return rDAO.getRoles();
 	}
+	
+	public Role getRole(int id){
+		RoleDAO rDAO = new RoleDAOImpl();
+		return rDAO.getRoleById(id);
+	}
 }

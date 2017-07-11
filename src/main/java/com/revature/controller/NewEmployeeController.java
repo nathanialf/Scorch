@@ -29,6 +29,7 @@ public class NewEmployeeController {
 
 		List<Role> roles = userService.allRoles();
 		modelMap.addAttribute("roles", roles);
+		
 		return "newemployee";
 	}
 

@@ -51,7 +51,7 @@
 			<h2>New Employee</h2>
 		</div>
 
-		<form:form method="post" action="add" commandName="user">
+		<form:form method="POST" action="add" commandName="user">
 			<div class="input-group col-md-6">
 				<span class="input-group-addon"><i
 					class="glyphicon glyphicon-user"></i></span> <input type="text"
@@ -76,7 +76,7 @@
 			<select name="role" class="form-control"
 					id="sel1">
 					<c:forEach var="role" items="${roles}">
-						<option value="${role.getName()}">${role.getName()}</option>
+						<option value="${role.getId()}">${role.getName()}</option>
 					</c:forEach>
 				</select>
 			</div><br><br><br><br>
