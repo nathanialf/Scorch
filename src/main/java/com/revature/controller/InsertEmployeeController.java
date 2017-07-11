@@ -17,26 +17,27 @@ import com.revature.bean.User;
 import com.revature.service.UserService;
 
 @Controller
-@RequestMapping(value = "/employee/new")
-public class NewEmployeeController {
+@RequestMapping(value = "/employee/add")
+public class InsertEmployeeController {
 	User sessionUser;
 
 	@Autowired
 	UserService userService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String getEmployees(ModelMap modelMap, HttpSession session) {
-
-		List<Role> roles = userService.allRoles();
-		modelMap.addAttribute("roles", roles);
+	public String getEmployees(@Valid User user, BindingResult bindingResult, ModelMap modelMap, HttpSession session) {
+		user.setActive(1);
+		user.setPassword("generic");
+		userService.addEmployee(user);
+		
 		return "newemployee";
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String getEmployeesPost(@Valid User user, BindingResult bindingResult, ModelMap modelMap, HttpSession session) {
-
-		List<Role> roles = userService.allRoles();
-		modelMap.addAttribute("roles", roles);
+		user.setActive(1);
+		user.setPassword("generic");
+		userService.addEmployee(user);
 		return "newemployee";
 	}
 }

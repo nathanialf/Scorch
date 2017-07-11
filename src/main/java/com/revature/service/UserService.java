@@ -4,7 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.revature.bean.Role;
 import com.revature.bean.User;
+import com.revature.dao.RoleDAO;
+import com.revature.dao.RoleDAOImpl;
 import com.revature.dao.UserDAO;
 import com.revature.dao.UserDAOImpl;
 
@@ -35,5 +38,15 @@ public class UserService {
 		UserDAO uDAO = new UserDAOImpl();
 		//return uDAO.getAllUsersExcept(id);
 		return uDAO.getAllUsers();
+	}
+	
+	public int addEmployee(User u){
+		UserDAO uDAO = new UserDAOImpl();
+		return uDAO.insertUser(u);
+	}
+	
+	public List<Role> allRoles(){
+		RoleDAO rDAO = new RoleDAOImpl();
+		return rDAO.getRoles();
 	}
 }

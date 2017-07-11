@@ -24,7 +24,7 @@
 </head>
 <body>
 	<c:if test="${sessionScope.user == null}">
-		<jsp:forward page="Login" />
+		<jsp:forward page="../Login" />
 	</c:if>
 
 	<nav class="navbar navbar-default">
@@ -38,7 +38,7 @@
 			<li><a href="#">Page 2</a></li>
 			<li><a href="#">Page 3</a></li>
 		</ul>
-		<form:form action="logout" method="GET">
+		<form:form action="../logout" method="GET">
 			<button type="submit" class="btn btn-default btn-sm"
 				style="float: right; margin-top: 10px">
 				<span class="glyphicon glyphicon-log-out"></span>&nbsp;Log-Out
@@ -51,25 +51,36 @@
 			<h2>New Employee</h2>
 		</div>
 
-		<form:form method="post" action="employee/add" commandName="user">
+		<form:form method="post" action="add" commandName="user">
 			<div class="input-group col-md-6">
 				<span class="input-group-addon"><i
 					class="glyphicon glyphicon-user"></i></span> <input type="text"
 					name="firstname" class="form-control" placeholder="First Name"
 					required>
-			</div><br>
+			</div>
+			<br>
 			<div class="input-group col-md-6">
 				<span class="input-group-addon"><i
 					class="glyphicon glyphicon-user"></i></span> <input type="text"
 					name="lastname" class="form-control" placeholder="Last Name"
 					required>
-			</div><br>
+			</div>
+			<br>
 			<div class="input-group col-md-6">
 				<span class="input-group-addon"><i
 					class="glyphicon glyphicon-user"></i></span> <input type="text"
 					name="username" class="form-control" placeholder="Username"
 					required>
-			</div>
+			</div><br>
+			<div class="form-group col-md-6">
+			<select class="form-control"
+					id="sel1">
+					<c:forEach var="role" items="${roles}">
+						<option value="${role.getId()}">${role.getName()}</option>
+					</c:forEach>
+				</select>
+			</div><br><br><br><br>
+			<input type="submit" class="btn btn-info" value="Submit">
 		</form:form>
 
 	</div>
