@@ -87,6 +87,7 @@ public class UserDAOTest {
 		System.out.println(x.getAllUsers());
 	}
 	
+	@Ignore
 	@Test
 	public void updateUser() {
 		System.out.println("-STARTING UPDATE_USER-");
@@ -103,6 +104,7 @@ public class UserDAOTest {
 		assert(x.getUserById(50).getFirstname().equals("UPDATEDTEST"));
 	}
 	
+	@Ignore
 	@Test
 	public void deleteUser() {
 		System.out.println("-STARTING DELETE_USER-");
