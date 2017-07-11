@@ -23,7 +23,7 @@
 </head>
 <body>
 	<c:if test="${sessionScope.user == null}">
-		<jsp:forward page="Login" />
+		<jsp:forward page="Login"/>
 	</c:if>
 	<nav class="navbar navbar-default">
 	<div class="container-fluid">
@@ -36,19 +36,31 @@
 			<li><a href="#">Page 2</a></li>
 			<li><a href="#">Page 3</a></li>
 		</ul>
-		<button type="button" class="btn btn-default btn-sm" style="float:right;margin-top:10px">
-			<span class="glyphicon glyphicon-log-out"></span> Log out
+		<button type="button" class="btn btn-default btn-sm" style="float:right;margin-top:10px" onclick="window.open(\"Logout\", \"_self\");">
+			<span class="glyphicon glyphicon-log-out"></span>Log-Out
 		</button>
 	</div>
 	</nav>
 	<div class="container">
 		<div class="jumbotron">
-			<h1>Welcome, ${user.getFirstname()} ${user.getLastname() }</h1>
+			<h1>Welcome, ${user.getFirstname()} ${user.getLastname()}</h1>
 			<p>You are a(n) ${user.getRole().getName()}</p>
 			<p>This page is ready to be improved by other views.</p>
 		</div>
 		<p>This is some text.</p>
 		<p>This is another text.</p>
 	</div>
+	<c:if test="${user.getRole().getName() == \"Associate\"}">
+		<jsp:include page="associatehome.jsp"/>
+	</c:if>
+	<c:if test="${user.getRole().getName() == \"Trainer\"}">
+		<jsp:include page="trainhome.jsp"/>
+	</c:if>
+	<c:if test="${user.getRole().getName() == \"Evaluator\"}">
+		<jsp:include page="evalhome.jsp"/>
+	</c:if>
+	<c:if test="${user.getRole().getName() == \"Manager\"}">
+		<jsp:include page="managerhome.jsp"/>
+	</c:if>
 </body>
 </html>
