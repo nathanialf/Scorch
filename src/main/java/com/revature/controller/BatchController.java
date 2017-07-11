@@ -24,7 +24,7 @@ public class BatchController {
 	
 	@ModelAttribute("Some info")
 	public String addInfotoRequestScope(){
-		System.out.println("Adding info the the modelMap");
+		System.out.println("Clicked on Create User from JSP Page...");
 		return "This is added information";
 	}
 	

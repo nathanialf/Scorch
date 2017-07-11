@@ -6,6 +6,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,7 +28,7 @@
 	<c:if test="${sessionScope.user == null}">
 		<jsp:forward page="Login" />
 	</c:if>
-	
+
 	<c:if test="${user.getRole().getName() == \"Associate\"}">
 		<jsp:include page="review.jsp" />
 	</c:if>
@@ -47,16 +49,25 @@
 				<li><a href="#">Page 2</a></li>
 				<li><a href="#">Page 3</a></li>
 			</ul>
-			<button type="button" class="btn btn-default btn-sm"
-				style="float: right; margin-top: 10px" onclick="window.open(\"Logout\", \"_self\");">
-				<span class="glyphicon glyphicon-log-out"></span>Log-Out
-			</button>
+			<form:form method="GET" commandName="logout">
+				<button type="submit" class="btn btn-default btn-sm"
+					style="float: right; margin-top: 10px">
+					<span class="glyphicon glyphicon-log-out"></span>&nbsp;Log-Out
+				</button>
+			</form:form>
 		</div>
 		</nav>
 
 		<div class="container">
 			<div class="jumbotron">
 				<h1>List of Batches</h1>
+
+				<c:if test="${ user.getRole().getName() == \"Trainer\" }">
+					<form:form commandName="batch" method="GET">
+						<input type="submit" value="Create User">
+					</form:form>
+				</c:if>
+
 				<ul>
 					<li>1</li>
 					<li>2</li>
@@ -64,6 +75,7 @@
 				</ul>
 			</div>
 		</div>
+
 	</c:if>
 
 </body>
