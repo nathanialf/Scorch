@@ -11,9 +11,6 @@
 		</div>
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="#">Home</a></li>
-			<li><a href="#">Page 1</a></li>
-			<li><a href="#">Page 2</a></li>
-			<li><a href="#">Page 3</a></li>
 		</ul>
 		<form:form method="GET" action="logout">
 		<button type="submit" class="btn btn-default btn-sm" style="float:right;margin-top:10px">
@@ -26,9 +23,7 @@
 		<div class="jumbotron">
 			<h1>Welcome, ${user.getFirstname()} ${user.getLastname()}</h1>
 			<p>You are a(n) ${user.getRole().getName()}</p>
-			<p>This page is ready to be improved by other views.</p>
+			<p>Here you can view your current and previous weeks of training.</p>
 		</div>
-		<p>This is some text.</p>
-		<p>This is another text.</p>
 	</div>
 </body>

@@ -12,8 +12,8 @@
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="#">Home</a></li>
 			<li><a href="employee">View Employees</a></li>
-			<li><a href="#">Page 2</a></li>
-			<li><a href="#">Page 3</a></li>
+			<%--<li><a href="#">Page 2</a></li>
+			<li><a href="#">Page 3</a></li>--%>
 		</ul>
 		<form:form method="GET" action="logout">
 		<button type="submit" class="btn btn-default btn-sm" style="float:right;margin-top:10px">
@@ -25,9 +25,7 @@
 	<div class="container">
 		<div class="jumbotron">
 			<h1>Welcome, ${user.getFirstname()} ${user.getLastname()}</h1>
-			<p>You are a Manager</p>
+			<p>You are a ${user.getRole().getName()}</p>
 		</div>
-		<p>This is some text.</p>
-		<p>This is another text.</p>
 	</div>
 </body>
