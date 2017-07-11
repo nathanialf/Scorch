@@ -9,7 +9,7 @@
 		</div>
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="#">Home</a></li>
-			<li><a href="#">Page 1</a></li>
+			<li><a href="employee">View Employees</a></li>
 			<li><a href="#">Page 2</a></li>
 			<li><a href="#">Page 3</a></li>
 		</ul>
@@ -21,8 +21,7 @@
 	<div class="container">
 		<div class="jumbotron">
 			<h1>Welcome, ${user.getFirstname()} ${user.getLastname()}</h1>
-			<p>You are a(n) ${user.getRole().getName()}</p>
-			<p>This page is ready to be improved by other views.</p>
+			<p>You are a Manager</p>
 		</div>
 		<p>This is some text.</p>
 		<p>This is another text.</p>

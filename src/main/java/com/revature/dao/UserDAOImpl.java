@@ -146,4 +146,32 @@ public class UserDAOImpl implements UserDAO {
 		return user;
 	}
 
+	@Override
+	public List<User> getAllUsersExcept(int id) {
+		List<User> user = null;
+		List<User> users = null;
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+		
+		try {
+			tx = session.beginTransaction();
+			users = session.createQuery("FROM User").list();
+			for (User u : users) {
+				if (u.getId() == id) {
+					users.remove(u);
+				}
+			}
+
+		} catch (HibernateException e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return users;
+	}
+
 }

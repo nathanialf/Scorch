@@ -1,5 +1,7 @@
 package com.revature.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.revature.bean.User;
@@ -27,5 +29,11 @@ public class UserService {
 		 * This authentication will return null in all situations where
 		 * both the password and username are not correct
 		 */
+	}
+	
+	public List<User> allEmployees(int id){
+		UserDAO uDAO = new UserDAOImpl();
+		//return uDAO.getAllUsersExcept(id);
+		return uDAO.getAllUsers();
 	}
 }
