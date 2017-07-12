@@ -78,53 +78,68 @@
 			<div class="container">
 				<div class="jumbotron">
 					<h1>Create Batch</h1>
-					<form method="POST">
-						<input type="submit" value="Create Batch"> <input
-							type="text" name="name" required>
-
-						<table border="0" cellpadding="5" cellspacing="0">
-							<tr>
-								<th align="left" valign="top">Select:</th>
-								<th>&nbsp;</th>
-								<th align="left" valign="top">Selected:</th>
-							</tr>
-							<tr>
-								<td align="left" valign="top"><select id="allAssoc"
-									name="allAssoc" multiple="multiple" style="width: 200px;"
-									size="10">
-										<c:forEach items="${ sessionScope.associates }" var="u">
-											<option value="${ u.getId() }"><c:out
-													value="${ u.getFirstname() }" />
-												<c:out value="${ u.getLastname() }" /></option>
-										</c:forEach>
-								</select></td>
-
-								<td align="center" valign="middle"><input type="button"
-									id="btnMoveRight" name="btnMoveRight" value="->"> <input
-									type="button" id="btnMoveLeft" name="btnMoveLeft" value="<-">
-								</td>
-
-								<td align="left" valign="top"><select id="selectedAssoc"
-									name="selectedAssoc" multiple="multiple" style="width: 200px;"
-									size="10" required></select></td>
-							</tr>
-						</table>
-
-					</form>
-
 				</div>
+				<form method="POST">
+					<div class="container-fluid">
+						<button type="submit" class="btn btn-primary">Create
+							Batch</button>
+
+						<div class="form-group col-md-3">
+							<input type="text" class="form-control" name="name">
+						</div>
+					</div>
+					<table border="0" cellpadding="5" cellspacing="0">
+						<tr>
+							<th align="left" valign="top">Select:</th>
+							<th>&nbsp;</th>
+							<th align="left" valign="top">Selected:</th>
+						</tr>
+						<tr>
+							<td align="left" valign="top">
+							<select id="allAssoc"
+								name="allAssoc" multiple class="form-control" style="width: 200px;"
+								size="10">
+									<c:forEach items="${ sessionScope.associates }" var="u">
+										<option value="${ u.getId() }"><c:out
+												value="${ u.getFirstname() }" />
+											<c:out value="${ u.getLastname() }" /></option>
+									</c:forEach>
+							</select></td>
+
+							<td align="center" valign="middle">
+							<button id="btnMoveRight" name="btnMoveRight" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"></span></button>
+							<button id="btnMoveLeft" name="btnMoveLeft" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span></button>
+							</td>
+
+							<td align="left" valign="top"><select id="selectedAssoc"
+								name="selectedAssoc" multiple class="form-control" style="width: 200px;"
+								size="10" required></select></td>
+						</tr>
+					</table>
+
+				</form>
+
 			</div>
 		</c:if>
-
+		<br>
 		<div class="container">
 			<div class="jumbotron">
 				<h1>List of Batches</h1>
-				<ul>
-					<c:forEach items="${ sessionScope.batches }" var="b">
-						<li><c:out value="${ b.getName() }" /></li>
-					</c:forEach>
-				</ul>
 			</div>
+			<table class="table table-hover">
+				<tr>
+					<th>Batch Name
+					<th>Trainer
+					<th>Size
+					<th>Start Date <c:forEach items="${ sessionScope.batches }"
+							var="b">
+							<tr>
+								<td>${ b.getName() }
+								<td>Some Trainer
+								<td>${ b.getAssociates().size() }
+								<td>${ b.getStartDate() }
+						</c:forEach>
+			</table>
 		</div>
 
 
