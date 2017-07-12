@@ -9,10 +9,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.revature.bean.Role;
 import com.revature.bean.User;
+import com.revature.dao.RoleDAO;
+import com.revature.dao.RoleDAOImpl;
 import com.revature.service.UserService;
 
 @Controller
@@ -26,6 +26,9 @@ public class AddEmployeeController {
 	public String getEmployeesPost(@Valid User user, BindingResult bindingResult, ModelMap modelMap, HttpSession session) {
 		user.setActive(1);
 		user.setPassword("generic");
+		int roleid = Integer.parseInt(user.getRole().getName());
+		user.setRole(userService.getRole(roleid));
+		//System.out.println(user);
 		/*
 		Role r = userService.getRole(role);
 		user.setRole(r);

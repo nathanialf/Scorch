@@ -39,7 +39,7 @@ public class RoleDAOImpl implements RoleDAO {
 		Session session = HibernateUtil.getSession();
 		Role role = null;
 		try {
-			role = (Role) session.get(Batch.class, id);
+			role = (Role) session.get(Role.class, id);
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		} finally {
