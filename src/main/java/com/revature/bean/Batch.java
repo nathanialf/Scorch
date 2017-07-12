@@ -50,7 +50,7 @@ public class Batch {
 	
 	@Autowired
 	@ManyToOne(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="USER")
+	@JoinColumn(name="USER_ID")
 	private User trainer;
 
 	@Autowired
