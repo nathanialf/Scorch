@@ -30,7 +30,5 @@
 			<p>You are a(n) ${user.getRole().getName()}</p>
 			<p>Here you can view the current and previous weeks of training</p>
 		</div>
-		
-		
 	</div>
 </body>

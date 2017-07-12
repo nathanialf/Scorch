@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.revature.bean.Batch;
 import com.revature.bean.User;
+import com.revature.dao.BatchDAO;
+import com.revature.dao.BatchDAOImpl;
 import com.revature.dao.UserDAO;
 import com.revature.dao.UserDAOImpl;
 import com.revature.service.BatchService;
@@ -35,7 +37,11 @@ public class BatchController {
 		List<User> aUsers = batchService.getAssociates();
 		System.out.println(aUsers);
 		
+		BatchDAO bDao = new BatchDAOImpl();
+		List<Batch> aBatches = bDao.getAllBatches();
+		
 		session.setAttribute("associates", aUsers);
+		session.setAttribute("batches", aBatches);
 		
 		return "batch";
 	}
@@ -48,8 +54,8 @@ public class BatchController {
 		
 		//List<User> associates = (List<User>)session.getAttribute("associates");
 		//		System.out.println("The full list: " + associates);
-
-				
+		
+			
 		Set<User> a = new HashSet<>();
 		UserDAO uDao = new UserDAOImpl();
 		
@@ -78,6 +84,12 @@ public class BatchController {
 		
 		//THEN Update the user
 		uDao.updateUser(trainer);
+		
+		
+		//Update the batches attribute
+		BatchDAO bDao = new BatchDAOImpl();
+		List<Batch> aBatches = bDao.getAllBatches();
+		session.setAttribute("batches", aBatches);
 		
 		return "batch";
 	}

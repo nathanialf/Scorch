@@ -47,11 +47,6 @@
 		<jsp:forward page="Login" />
 	</c:if>
 
-	<c:if test="${sessionScope.user.getRole().getName() == \"Associate\"}">
-		<jsp:include page="review.jsp" />
-	</c:if>
-
-
 	<c:if
 		test="${	sessionScope.user.getRole().getName() == \"Trainer\" || 
 					sessionScope.user.getRole().getName() == \"Evaluator\" ||
@@ -77,16 +72,15 @@
 		</div>
 		</nav>
 
-		<div class="container">
-			<div class="jumbotron">
-				<h1>List of Batches</h1>
 
-				<c:if
-					test="${ sessionScope.user.getRole().getName() == \"Trainer\" }">
-					
-					<form method="POST" >
-						<input type="submit" value="Create Batch">
-						<input type="text" name="name" required>
+
+		<c:if test="${ sessionScope.user.getRole().getName() == \"Trainer\" }">
+			<div class="container">
+				<div class="jumbotron">
+					<h1>Create Batch</h1>
+					<form method="POST">
+						<input type="submit" value="Create Batch"> <input
+							type="text" name="name" required>
 
 						<table border="0" cellpadding="5" cellspacing="0">
 							<tr>
@@ -99,8 +93,9 @@
 									name="allAssoc" multiple="multiple" style="width: 200px;"
 									size="10">
 										<c:forEach items="${ sessionScope.associates }" var="u">
-											<option value="${ u.getId() }"><c:out value="${ u.getFirstname() }" /> <c:out
-													value="${ u.getLastname() }" /></option>
+											<option value="${ u.getId() }"><c:out
+													value="${ u.getFirstname() }" />
+												<c:out value="${ u.getLastname() }" /></option>
 										</c:forEach>
 								</select></td>
 
@@ -116,15 +111,22 @@
 						</table>
 
 					</form>
-				</c:if>
 
+				</div>
+			</div>
+		</c:if>
+
+		<div class="container">
+			<div class="jumbotron">
+				<h1>List of Batches</h1>
 				<ul>
-					<li>1</li>
-					<li>2</li>
-					<li>3</li>
+					<c:forEach items="${ sessionScope.batches }" var="b">
+						<li><c:out value="${ b.getName() }" /></li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>
+
 
 	</c:if>
 
