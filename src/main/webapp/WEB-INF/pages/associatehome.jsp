@@ -32,7 +32,7 @@
 			Batch b = bDAO.selectBatchByUser((User)session.getAttribute("user"));
 		%>
 		<h2><%= b.getName() %></h2><br>
-		Trainer: <%= b.getTrainer().getFirstname() %> <%= b.getTrainer().getLastname() %><br>
+		Trainer:<br>
 		
 		<%
 			for(Week w : b.getWeeks()){

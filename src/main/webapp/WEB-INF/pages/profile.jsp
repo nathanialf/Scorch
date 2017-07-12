@@ -80,8 +80,10 @@
 							<c:when test="${role.getName() == user.getRole().getName()}">
 								<option value="${role.getId()}" selected>${role.getName()}</option>
 							</c:when>
+							<c:otherwise>
+								<option value="${role.getId()}">${role.getName()}</option>
+							</c:otherwise>
 						</c:choose>
-						<option value="${role.getId()}">${role.getName()}</option>
 					</c:forEach>
 				</select>
 			</div>
