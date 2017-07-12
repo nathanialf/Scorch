@@ -140,7 +140,7 @@ public class BatchDAOImpl implements BatchDAO {
 				batch = (Batch) session.get(Batch.class, (int)o);
 			}
 			*/
-			batch = (Batch) session.createQuery("FROM Batch WHERE id in (select batch_id from batch_assoc where associate_id = :id)").setInteger("id", u.getId());
+			batch = (Batch) session.createQuery("FROM Batch WHERE id in (select Batch.id from BATCH_ASSOC where User.id = :id)").setInteger("id", u.getId());
 
 		} catch (HibernateException e) {
 			if (tx != null) {
