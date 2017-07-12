@@ -29,7 +29,9 @@
 		<% 
 			BatchDAO bDAO = new BatchDAOImpl();
 			Batch b = bDAO.selectBatchByUser((User)session.getAttribute("user"));
-			out.println(b);
 		%>
+		<h2><%= b.getName() %></h2><br>
+		Trainer: <%= b.getTrainer() %>
+		
 	</div>
 </body>
