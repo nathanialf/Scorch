@@ -9,7 +9,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.revature.bean.Role;
 import com.revature.bean.User;
 import com.revature.service.UserService;
 
@@ -24,6 +26,10 @@ public class AddEmployeeController {
 	public String getEmployeesPost(@Valid User user, BindingResult bindingResult, ModelMap modelMap, HttpSession session) {
 		user.setActive(1);
 		user.setPassword("generic");
+		/*
+		Role r = userService.getRole(role);
+		user.setRole(r);
+		*/
 		userService.addEmployee(user);
 		return "newemployee";
 	}
@@ -32,6 +38,10 @@ public class AddEmployeeController {
 	public String getEmployeesGet(@Valid User user, BindingResult bindingResult, ModelMap modelMap, HttpSession session) {
 		user.setActive(1);
 		user.setPassword("generic");
+		/*
+		Role r = userService.getRole(role);
+		user.setRole(r);
+		*/
 		userService.addEmployee(user);
 		return "newemployee";
 	}

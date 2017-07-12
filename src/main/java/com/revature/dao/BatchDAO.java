@@ -3,6 +3,7 @@ package com.revature.dao;
 import java.util.List;
 
 import com.revature.bean.Batch;
+import com.revature.bean.User;
 
 public interface BatchDAO {
 	
@@ -15,4 +16,6 @@ public interface BatchDAO {
 	public List<Batch> getAllBatches();
 	
 	public void deleteBatch(Batch batch);
+	
+	public Batch selectBatchByUser(User u);
 }

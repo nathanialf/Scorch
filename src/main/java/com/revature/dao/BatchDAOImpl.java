@@ -3,11 +3,12 @@ package com.revature.dao;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.revature.bean.Batch;
-import com.revature.bean.Review;
+import com.revature.bean.User;
 import com.revature.util.HibernateUtil;
 
 public class BatchDAOImpl implements BatchDAO {
@@ -122,6 +123,35 @@ public class BatchDAOImpl implements BatchDAO {
 			session.close();
 		}
 		
+	}
+
+	@Override
+	public Batch selectBatchByUser(User u) {
+		Batch batch = null;
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+
+		try {
+			tx = session.beginTransaction();/*
+			Query query = session.createQuery("select batch_id from batch_assoc where associate_id = :id");
+			query.setInteger("id", u.getId());
+			List<Object[]> rows = query.list();
+			for(Object o : rows){
+				batch = (Batch) session.get(Batch.class, (int)o);
+			}
+			*/
+			batch = (Batch) session.createQuery("FROM Batch WHERE id in (select batch_id from batch_assoc where associate_id = :id)").setInteger("id", u.getId());
+
+		} catch (HibernateException e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return batch;
 	}
 
 }
