@@ -14,7 +14,6 @@
 			<li class="active"><a href="login">Home</a></li>
 			<li><a href="batch">Batches</a></li>
 			<li><a href="review">Reviews</a></li>
-			<li><a href="#">Stats</a></li>
 			<li><a href="employee/profile">Profile</a></li>
 		</ul>
 		<form:form method="GET" commandName="logout">
@@ -28,9 +27,6 @@
 		<div class="jumbotron">
 			<h1>Welcome, ${user.getFirstname()} ${user.getLastname()}</h1>
 			<p>You are a(n) ${user.getRole().getName()}</p>
-			<p>This page is ready to be improved by other views.</p>
 		</div>
-		<p>This is some text.</p>
-		<p>This is another text.</p>
 	</div>
 </body>
