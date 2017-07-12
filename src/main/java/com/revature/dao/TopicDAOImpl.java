@@ -99,7 +99,7 @@ public class TopicDAOImpl implements TopicDAO {
 	}
 
 	@Override
-	public void deleteUser(Topic t) {
+	public void deleteTopic(Topic t) {
 
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;

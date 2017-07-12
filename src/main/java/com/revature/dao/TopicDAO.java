@@ -9,5 +9,5 @@ public interface TopicDAO {
 	public Topic getTopicById(int id);
 	public List<Topic> getAllTopics();
 	public void updateTopic(Topic t);
-	public void deleteUser(Topic t);
+	public void deleteTopic(Topic t);
 }

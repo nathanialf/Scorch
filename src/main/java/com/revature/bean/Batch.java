@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -48,6 +49,11 @@ public class Batch {
 	private List<Week> weeks;
 	
 	@Autowired
+	@ManyToOne(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name="USER")
+	private User trainer;
+
+	@Autowired
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name="BATCH_ASSOC", joinColumns = @JoinColumn(name="BATCH_ID"), inverseJoinColumns = @JoinColumn(name="ASSOCIATE_ID"))
 	private Set<User> associates = new HashSet<>();
@@ -60,6 +66,13 @@ public class Batch {
 		super();
 		this.name = name;
 		this.startDate = startDate;
+	}
+
+	public Batch(String name, Date startDate, User trainer) {
+		super();
+		this.name = name;
+		this.startDate = startDate;
+		this.trainer = trainer;
 	}
 
 	public int getId() {
@@ -101,9 +114,18 @@ public class Batch {
 	public void setAssociates(Set<User> associates) {
 		this.associates = associates;
 	}
+	
+	public User getTrainer() {
+		return trainer;
+	}
 
+	public void setTrainer(User trainer) {
+		this.trainer = trainer;
+	}
+	
 	@Override
 	public String toString() {
-		return "Batch [id=" + id + ", name=" + name + ", startDate=" + startDate + ", weeks=" + weeks + "]";
+		return "Batch [id=" + id + ", name=" + name + ", startDate=" + startDate + ", weeks=" + weeks + ", trainer="
+				+ trainer + "]";
 	}
 }
