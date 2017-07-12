@@ -54,4 +54,10 @@ public class UserService {
 		RoleDAO rDAO = new RoleDAOImpl();
 		return rDAO.getRoleById(id);
 	}
+	
+	public User updateUser(User user){
+		UserDAO uDAO = new UserDAOImpl();
+		uDAO.updateUser(user);
+		return uDAO.getUserById(user.getId());
+	}
 }

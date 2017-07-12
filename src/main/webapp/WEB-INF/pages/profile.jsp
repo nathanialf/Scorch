@@ -48,7 +48,50 @@
 		<div class="jumbotron">
 			<h2>Employee Profile</h2>
 		</div>
-		${user.getFirstname()} ${user.getLastname()}
+		<form:form method="POST" action="update" commandName="user">
+			<div class="input-group col-md-6">
+				<span class="input-group-addon"><i
+					class="glyphicon glyphicon-user"></i></span> <input type="text"
+					name="firstname" class="form-control" placeholder="First Name"
+					value="${user.getFirstname()}"
+					required>
+			</div>
+			<br>
+			<div class="input-group col-md-6">
+				<span class="input-group-addon"><i
+					class="glyphicon glyphicon-user"></i></span> <input type="text"
+					name="lastname" class="form-control" placeholder="Last Name"
+					value="${user.getLastname()}"
+					required>
+			</div>
+			<br>
+			<div class="input-group col-md-6">
+				<span class="input-group-addon"><i
+					class="glyphicon glyphicon-user"></i></span> <input type="text"
+					name="username" class="form-control" placeholder="Username"
+					value="${user.getUsername()}"
+					required>
+			</div>
+			<br>
+			<div class="form-group col-md-6">
+				<select name="role" class="form-control" id="sel1">
+					<c:forEach var="role" items="${roles}">
+						<c:choose>
+							<c:when test="${role.getName() == user.getRole().getName()}">
+								<option value="${role.getId()}" selected>${role.getName()}</option>
+							</c:when>
+						</c:choose>
+						<option value="${role.getId()}">${role.getName()}</option>
+					</c:forEach>
+				</select>
+			</div>
+			<br>
+			<br>
+			<br>
+			<br>
+			<input type="submit" class="btn btn-info" value="Submit">
+		</form:form>
+
 	</div>
 </body>
 </html>

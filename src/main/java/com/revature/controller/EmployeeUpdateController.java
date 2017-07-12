@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -16,27 +17,36 @@ import com.revature.bean.User;
 import com.revature.service.UserService;
 
 @Controller
-@RequestMapping(value = "/employee/profile")
-public class EmployeeProfileController {
+@RequestMapping(value = "/employee/update")
+public class EmployeeUpdateController {
+
 	User sessionUser;
 
-	UserService userService = new UserService();
-
+	@Autowired
+	UserService userService;
+	/*
 	@RequestMapping(method = RequestMethod.GET)
 	public String getEmployees(ModelMap modelMap, HttpSession session) {
-
-		List<Role> roles = userService.allRoles();
-		modelMap.addAttribute("roles", roles);
 		
 		
 		return "profile";
 	}
-
+	*/
 	@RequestMapping(method = RequestMethod.POST)
 	public String doLogin(@Valid User user, BindingResult bindingResult, ModelMap modelMap, HttpSession session) {
+		sessionUser = (User)session.getAttribute("user");
+		
+		int roleid = Integer.parseInt(user.getRole().getName());
+		sessionUser.setFirstname(user.getFirstname());
+		sessionUser.setLastname(user.getLastname());
+		sessionUser.setUsername(user.getUsername());
+		sessionUser.setRole(userService.getRole(roleid));
+		
+		session.setAttribute("user", userService.updateUser(sessionUser));
 
 		List<Role> roles = userService.allRoles();
 		modelMap.addAttribute("roles", roles);
+		
 		return "profile";
 	}
 }
