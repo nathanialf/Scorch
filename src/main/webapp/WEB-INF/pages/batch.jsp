@@ -84,7 +84,7 @@
 				<c:if
 					test="${ sessionScope.user.getRole().getName() == \"Trainer\" }">
 					
-					<form:form method="POST" modelAttribute="batch">
+					<form method="POST" >
 						<input type="submit" value="Create Batch">
 						<input type="text" name="name" required>
 
@@ -98,9 +98,9 @@
 								<td align="left" valign="top"><select id="allAssoc"
 									name="allAssoc" multiple="multiple" style="width: 200px;"
 									size="10">
-										<c:forEach items="${ batch.associates}" varStatus="vs">
-											<form:option path="associates[${vs.index}]" value="${ user }"><c:out value="${ user.getFirstname() }" /> <c:out
-													value="${ user.getLastname() }" /></form:option>
+										<c:forEach items="${ sessionScope.associates }" var="u">
+											<option value="${ u.getId() }"><c:out value="${ u.getFirstname() }" /> <c:out
+													value="${ u.getLastname() }" /></option>
 										</c:forEach>
 								</select></td>
 
@@ -115,7 +115,7 @@
 							</tr>
 						</table>
 
-					</form:form>
+					</form>
 				</c:if>
 
 				<ul>

@@ -27,6 +27,7 @@ public class BatchService {
 	public List<User> getAssociates() {
 		UserDAO uDao = new UserDAOImpl();
 		List<User> users = uDao.getAllUsers();
+	
 		
 		//Selects users that are not associates
         Predicate<User> userPredicate = p -> !p.getRole().getName().equals("Associate");
