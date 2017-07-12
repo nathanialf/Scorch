@@ -35,7 +35,7 @@
 		<ul class="nav navbar-nav">
 			<li><a href="login">Home</a></li>
 			<li class="active"><a href="#">View Employees</a></li>
-			<li><a href="#">Page 2</a></li>
+			<li><a href="employee/profile">Profile</a></li>
 			<li><a href="#">Page 3</a></li>
 		</ul>
 		<form:form method="GET" action="logout">
