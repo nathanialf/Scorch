@@ -13,7 +13,7 @@
 		</div>
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="login">Home</a></li>
-			<li><a href="batch">Batch</a></li>
+			<li><a href="batch">Batches</a></li>
 		</ul>
 		<form:form method="GET" action="logout">
 		<button type="submit" class="btn btn-default btn-sm" style="float:right;margin-top:10px">
