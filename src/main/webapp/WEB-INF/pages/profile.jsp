@@ -24,7 +24,7 @@
 </head>
 <body>
 	<c:if test="${sessionScope.user == null}">
-		<jsp:forward page="Login" />
+		<jsp:forward page="../Login" />
 	</c:if>
 
 	<nav class="navbar navbar-default">
@@ -33,51 +33,22 @@
 			<a class="navbar-brand" href="#">Revature</a>
 		</div>
 		<ul class="nav navbar-nav">
-			<li><a href="login">Home</a></li>
-			<li class="active"><a href="#">View Employees</a></li>
-			<li><a href="employee/profile">Profile</a></li>
-			<li><a href="#">Page 3</a></li>
+			<li><a href="../login">Home</a></li>
+			<li class="active"><a href="profile">Profile</a></li>
 		</ul>
-		<form:form method="GET" action="logout">
-		<button type="submit" class="btn btn-default btn-sm" style="float:right;margin-top:10px">
-			<span class="glyphicon glyphicon-log-out"></span>&nbsp;Log-Out
-		</button>
+		<form:form action="../logout" method="GET">
+			<button type="submit" class="btn btn-default btn-sm"
+				style="float: right; margin-top: 10px">
+				<span class="glyphicon glyphicon-log-out"></span>&nbsp;Log-Out
+			</button>
 		</form:form>
 	</div>
 	</nav>
 	<div class="container">
 		<div class="jumbotron">
-			<h2>Employees</h2>
-			<br>
-			<br>
-		<form:form method="post" action="employee/new">
-		<button type="submit" class="btn btn-default btn-sm">
-			<span class="glyphicon glyphicon-plus"></span>&nbsp;New Employee
-		</button>
-		</form:form>
+			<h2>Employee Profile</h2>
 		</div>
-
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>Name
-					<th>Username
-					<th>Role
-					<th>Active
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="emp" items="${employees}">
-					<tr>
-						<td>${emp.getFirstname()}&nbsp;${emp.getLastname()}
-						<td>${emp.getUsername()}
-						<td>${emp.getRole().getName()}
-						<td>${emp.getActive()}
-				</c:forEach>
-			</tbody>
-		</table>
-
+		${user.getFirstname()} ${user.getLastname()}
 	</div>
-
 </body>
 </html>

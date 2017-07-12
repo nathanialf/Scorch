@@ -15,6 +15,7 @@
 			<li><a href="batch">Batches</a></li>
 			<li><a href="review">Reviews</a></li>
 			<li><a href="#">Stats</a></li>
+			<li><a href="employee/profile">Profile</a></li>
 		</ul>
 		<form:form method="GET" commandName="logout">
 		<button type="submit" class="btn btn-default btn-sm" style="float:right;margin-top:10px">

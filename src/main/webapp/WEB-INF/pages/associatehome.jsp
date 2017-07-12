@@ -12,6 +12,7 @@
 		</div>
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="login">Home</a></li>
+			<li><a href="employee/profile">Profile</a></li>
 		</ul>
 		<form:form method="GET" action="logout">
 		<button type="submit" class="btn btn-default btn-sm" style="float:right;margin-top:10px">
@@ -31,7 +32,13 @@
 			Batch b = bDAO.selectBatchByUser((User)session.getAttribute("user"));
 		%>
 		<h2><%= b.getName() %></h2><br>
-		Trainer: <%= b.getTrainer() %>
+		Trainer: <%= b.getTrainer().getFirstname() %> <%= b.getTrainer().getLastname() %><br>
+		
+		<%
+			for(Week w : b.getWeeks()){
+				out.println(w);
+			}
+		%>
 		
 	</div>
 </body>

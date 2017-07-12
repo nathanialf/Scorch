@@ -12,6 +12,7 @@
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="login">Home</a></li>
 			<li><a href="employee">View Employees</a></li>
+			<li><a href="employee/profile">Profile</a></li>
 			<%--<li><a href="#">Page 2</a></li>
 			<li><a href="#">Page 3</a></li>--%>
 		</ul>
