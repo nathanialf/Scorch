@@ -125,15 +125,18 @@ public class UserDAOImpl implements UserDAO {
 		Transaction tx = null;
 
 		try {
-			tx = session.beginTransaction();
+			tx = session.beginTransaction();/*
 			List<User> users = session.createQuery("FROM User").list();			
 			
 			for (User u : users) {
 				if (u.getUsername().equals(username) && u.getPassword().equals(password) && u.getActive() == 1) {
 					user = u;
 				}
+			}*/
+			List<User> users = session.createQuery("FROM User WHERE username = :user and password = :pass").setString("user", username).setString("pass", password).list();
+			for(User u : users){
+				user = u;
 			}
-
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
