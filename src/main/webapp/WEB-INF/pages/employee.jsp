@@ -36,7 +36,6 @@
 			<li><a href="login">Home</a></li>
 			<li class="active"><a href="#">View Employees</a></li>
 			<li><a href="employee/profile">Profile</a></li>
-			<li><a href="#">Page 3</a></li>
 		</ul>
 		<form:form method="GET" action="logout">
 		<button type="submit" class="btn btn-default btn-sm" style="float:right;margin-top:10px">

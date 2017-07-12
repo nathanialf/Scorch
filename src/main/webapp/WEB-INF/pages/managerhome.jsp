@@ -13,8 +13,6 @@
 			<li class="active"><a href="login">Home</a></li>
 			<li><a href="employee">View Employees</a></li>
 			<li><a href="employee/profile">Profile</a></li>
-			<%--<li><a href="#">Page 2</a></li>
-			<li><a href="#">Page 3</a></li>--%>
 		</ul>
 		<form:form method="GET" action="logout">
 		<button type="submit" class="btn btn-default btn-sm" style="float:right;margin-top:10px">
