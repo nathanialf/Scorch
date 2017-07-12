@@ -16,7 +16,7 @@ import com.revature.dao.UserDAOImpl;
 @Component
 public class BatchService {
 
-	public void createEmptyBatch(Batch batch) {
+	public void createBatch(Batch batch) {
 		batch.setStartDate(new Date(System.currentTimeMillis()));
 
 		BatchDAO bDao = new BatchDAOImpl();

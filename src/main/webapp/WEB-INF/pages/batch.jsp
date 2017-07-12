@@ -23,21 +23,21 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
-$(document).ready(function () {
-    $('#allAssoc').dblclick(function () {
-        return !$('#allAssoc option:selected').appendTo('#selectedAssoc');
-    });
-    $('#btnMoveRight').click(function () {
-        return !$('#allAssoc option:selected').appendTo('#selectedAssoc');
-    });
+	$(document).ready(function() {
+		$('#allAssoc').dblclick(function() {
+			return !$('#allAssoc option:selected').appendTo('#selectedAssoc');
+		});
+		$('#btnMoveRight').click(function() {
+			return !$('#allAssoc option:selected').appendTo('#selectedAssoc');
+		});
 
-    $('#selectedAssoc').dblclick(function () {
-        return !$('#selectedAssoc option:selected').appendTo('#allAssoc');
-    });
-    $('#btnMoveLeft').click(function () {
-        return !$('#selectedAssoc option:selected').appendTo('#allAssoc');
-    });
-});
+		$('#selectedAssoc').dblclick(function() {
+			return !$('#selectedAssoc option:selected').appendTo('#allAssoc');
+		});
+		$('#btnMoveLeft').click(function() {
+			return !$('#selectedAssoc option:selected').appendTo('#allAssoc');
+		});
+	});
 </script>
 </head>
 <body>
@@ -83,7 +83,8 @@ $(document).ready(function () {
 
 				<c:if
 					test="${ sessionScope.user.getRole().getName() == \"Trainer\" }">
-					<form:form method="POST">
+					
+					<form:form method="POST" modelAttribute="batch">
 						<input type="submit" value="Create Batch">
 						<input type="text" name="name" required>
 
@@ -97,11 +98,10 @@ $(document).ready(function () {
 								<td align="left" valign="top"><select id="allAssoc"
 									name="allAssoc" multiple="multiple" style="width: 200px;"
 									size="10">
-										<option value="1">Afghanistan</option>
-										<option value="3">America</option>
-										<option value="3">Albania</option>
-										<option value="4">Algeria</option>
-										<option value="5">American samoa</option>
+										<c:forEach items="${ batch.associates}" varStatus="vs">
+											<form:option path="associates[${vs.index}]" value="${ user }"><c:out value="${ user.getFirstname() }" /> <c:out
+													value="${ user.getLastname() }" /></form:option>
+										</c:forEach>
 								</select></td>
 
 								<td align="center" valign="middle"><input type="button"

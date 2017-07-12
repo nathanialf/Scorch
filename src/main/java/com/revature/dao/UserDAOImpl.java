@@ -6,7 +6,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import com.revature.bean.User;
 import com.revature.util.HibernateUtil;
 
@@ -17,7 +16,6 @@ public class UserDAOImpl implements UserDAO {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
 		int userId = 0;
-
 		try {
 			tx = session.beginTransaction();
 			userId = (Integer) session.save(user);
@@ -30,7 +28,6 @@ public class UserDAOImpl implements UserDAO {
 		} finally {
 			session.close();
 		}
-
 		return userId;
 	}
 
@@ -39,11 +36,9 @@ public class UserDAOImpl implements UserDAO {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
 		User user = null;
-
 		try {
 			tx = session.beginTransaction();
 			user = (User) session.get(User.class, id);
-
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -52,7 +47,6 @@ public class UserDAOImpl implements UserDAO {
 		} finally {
 			session.close();
 		}
-
 		return user;
 	}
 
@@ -61,11 +55,9 @@ public class UserDAOImpl implements UserDAO {
 		List<User> users = null;
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
-
 		try {
 			tx = session.beginTransaction();
 			users = session.createQuery("FROM User").list();
-
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -82,7 +74,6 @@ public class UserDAOImpl implements UserDAO {
 	public void updateUser(User user) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
-
 		try {
 			tx = session.beginTransaction();
 			session.update(user);
@@ -95,19 +86,17 @@ public class UserDAOImpl implements UserDAO {
 		} finally {
 			session.close();
 		}
+
 	}
 
 	@Override
 	public void deleteUser(User u) {
-
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
-
 		try {
 			tx = session.beginTransaction();
 			session.delete(u);
 			tx.commit();
-
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -126,8 +115,10 @@ public class UserDAOImpl implements UserDAO {
 
 		try {
 			tx = session.beginTransaction();
-			List<User> users = session.createQuery("FROM User WHERE username = :user and password = :pass").setString("user", username).setString("pass", password).list();
-			for(User u : users){
+			List<User> users = session.createQuery("FROM User WHERE username = :user and password = :pass")
+					.setString("user", username).setString("pass", password).list();
+
+			for (User u : users) {
 				user = u;
 			}
 		} catch (HibernateException e) {
@@ -135,6 +126,7 @@ public class UserDAOImpl implements UserDAO {
 				tx.rollback();
 			}
 			e.printStackTrace();
+
 		} finally {
 			session.close();
 		}
@@ -148,7 +140,6 @@ public class UserDAOImpl implements UserDAO {
 		List<User> users = null;
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
-		
 		try {
 			tx = session.beginTransaction();
 			users = session.createQuery("FROM User").list();
@@ -157,7 +148,6 @@ public class UserDAOImpl implements UserDAO {
 					users.remove(u);
 				}
 			}
-
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -168,6 +158,7 @@ public class UserDAOImpl implements UserDAO {
 		}
 
 		return users;
+
 	}
 
 }
