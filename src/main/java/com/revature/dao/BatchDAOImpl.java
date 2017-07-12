@@ -141,12 +141,43 @@ public class BatchDAOImpl implements BatchDAO {
 				for(User user : b.getAssociates()){
 					if(user.getId() == u.getId()){
 						batch = b;
-						break;
+						break batch;
 					}
 				}
 			}
 			
 			//batch = (Batch) session.createQuery("FROM Batch WHERE id in (select Batch.id from BATCH_ASSOC where User.id = :id)").setInteger("id", u.getId());
+
+		} catch (HibernateException e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return batch;
+	}
+	
+	@Override
+	public Batch selectBatchByTrainer(User u) {
+		Batch batch = null;
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+
+		try {
+			tx = session.beginTransaction();
+
+			List<Batch> batches = session.createQuery("FROM Batch").list();
+			
+			batch:
+			for(Batch b : batches){
+					if(b.getTrainer().getId() == u.getId()){
+						batch = b;
+						break batch;
+					}
+			}
 
 		} catch (HibernateException e) {
 			if (tx != null) {

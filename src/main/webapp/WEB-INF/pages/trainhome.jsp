@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 	
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="com.revature.bean.*, com.revature.dao.*"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -29,5 +30,10 @@
 			<p>You are a(n) ${user.getRole().getName()}</p>
 			<p>Here you can view the current and previous weeks of training</p>
 		</div>
+		<% 
+			BatchDAO bDAO = new BatchDAOImpl();
+			Batch b = bDAO.selectBatchByTrainer((User)session.getAttribute("user"));
+		%>
+		<h2><%= b.getName() %></h2>
 	</div>
 </body>

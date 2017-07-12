@@ -18,4 +18,6 @@ public interface BatchDAO {
 	public void deleteBatch(Batch batch);
 	
 	public Batch selectBatchByUser(User u);
+	
+	public Batch selectBatchByTrainer(User u);
 }
