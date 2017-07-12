@@ -31,7 +31,12 @@ public class LoginController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String getLoginPage(ModelMap modelMap){
+	public String getLoginPage(ModelMap modelMap, HttpSession session){
+		
+		if(session.getAttribute("user") != null){
+			return "home";
+		}
+
 		
 		System.out.println(modelMap.get("Some info"));
 		

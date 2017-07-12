@@ -24,16 +24,16 @@
 	<c:if test="${sessionScope.user == null}">
 		<jsp:forward page="Login"/>
 	</c:if>
-	<c:if test="${user.getRole().getName() == \"Associate\"}">
+	<c:if test="${sessionScope.user.getRole().getName() == \"Associate\"}">
 		<jsp:include page="associatehome.jsp"/>
 	</c:if>
-	<c:if test="${user.getRole().getName() == \"Trainer\"}">
+	<c:if test="${sessionScope.user.getRole().getName() == \"Trainer\"}">
 		<jsp:include page="trainhome.jsp"/>
 	</c:if>
-	<c:if test="${user.getRole().getName() == \"Evaluator\"}">
+	<c:if test="${sessionScope.user.getRole().getName() == \"Evaluator\"}">
 		<jsp:include page="evalhome.jsp"/>
 	</c:if>
-	<c:if test="${user.getRole().getName() == \"Manager\"}">
+	<c:if test="${sessionScope.user.getRole().getName() == \"Manager\"}">
 		<jsp:include page="managerhome.jsp"/>
 	</c:if>
 </body>

@@ -38,6 +38,12 @@ public class BatchDAOImpl implements BatchDAO {
 
 		try {
 			tx = session.beginTransaction();
+			
+			System.out.println(batch.getId());
+			System.out.println(batch.getName());
+			System.out.println(batch.getAssociates());
+			System.out.println(batch.getWeeks());
+			
 			batchId = (Integer) session.save(batch);
 			tx.commit();
 		} catch (HibernateException e) {

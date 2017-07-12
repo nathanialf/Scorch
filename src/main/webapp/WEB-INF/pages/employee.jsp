@@ -33,7 +33,7 @@
 			<a class="navbar-brand" href="#">Revature</a>
 		</div>
 		<ul class="nav navbar-nav">
-			<li><a href="home.jsp">Home</a></li>
+			<li><a href="login">Home</a></li>
 			<li class="active"><a href="#">View Employees</a></li>
 			<li><a href="#">Page 2</a></li>
 			<li><a href="#">Page 3</a></li>
