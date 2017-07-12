@@ -36,4 +36,9 @@ public class BatchService {
 		
 		return users;
 	}
+	
+	public Batch getBatch(int id){
+		BatchDAO bDao = new BatchDAOImpl();
+		return bDao.getBatchById(id);
+	}
 }

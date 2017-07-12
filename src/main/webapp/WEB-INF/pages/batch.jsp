@@ -131,13 +131,20 @@
 					<th>Batch Name
 					<th>Trainer
 					<th>Size
-					<th>Start Date <c:forEach items="${ sessionScope.batches }"
+					<th>Start Date 
+					<th>
+					<c:forEach items="${ sessionScope.batches }"
 							var="b">
 							<tr>
 								<td>${ b.getName() }
 								<td>Some Trainer
 								<td>${ b.getAssociates().size() }
 								<td>${ b.getStartDate() }
+								<td>
+								<form:form method="post" action="batch/individual">
+									<button class="btn btn-primary" type="submit">View</button>
+									<input type="hidden" name="id" value="${b.getId()}">
+								</form:form>
 						</c:forEach>
 			</table>
 		</div>
