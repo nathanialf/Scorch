@@ -2,6 +2,10 @@ package com.revature.daotest;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -9,10 +13,11 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.revature.bean.Batch;
 import com.revature.bean.Role;
 import com.revature.bean.User;
-import com.revature.dao.RoleDAO;
-import com.revature.dao.RoleDAOImpl;
+import com.revature.dao.BatchDAO;
+import com.revature.dao.BatchDAOImpl;
 import com.revature.dao.UserDAO;
 import com.revature.dao.UserDAOImpl;
 
@@ -45,6 +50,27 @@ public class UserDAOTest {
 	@After
 	public void tearDown() throws Exception {
 		System.out.println("---AFTER THE TEST---");
+	}
+	
+	
+	@Test
+	public void insertTrainer(){
+		UserDAO x = new UserDAOImpl();
+		BatchDAO y = new BatchDAOImpl();
+		
+		Role y1 = new Role("Trainer");
+		User u1 = new User("username1", "pass", "Bob", "Bobson", 1, y1,null);
+		Set<Batch> batches = new HashSet<Batch>();
+		
+		Batch z = new Batch("java 404", new Date(System.currentTimeMillis()));
+		
+		y.insertBatch(z);
+		
+		batches.add(z);
+
+		u1.setBatches(batches);
+		x.insertUser(u1);
+		
 	}
 	
 	@Ignore

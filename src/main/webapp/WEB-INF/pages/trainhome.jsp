@@ -30,10 +30,7 @@
 			<p>You are a(n) ${user.getRole().getName()}</p>
 			<p>Here you can view the current and previous weeks of training</p>
 		</div>
-		<% 
-			BatchDAO bDAO = new BatchDAOImpl();
-			Batch b = bDAO.selectBatchByTrainer((User)session.getAttribute("user"));
-		%>
-		<h2><%= b.getName() %></h2>
+		
+		
 	</div>
 </body>

@@ -1,6 +1,8 @@
 package com.revature.bean;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -57,16 +61,23 @@ public class User {
 	@JoinColumn(name="ROLE_ID")
 	private Role role;
 	
+//	@Autowired
+//	@OneToMany(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
+//	@JoinColumn(name="BATCH_ID")
+//	private List<Batch> batches;
+	
+	
 	@Autowired
-	@OneToMany(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="BATCH_ID")
-	private List<Batch> batches;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name="BATCH_TRAINERS", joinColumns = @JoinColumn(name="USER_ID"), inverseJoinColumns = @JoinColumn(name="BATCH_ID"))
+	private Set<Batch> batches = new HashSet<>();
+	
 	
 	public User(){
 		super();
 	}
 
-	public User(String username, String password, String firstname, String lastname, int active, Role role, List<Batch> batches) {
+	public User(String username, String password, String firstname, String lastname, int active, Role role, Set<Batch> batches) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -133,11 +144,11 @@ public class User {
 		this.role = role;
 	}
 
-	public List<Batch> getBatches() {
+	public Set<Batch> getBatches() {
 		return batches;
 	}
 
-	public void setBatches(List<Batch> batches) {
+	public void setBatches(Set<Batch> batches) {
 		this.batches = batches;
 	}
 

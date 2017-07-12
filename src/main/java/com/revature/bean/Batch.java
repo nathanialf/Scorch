@@ -48,13 +48,14 @@ public class Batch {
 	@JoinColumn(name="WEEK_ID")
 	private List<Week> weeks;
 	
-	@Autowired
-	@ManyToOne(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="USER_ID")
-	private User trainer;
+//	@Autowired
+//	@ManyToOne(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
+//	@JoinColumn(name="USER_ID")
+//	private User trainer;
+	
 
 	@Autowired
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="BATCH_ASSOC", joinColumns = @JoinColumn(name="BATCH_ID"), inverseJoinColumns = @JoinColumn(name="ASSOCIATE_ID"))
 	private Set<User> associates = new HashSet<>();
 	
@@ -66,13 +67,6 @@ public class Batch {
 		super();
 		this.name = name;
 		this.startDate = startDate;
-	}
-
-	public Batch(String name, Date startDate, User trainer) {
-		super();
-		this.name = name;
-		this.startDate = startDate;
-		this.trainer = trainer;
 	}
 
 	public int getId() {
@@ -115,17 +109,10 @@ public class Batch {
 		this.associates = associates;
 	}
 	
-	public User getTrainer() {
-		return trainer;
-	}
 
-	public void setTrainer(User trainer) {
-		this.trainer = trainer;
-	}
 	
 	@Override
 	public String toString() {
-		return "Batch [id=" + id + ", name=" + name + ", startDate=" + startDate + ", weeks=" + weeks + ", trainer="
-				+ trainer + "]";
+		return "Batch [id=" + id + ", name=" + name + ", startDate=" + startDate + ", weeks=" + weeks +"]";
 	}
 }

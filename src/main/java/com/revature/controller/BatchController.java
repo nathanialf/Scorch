@@ -1,5 +1,6 @@
 package com.revature.controller;
 
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -45,25 +46,38 @@ public class BatchController {
 		System.out.println("POST: /batch");
 		
 		
-		List<User> associates = (List<User>)session.getAttribute("associates");
+		//List<User> associates = (List<User>)session.getAttribute("associates");
+		//		System.out.println("The full list: " + associates);
+
 				
 		Set<User> a = new HashSet<>();
 		UserDAO uDao = new UserDAOImpl();
 		
 		String[] options = request.getParameterValues("selectedAssoc");
 		for(String option : options){
-			System.out.println("The selected associates to be put in a set: "+option);
-			System.out.println(uDao.getUserById(Integer.parseInt(option)));
 			a.add(uDao.getUserById(Integer.parseInt(option)));
 		}
 		
 		System.out.println("The Associates in a set:");
 		System.out.println(a);
-		//batch.getAssociates();
-
-		System.out.println("The full list: " + associates);
 		
+		User trainer = (User)session.getAttribute("user");
+		System.out.println("The current trainer is:");
+		System.out.println(trainer.getUsername());
+		
+		Set<Batch> b = new HashSet<>();
+		b.add(batch);
+		
+			
+		trainer.setBatches(b);
+				
+		batch.setAssociates(a);
+		
+		//First MUST create the batch 
 		batchService.createBatch(batch);
+		
+		//THEN Update the user
+		uDao.updateUser(trainer);
 		
 		return "batch";
 	}

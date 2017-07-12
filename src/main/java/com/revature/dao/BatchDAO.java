@@ -19,5 +19,5 @@ public interface BatchDAO {
 	
 	public Batch selectBatchByUser(User u);
 	
-	public Batch selectBatchByTrainer(User u);
+	//public Batch selectBatchByTrainer(User u);
 }
