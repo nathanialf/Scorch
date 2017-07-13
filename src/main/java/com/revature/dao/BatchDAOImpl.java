@@ -23,8 +23,8 @@ public class BatchDAOImpl implements BatchDAO {
 			WeekDAO wdao = new WeekDAOImpl();
 			List<Week> weeks = wdao.getAllWeeks();
 			List<Week> batchWeeks = new ArrayList<Week>();
-			for(Week w : weeks){
-				if(w.getBatch().getId() == batch.getId())
+			for (Week w : weeks) {
+				if (w.getBatch().getId() == batch.getId())
 					batchWeeks.add(w);
 			}
 			batch.setWeeks(batchWeeks);
@@ -48,12 +48,12 @@ public class BatchDAOImpl implements BatchDAO {
 
 		try {
 			tx = session.beginTransaction();
-			
+
 			System.out.println(batch.getId());
 			System.out.println(batch.getName());
 			System.out.println(batch.getAssociates());
 			System.out.println(batch.getWeeks());
-			
+
 			batchId = (Integer) session.save(batch);
 			tx.commit();
 		} catch (HibernateException e) {
@@ -78,7 +78,7 @@ public class BatchDAOImpl implements BatchDAO {
 
 			// Update batch with new changes...
 			session.update(batch);
-			
+
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null) {
@@ -131,7 +131,7 @@ public class BatchDAOImpl implements BatchDAO {
 		} finally {
 			session.close();
 		}
-		
+
 	}
 
 	@Override
@@ -144,27 +144,29 @@ public class BatchDAOImpl implements BatchDAO {
 			tx = session.beginTransaction();
 
 			List<Batch> batches = session.createQuery("FROM Batch").list();
-			
-			batch:
-			for(Batch b : batches){
-				for(User user : b.getAssociates()){
-					if(user.getId() == u.getId()){
+
+			batch: for (Batch b : batches) {
+				for (User user : b.getAssociates()) {
+					if (user.getId() == u.getId()) {
 						batch = b;
 						break batch;
 					}
 				}
 			}
-
-			WeekDAO wdao = new WeekDAOImpl();
-			List<Week> weeks = wdao.getAllWeeks();
-			List<Week> batchWeeks = new ArrayList<Week>();
-			for(Week w : weeks){
-				if(w.getBatch().getId() == batch.getId())
-					batchWeeks.add(w);
+			if (batch != null) {
+				WeekDAO wdao = new WeekDAOImpl();
+				List<Week> weeks = wdao.getAllWeeks();
+				List<Week> batchWeeks = new ArrayList<Week>();
+				for (Week w : weeks) {
+					if (w.getBatch().getId() == batch.getId())
+						batchWeeks.add(w);
+				}
+				batch.setWeeks(batchWeeks);
 			}
-			batch.setWeeks(batchWeeks);
-			
-			//batch = (Batch) session.createQuery("FROM Batch WHERE id in (select Batch.id from BATCH_ASSOC where User.id = :id)").setInteger("id", u.getId());
+
+			// batch = (Batch) session.createQuery("FROM Batch WHERE id in
+			// (select Batch.id from BATCH_ASSOC where User.id =
+			// :id)").setInteger("id", u.getId());
 
 		} catch (HibernateException e) {
 			if (tx != null) {
@@ -177,36 +179,36 @@ public class BatchDAOImpl implements BatchDAO {
 
 		return batch;
 	}
-	
-//	@Override
-//	public Batch selectBatchByTrainer(User u) {
-//		Batch batch = null;
-//		Session session = HibernateUtil.getSession();
-//		Transaction tx = null;
-//
-//		try {
-//			tx = session.beginTransaction();
-//
-//			List<Batch> batches = session.createQuery("FROM Batch").list();
-//			
-//			batch:
-//			for(Batch b : batches){
-//					if(b.getTrainer().getId() == u.getId()){
-//						batch = b;
-//						break batch;
-//					}
-//			}
-//
-//		} catch (HibernateException e) {
-//			if (tx != null) {
-//				tx.rollback();
-//			}
-//			e.printStackTrace();
-//		} finally {
-//			session.close();
-//		}
-//
-//		return batch;
-//	}
+
+	// @Override
+	// public Batch selectBatchByTrainer(User u) {
+	// Batch batch = null;
+	// Session session = HibernateUtil.getSession();
+	// Transaction tx = null;
+	//
+	// try {
+	// tx = session.beginTransaction();
+	//
+	// List<Batch> batches = session.createQuery("FROM Batch").list();
+	//
+	// batch:
+	// for(Batch b : batches){
+	// if(b.getTrainer().getId() == u.getId()){
+	// batch = b;
+	// break batch;
+	// }
+	// }
+	//
+	// } catch (HibernateException e) {
+	// if (tx != null) {
+	// tx.rollback();
+	// }
+	// e.printStackTrace();
+	// } finally {
+	// session.close();
+	// }
+	//
+	// return batch;
+	// }
 
 }
