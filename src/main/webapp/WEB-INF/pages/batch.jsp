@@ -121,7 +121,7 @@
 								<td>${ b.getAssociates().size() }
 								<td>${ b.getStartDate() }
 								<td>
-								<form:form method="post" action="batch/individual">
+								<form:form method="post" action="batchindividual">
 									<button class="btn btn-primary" type="submit">View</button>
 									<input type="hidden" name="id" value="${b.getId()}">
 								</form:form>

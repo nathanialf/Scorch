@@ -32,7 +32,7 @@
 			<h2>New Employee</h2>
 		</div>
 
-		<form:form method="POST" action="add" commandName="user">
+		<form:form method="POST" action="employeeadd" commandName="user">
 			<div class="input-group col-md-6">
 				<span class="input-group-addon"><i
 					class="glyphicon glyphicon-user"></i></span> <input type="text"

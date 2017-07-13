@@ -16,7 +16,7 @@ import com.revature.dao.RoleDAOImpl;
 import com.revature.service.UserService;
 
 @Controller
-@RequestMapping(value = "/employee/add")
+@RequestMapping(value = "/employeeadd")
 public class AddEmployeeController {
 
 	@Autowired

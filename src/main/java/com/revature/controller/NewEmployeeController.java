@@ -17,7 +17,7 @@ import com.revature.bean.User;
 import com.revature.service.UserService;
 
 @Controller
-@RequestMapping(value = "/employee/new")
+@RequestMapping(value = "/employeenew")
 public class NewEmployeeController {
 	User sessionUser;
 

@@ -31,7 +31,7 @@
 		<div class="jumbotron">
 			<h2>Employee Profile</h2>
 		</div>
-		<form:form method="POST" action="update" commandName="user">
+		<form:form method="POST" action="employeeupdate" commandName="user">
 			<div class="input-group col-md-6">
 				<span class="input-group-addon"><i
 					class="glyphicon glyphicon-user"></i></span> <input type="text"

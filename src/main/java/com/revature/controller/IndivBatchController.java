@@ -15,7 +15,7 @@ import com.revature.service.BatchService;
 import com.revature.service.UserService;
 
 @Controller
-@RequestMapping(value = "/batch/individual")
+@RequestMapping(value = "/batchindividual")
 public class IndivBatchController {
 
 	User sessionUser;
