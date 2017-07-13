@@ -6,7 +6,7 @@
 			<a class="navbar-brand" href="#">Revature</a>
 		</div>
 		<ul class="nav navbar-nav">
-			<li class="active"><a href="login">Home</a></li>
+			<li><a href="login">Home</a></li>
 			<c:if test="${sessionScope.user.getRole().getName() == \"Trainer\"}">
 				<li><a href="batch">View Batches</a></li>
 			</c:if>
