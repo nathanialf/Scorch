@@ -2,6 +2,7 @@ package com.revature.service;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.springframework.stereotype.Component;
@@ -27,18 +28,42 @@ public class BatchService {
 	public List<User> getAssociates() {
 		UserDAO uDao = new UserDAOImpl();
 		List<User> users = uDao.getAllUsers();
-		
-		//Selects users that are not associates
-        Predicate<User> userPredicate = p -> !p.getRole().getName().equals("Associate");
-		
-        //Removes any user that is part of the predicate
+
+		// Selects users that are not associates
+		Predicate<User> userPredicate = p -> !p.getRole().getName().equals("Associate");
+
+		// Removes any user that is part of the predicate
 		users.removeIf(userPredicate);
-		
+
 		return users;
 	}
-	
-	public Batch getBatch(int id){
+
+	public Batch getBatch(int id) {
 		BatchDAO bDao = new BatchDAOImpl();
 		return bDao.getBatchById(id);
+	}
+
+	/*
+	 * Gets the FIRST batch that the associate is in. An associate should only
+	 * belong to one batch BUT since the Tables are not completely setup, then
+	 * currently retrieves the first match
+	 */
+	public int getBatchIdOfCurrentAssociate(User currentAssociate) {
+		int batchIdImIn = 0;
+		BatchDAO bDao = new BatchDAOImpl();
+		System.out.println(bDao.getAllBatches());
+		List<Batch> batches = bDao.getAllBatches();
+		
+		firstBatch:
+		for (Batch b : batches) {
+			Set<User> userPile = b.getAssociates();
+			for (User u : userPile) {
+				if (u.getId() == currentAssociate.getId()) {
+					batchIdImIn = b.getId();
+					break firstBatch;
+				}
+			}
+		}
+		return batchIdImIn;
 	}
 }

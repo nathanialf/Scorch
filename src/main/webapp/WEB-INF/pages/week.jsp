@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Batch</title>
+<title>The Weekly View</title>
 <!--  <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.css" />-->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
@@ -44,15 +44,49 @@
 		</form:form>
 	</div>
 	</nav>
+	
+	<%-- Topics with combined rating go here --%>
 	<div class="container">
 		<div class="jumbotron">
 			<h1>The Week Page</h1>
-			<p>You are a(n) ${user.getRole().getName()}</p>
 			<p>Let's do some reviewing...</p>
 		</div>
 		<p>This is some text.</p>
 		<p>This is another text.</p>
 	</div>
+
+	<%-- Create Review from Associate --%>
+	<div class="container">
+		<div class="jumbotron">
+			<h1>Comments for the week</h1>
+
+			<c:if test="${param.submitted}">
+				<c:if test="${empty param.review}" var="noReview" />
+
+				<c:if
+					test="${not (noReview)}">
+					<c:set value="${param.review}" var="review" scope="request" />
+				</c:if>
+			</c:if>
+
+			<form method="post">
+				<input type="hidden" name="submitted" value="true" />
+
+				<P>
+					Enter your review: 
+					<textarea name="review"></textarea><br />
+					<c:if test="${noReview}">
+						<small><font color="red"> Note: Write out a review first </font></small>
+					</c:if>
+				</p>
+
+				<input type="submit" value="Submit" />
+			</form>
+		</div>
+	</div>
+	
+	<%-- All reviews --%>
+
 </body>
 
 </html>
