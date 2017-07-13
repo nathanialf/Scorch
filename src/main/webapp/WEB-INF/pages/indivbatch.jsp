@@ -26,6 +26,7 @@
 	<c:if test="${sessionScope.user == null}">
 		<jsp:forward page="Login" />
 	</c:if>
+	<jsp:include page="../../static/pages/navbar.jsp"/>
 	<div class="container">
 		<div class="jumbotron">
 			<h1>${batch.getName()}</h1><br>
