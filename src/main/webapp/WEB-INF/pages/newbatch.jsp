@@ -42,55 +42,61 @@
 </head>
 <body>
 
-
 	<c:if test="${sessionScope.user == null}">
 		<jsp:forward page="Login" />
 	</c:if>
+	<div class="container-fluid">
 
-	<c:if
-		test="${	sessionScope.user.getRole().getName() == \"Trainer\" || 
+		<div class="jumbotron">
+			<h1>Batches</h1>
+		</div>
+		<c:if
+			test="${	sessionScope.user.getRole().getName() == \"Trainer\" || 
 					sessionScope.user.getRole().getName() == \"Evaluator\" ||
 					sessionScope.user.getRole().getName() == \"Manager\" }">
+			<form method="POST">
+				<div class="container-fluid">
+					<button type="submit" class="btn btn-primary">Create Batch</button>
 
-		<jsp:include page="../../static/pages/navbar.jsp" />
+					<div class="form-group col-md-3">
+						<input type="text" class="form-control" name="name">
+					</div>
+				</div>
+				<table border="0" cellpadding="10" cellspacing="10">
+					<tr>
+						<th align="left" valign="top">Select:</th>
+						<th>&nbsp;</th>
+						<th align="left" valign="top">Selected:</th>
+					</tr>
+					<tr>
+						<td align="left" valign="top"><select id="allAssoc"
+							name="allAssoc" multiple class="form-control"
+							style="width: 200px;" size="10">
+								<c:forEach items="${ sessionScope.associates }" var="u">
+									<option value="${ u.getId() }"><c:out
+											value="${ u.getFirstname() }" />
+										<c:out value="${ u.getLastname() }" /></option>
+								</c:forEach>
+						</select></td>
 
-		<div class="container">
-			<div class="jumbotron">
-				<h1>Batches</h1>
+						<td align="center" valign="middle">
+							<button id="btnMoveRight" name="btnMoveRight"
+								class="btn btn-default">
+								<span class="glyphicon glyphicon-chevron-right"></span>
+							</button>
+							<button id="btnMoveLeft" name="btnMoveLeft"
+								class="btn btn-default">
+								<span class="glyphicon glyphicon-chevron-left"></span>
+							</button>
+						</td>
 
-				<br> <br>
-				<c:if
-					test="${ sessionScope.user.getRole().getName() == \"Trainer\" }">
+						<td align="left" valign="top"><select id="selectedAssoc"
+							name="selectedAssoc" multiple class="form-control"
+							style="width: 200px;" size="10" required></select></td>
+					</tr>
+				</table>
 
-					<form:form method="get" action="batchnew">
-						<button type="submit" class="btn btn-default btn-sm">
-							<span class="glyphicon glyphicon-plus"></span>&nbsp;New Employee
-						</button>
-					</form:form>
-				</c:if>
-			</div>
-			<table class="table table-hover">
-				<tr>
-					<th>Batch Name
-					<th>Trainer
-					<th>Size
-					<th>Start Date
-					<th><c:forEach items="${ sessionScope.batches }" var="b">
-							<tr>
-								<td>${ b.getName() }
-								<td>Some Trainer
-								<td>${ b.getAssociates().size() }
-								<td>${ b.getStartDate() }
-								<td><form:form method="post" action="batchindividual">
-										<button class="btn btn-primary" type="submit">View</button>
-										<input type="hidden" name="id" value="${b.getId()}">
-									</form:form>
-						</c:forEach>
-			</table>
-		</div>
-
-
-	</c:if>
-
+			</form>
+		</c:if>
+	</div>
 </body>
-</html>

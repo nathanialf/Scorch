@@ -8,10 +8,10 @@
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="login">Home</a></li>
 			<c:if test="${sessionScope.user.getRole().getName() == \"Trainer\"}">
-				<li><a href="batch">Batches</a></li>
+				<li><a href="batch">View Batches</a></li>
 			</c:if>
 			<c:if test="${sessionScope.user.getRole().getName() == \"Evaluator\"}">
-				<li><a href="batch">Batches</a></li>
+				<li><a href="batch">View Batches</a></li>
 			</c:if>
 			<c:if test="${sessionScope.user.getRole().getName() == \"Manager\"}">
 				<li><a href="employee">View Employees</a></li>
