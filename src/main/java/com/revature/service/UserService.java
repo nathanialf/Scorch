@@ -1,9 +1,12 @@
 package com.revature.service;
 
+import static org.hamcrest.CoreMatchers.nullValue;
+
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.revature.bean.Batch;
 import com.revature.bean.Role;
 import com.revature.bean.User;
 import com.revature.dao.RoleDAO;
@@ -59,5 +62,24 @@ public class UserService {
 		UserDAO uDAO = new UserDAOImpl();
 		uDAO.updateUser(user);
 		return uDAO.getUserById(user.getId());
+	}
+	
+	public User getTrainer(Batch b){
+		UserDAO uDAO = new UserDAOImpl();
+		User trainer = null;
+		
+		List<User> users = uDAO.getAllUsers();
+		
+		user:
+		for(User u : users){
+			for(Batch bat : u.getBatches()){
+				if(bat.getId() == b.getId()){
+					trainer = u;
+					break user;
+				}
+			}
+		}
+		
+		return trainer;
 	}
 }

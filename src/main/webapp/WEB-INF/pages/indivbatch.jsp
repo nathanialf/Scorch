@@ -46,8 +46,8 @@
 	</nav>
 	<div class="container">
 		<div class="jumbotron">
-			<h2>${batch.getName()}</h2><br>
-			<h3>Trainer Name</h3>
+			<h1>${batch.getName()}</h1><br>
+			<h3>Trainer: ${trainer.getFirstname()} ${trainer.getLastname()}</h3>
 		</div>
 		<div class="col-sm-6">
 		<div style="text-align:center;"><h4>Associates</h4></div><br>
@@ -65,10 +65,10 @@
 		<div style="text-align:center;"><h4>Week</h4></div><br>
 		<table class="table table-hover">
 			<tr><th>Week
-			<th>sdjfk
+			<th>Topics
 			<c:forEach var="week" items="${batch.getWeeks()}">
-				<tr><td>${week}
-				<td>
+				<tr><td>Week ${week.getNum()}
+				<td>${week.getTopics().size()} topics
 			</c:forEach>
 			</table>
 		</div>
