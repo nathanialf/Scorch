@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.revature.bean.User;
 
 @Controller
-@RequestMapping(value="/logout")
+@RequestMapping(value="**/logout")
 public class LogoutController {
 	
 	@Autowired

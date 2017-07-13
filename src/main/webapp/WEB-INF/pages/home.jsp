@@ -24,6 +24,7 @@
 	<c:if test="${sessionScope.user == null}">
 		<jsp:forward page="Login"/>
 	</c:if>
+	<jsp:include page="../../static/pages/navbar.jsp"/>
 	<c:if test="${sessionScope.user.getRole().getName() == \"Associate\"}">
 		<jsp:include page="associatehome.jsp"/>
 	</c:if>

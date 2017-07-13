@@ -26,24 +26,6 @@
 	<c:if test="${sessionScope.user == null}">
 		<jsp:forward page="Login" />
 	</c:if>
-
-	<nav class="navbar navbar-default">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Revature</a>
-		</div>
-		<ul class="nav navbar-nav">
-			<li><a href="../login">Home</a></li>
-			<li class="active"><a href="#">View Employees</a></li>
-			<li><a href="../employee/profile">Profile</a></li>
-		</ul>
-		<form:form method="GET" action="logout">
-		<button type="submit" class="btn btn-default btn-sm" style="float:right;margin-top:10px">
-			<span class="glyphicon glyphicon-log-out"></span>&nbsp;Log-Out
-		</button>
-		</form:form>
-	</div>
-	</nav>
 	<div class="container">
 		<div class="jumbotron">
 			<h1>${batch.getName()}</h1><br>

@@ -17,12 +17,14 @@
 <!-- Latest compiled JavaScript -->		
 <script		
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>		
-<link rel="stylesheet" href="static/css/style.css" />		
+<link rel="stylesheet" href="static/css/style.css" />	
+<link rel="stylesheet" href="../static/css/style.css" />		
 </head>		
 <body>		
 	<div class="container-fluid">		
 		<div class="col-sm-4 col-sm-offset-4 login-card" style="">		
-			<img src="static/img/revlogo.png" class="col-sm-12" style="background-color:#EFEFEF;border-bottom:1px solid lightgray;">		
+			<img src="static/img/revlogo.png" class="col-sm-12" style="background-color:#EFEFEF;border-bottom:1px solid lightgray;">
+			<img src="../static/img/revlogo.png" class="col-sm-12" style="background-color:#EFEFEF;border-bottom:1px solid lightgray;"></img></img>		
 			<br>		
 			<br>		
 			<c:if test="${errorMessage != null}">		

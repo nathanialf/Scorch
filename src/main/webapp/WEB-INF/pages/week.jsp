@@ -26,24 +26,7 @@
 
 
 <body>
-	<nav class="navbar navbar-default">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Revature</a>
-		</div>
-		<ul class="nav navbar-nav">
-			<li class="active"><a href="login">Home</a></li>
-			<li><a href="profile">Profile</a></li>
-		</ul>
-
-		<form:form action="logout" method="GET">
-			<button type="submit" class="btn btn-default btn-sm"
-				style="float: right; margin-top: 10px">
-				<span class="glyphicon glyphicon-log-out"></span>&nbsp;Log-Out
-			</button>
-		</form:form>
-	</div>
-	</nav>
+	<jsp:include page="../../static/pages/navbar.jsp"/>
 	
 	<%-- Topics with combined rating go here --%>
 	<div class="container">

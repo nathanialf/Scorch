@@ -51,29 +51,9 @@
 		test="${	sessionScope.user.getRole().getName() == \"Trainer\" || 
 					sessionScope.user.getRole().getName() == \"Evaluator\" ||
 					sessionScope.user.getRole().getName() == \"Manager\" }">
-
-		<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Revature</a>
-			</div>
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="login">Home</a></li>
-				<li><a href="#">Page 1</a></li>
-				<li><a href="#">Page 2</a></li>
-				<li><a href="#">Page 3</a></li>
-			</ul>
-			<form:form method="GET" action="logout">
-				<button type="submit" class="btn btn-default btn-sm"
-					style="float: right; margin-top: 10px">
-					<span class="glyphicon glyphicon-log-out"></span>&nbsp;Log-Out
-				</button>
-			</form:form>
-		</div>
-		</nav>
-
-
-
+		
+		<jsp:include page="../../static/pages/navbar.jsp"/>
+		
 		<c:if test="${ sessionScope.user.getRole().getName() == \"Trainer\" }">
 			<div class="container">
 				<div class="jumbotron">
