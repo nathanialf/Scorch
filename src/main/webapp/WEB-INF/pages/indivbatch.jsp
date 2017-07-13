@@ -33,9 +33,9 @@
 			<a class="navbar-brand" href="#">Revature</a>
 		</div>
 		<ul class="nav navbar-nav">
-			<li><a href="login">Home</a></li>
+			<li><a href="../login">Home</a></li>
 			<li class="active"><a href="#">View Employees</a></li>
-			<li><a href="employee/profile">Profile</a></li>
+			<li><a href="../employee/profile">Profile</a></li>
 		</ul>
 		<form:form method="GET" action="logout">
 		<button type="submit" class="btn btn-default btn-sm" style="float:right;margin-top:10px">
@@ -46,16 +46,24 @@
 	</nav>
 	<div class="container">
 		<div class="jumbotron">
-			<h2>${batch.getName()}</h2>
-			<br>
-			<br>
-		<form:form method="post" action="employee/new">
-		<button type="submit" class="btn btn-default btn-sm">
-			<span class="glyphicon glyphicon-plus"></span>&nbsp;New Employee
-		</button>
-		</form:form>
+			<h2>${batch.getName()}</h2><br>
+			<h3>Trainer Name</h3>
+		</div>
+		<div class="col-sm-6">
+		<div style="text-align:center;"><h4>Associates</h4></div><br>
+		<table class="table table-hover">
+			<tr><th>Name
+			<th>Username
+			<c:forEach var="assoc" items="${batch.getAssociates()}">
+				<tr><td>${assoc.getFirstname()} ${assoc.getLastname()}
+				<td>${assoc.getUsername()}
+			</c:forEach>
+		</table>
 		</div>
 
+		<div class="col-sm-6">
+		<div style="text-align:center;"><h4>Week</h4></div><br>
+		</div>
 	</div>
 
 </body>
