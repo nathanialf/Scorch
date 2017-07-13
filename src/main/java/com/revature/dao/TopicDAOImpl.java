@@ -1,5 +1,6 @@
 package com.revature.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -7,7 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.revature.bean.Topic;
-import com.revature.bean.User;
+import com.revature.bean.Week;
 import com.revature.util.HibernateUtil;
 
 public class TopicDAOImpl implements TopicDAO {
@@ -76,6 +77,35 @@ public class TopicDAOImpl implements TopicDAO {
 		}
 
 		return topics;
+	}
+	
+	@Override
+	public List<Topic> getAllTopicsByWeek(Week w) {
+		List<Topic> topics = null;
+		List<Topic> weekTops = new ArrayList<Topic>();
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+
+		try {
+			tx = session.beginTransaction();
+			topics = session.createQuery("FROM Topic").list();
+			
+			for(Topic t : topics) {
+				if(t.getWeek().getId() == w.getId()) {
+					weekTops.add(t);
+				}
+			}
+			
+		} catch (HibernateException e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return weekTops;
 	}
 
 	@Override

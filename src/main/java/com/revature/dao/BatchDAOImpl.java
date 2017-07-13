@@ -154,6 +154,15 @@ public class BatchDAOImpl implements BatchDAO {
 					}
 				}
 			}
+
+			WeekDAO wdao = new WeekDAOImpl();
+			List<Week> weeks = wdao.getAllWeeks();
+			List<Week> batchWeeks = new ArrayList<Week>();
+			for(Week w : weeks){
+				if(w.getBatch().getId() == batch.getId())
+					batchWeeks.add(w);
+			}
+			batch.setWeeks(batchWeeks);
 			
 			//batch = (Batch) session.createQuery("FROM Batch WHERE id in (select Batch.id from BATCH_ASSOC where User.id = :id)").setInteger("id", u.getId());
 
