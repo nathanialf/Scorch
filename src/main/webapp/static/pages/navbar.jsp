@@ -16,7 +16,7 @@
 			<c:if test="${sessionScope.user.getRole().getName() == \"Manager\"}">
 				<li><a href="employee">View Employees</a></li>
 			</c:if>
-			<li><a href="profile">Profile</a></li>
+			<li><a href="employeeprofile">Profile</a></li>
 		</ul>
 		<form:form method="GET" action="logout">
 			<button type="submit" class="btn btn-default btn-sm" style="float:right;margin-top:10px">
