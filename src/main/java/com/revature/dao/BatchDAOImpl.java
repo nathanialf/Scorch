@@ -1,14 +1,15 @@
 package com.revature.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.revature.bean.Batch;
 import com.revature.bean.User;
+import com.revature.bean.Week;
 import com.revature.util.HibernateUtil;
 
 public class BatchDAOImpl implements BatchDAO {
@@ -19,6 +20,14 @@ public class BatchDAOImpl implements BatchDAO {
 		Batch batch = null;
 		try {
 			batch = (Batch) session.get(Batch.class, batchId);
+			WeekDAO wdao = new WeekDAOImpl();
+			List<Week> weeks = wdao.getAllWeeks();
+			List<Week> batchWeeks = new ArrayList<Week>();
+			for(Week w : weeks){
+				if(w.getBatch().getId() == batch.getId())
+					batchWeeks.add(w);
+			}
+			batch.setWeeks(batchWeeks);
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		} finally {

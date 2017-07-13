@@ -63,6 +63,14 @@
 
 		<div class="col-sm-6">
 		<div style="text-align:center;"><h4>Week</h4></div><br>
+		<table class="table table-hover">
+			<tr><th>Week
+			<th>sdjfk
+			<c:forEach var="week" items="${batch.getWeeks()}">
+				<tr><td>${week}
+				<td>
+			</c:forEach>
+			</table>
 		</div>
 	</div>
 
