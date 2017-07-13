@@ -64,7 +64,7 @@
 
 					<form:form method="get" action="batchnew">
 						<button type="submit" class="btn btn-default btn-sm">
-							<span class="glyphicon glyphicon-plus"></span>&nbsp;New Employee
+							<span class="glyphicon glyphicon-plus"></span>&nbsp;New Batch
 						</button>
 					</form:form>
 				</c:if>

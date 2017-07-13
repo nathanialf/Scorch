@@ -26,34 +26,52 @@
 	<c:if test="${sessionScope.user == null}">
 		<jsp:forward page="Login" />
 	</c:if>
-	<jsp:include page="../../static/pages/navbar.jsp"/>
+	<jsp:include page="../../static/pages/navbar.jsp" />
 	<div class="container">
 		<div class="jumbotron">
-			<h1>${batch.getName()}</h1><br>
+			<h1>${batch.getName()}</h1>
+			<br>
 			<h3>Trainer: ${trainer.getFirstname()} ${trainer.getLastname()}</h3>
 		</div>
 		<div class="col-sm-6">
-		<div style="text-align:center;"><h4>Associates</h4></div><br>
-		<table class="table table-hover">
-			<tr><th>Name
-			<th>Username
-			<c:forEach var="assoc" items="${batch.getAssociates()}">
-				<tr><td>${assoc.getFirstname()} ${assoc.getLastname()}
-				<td>${assoc.getUsername()}
-			</c:forEach>
-		</table>
+			<div style="text-align: center;">
+				<h4>Associates</h4>
+			</div>
+			<br>
+			<table class="table table-hover">
+				<tr>
+					<th>Name
+					<th>Username <c:forEach var="assoc"
+							items="${batch.getAssociates()}">
+							<tr>
+								<td>${assoc.getFirstname()} ${assoc.getLastname()}
+								<td>${assoc.getUsername()}
+						</c:forEach>
+			</table>
 		</div>
 
 		<div class="col-sm-6">
-		<div style="text-align:center;"><h4>Week</h4></div><br>
-		<table class="table table-hover">
-			<tr><th>Week
-			<th>Topics
-			<c:forEach var="week" items="${batch.getWeeks()}">
-				<tr><td>Week ${week.getNum()}
-				<td>${week.getTopics().size()} topics
-			</c:forEach>
+			<div style="text-align: center;">
+				<h4>Week</h4>
+			</div>
+			<br>
+			<table class="table table-hover">
+				<tr>
+					<th>Week
+					<th>Topics
+					<th><c:forEach var="week" items="${batch.getWeeks()}">
+							<tr>
+								<td>Week ${week.getNum()}
+								<td>${week.getTopics().size()} topics
+								<td><form:form method="post" action="#">
+										<button class="btn btn-primary" type="submit">View</button>
+										<input type="hidden" name="id" value="${week.getId()}">
+									</form:form>
+						</c:forEach>
 			</table>
+			<c:if test="${user.getId() == trainer.getId()}">
+			<button type="button" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-plus"></span> Add Week</button>
+			</c:if>
 		</div>
 	</div>
 
