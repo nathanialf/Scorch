@@ -160,6 +160,8 @@ public class BatchDAOImpl implements BatchDAO {
 				for (Week w : weeks) {
 					if (w.getBatch().getId() == batch.getId())
 						batchWeeks.add(w);
+					TopicDAO tDAO = new TopicDAOImpl();
+					w.setTopics(tDAO.getAllTopicsByWeek(w));
 				}
 				batch.setWeeks(batchWeeks);
 			}

@@ -1,3 +1,4 @@
+<%@page import="com.revature.service.UserService"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="com.revature.bean.*, com.revature.dao.*,java.util.*"%>
@@ -15,15 +16,17 @@
 			BatchDAO bDAO = new BatchDAOImpl();
 			TopicDAO tDAO = new TopicDAOImpl();
 			Batch b = bDAO.selectBatchByUser((User) session.getAttribute("user"));
+			UserService user = new UserService();
 			if (b != null) {
-				out.println("<h2>" + b.getName() + "</h2><br>Trainer:<br>");
-
+				out.println("<h2>" + b.getName() + "</h2><br><h3>Trainer: " + user.getTrainer(b).getFirstname() + " " + user.getTrainer(b).getLastname() + "</h3><br>");
+				out.println("<div class = 'well well-sm'>");
 				for (Week w : b.getWeeks()) {
 					List<Topic> t = tDAO.getAllTopicsByWeek(w);
 					for (Topic top : t) {
 						out.println(w.getNum() + " " + top.getTopic() + "<br>");
 					}
 				}
+				out.println("</div>");
 			}
 		%>
 
