@@ -18,9 +18,7 @@
 	background-color:#5cb85c;
 	border-color:#4cae4c;
 	color:white;
-	width:92%;
-	margin-left:4%;
-	margin-right:4%;
+	width:100%;
 	margin-top:20px;
 	margin-bottom:20px;
 	padding:15px 0px
@@ -30,8 +28,7 @@
 	width:92%;
 	margin-left:4%;
 	margin-right:4%;
-	margin-top:190px;
-	margin-bottom:20px;
+	margin-top:160px;
 	padding:15px 0px;
 	text-align:center;
 }
