@@ -1,6 +1,6 @@
-<%@page import="com.revature.service.UserService"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="com.revature.service.UserService"%>
 <%@ page import="com.revature.bean.*, com.revature.dao.*,java.util.*"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,20 +18,13 @@
 			Batch b = bDAO.selectBatchByUser((User) session.getAttribute("user"));
 			UserService userService = new UserService();
 			if (b != null) {
-				out.println("<h2>" + b.getName() + "</h2><br><h3>Trainer: " + userService.getTrainer(b).getFirstname() + " " + userService.getTrainer(b).getLastname() + "</h3><br>");
-				//out.println("<div class='well container'>");
+				out.println("<h2>" + b.getName() + "</h2><br>" +
+				"<h3>Trainer: " + userService.getTrainer(b).getFirstname() + " " + userService.getTrainer(b).getLastname() + "</h3><br>");
 				
 				for (Week w : b.getWeeks()) {
 					List<Topic> t = tDAO.getAllTopicsByWeek(w);
 					out.println("<div class='well container'>"+
 					"<div class = 'col-sm-2' style='padding:0px;'>" + "<h2>Week: " + w.getNum() +"</h2></div>");
-					/*
-					<div class="container" id="topic_container">
-					<c:forEach var="topic" items="${week.getTopics()}">
-						<div class="topic">
-							<br>${topic.getTopic()}</div>
-					</c:forEach>
-				</div>*/
 					
 					out.println("<div class='col-sm-8' id='topic_container' style='padding:0px;'>");
 					for (Topic top : t) {

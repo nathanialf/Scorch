@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 import com.revature.bean.Batch;
 import com.revature.bean.User;
 import com.revature.bean.Week;
+import com.revature.service.UserService;
 import com.revature.util.HibernateUtil;
 
 public class BatchDAOImpl implements BatchDAO {
