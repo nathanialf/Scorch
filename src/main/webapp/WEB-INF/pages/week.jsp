@@ -37,6 +37,8 @@
 			<p>Let's do some reviewing...</p>
 		</div>
 	</div>
+	
+	<div id="week-id" style="display:none;">${week.getId()}</div>
 
 	<div class="container" id="topic_container">
 		<c:forEach var="topic" items="${week.getTopics()}">

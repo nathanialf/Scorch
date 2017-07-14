@@ -5,13 +5,14 @@ $(document).ready(function() {
 	$(".topic").click(function() {
 		if(this.id == "add"){
 			document.getElementById("hidden-form").innerHTML = "<div class='container'><div class='well'>" +
-					"<form:form>" +
+					"<form method='post' action='addtopic'>" +
 					"<div class='form-group'>" +
 					"<label for='usr'>Topic:</label>" +
-					"<input type='text' class='form-control' id='usr'>" +
+					"<input type='hidden' name='id' value='"+document.getElementById("week-id").innerHTML+"'>" +
+					"<input type='text' name='topic' class='form-control' id='usr'>" +
 					"</div>" +
 					"<button type='submit' class='btn btn-primary'>Submit</button>" +
-					"</form:form>" +
+					"</form>" +
 					"</div></div>";
 		}
 		else if (this.id != ""){
