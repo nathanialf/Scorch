@@ -62,7 +62,7 @@
 					<th><c:forEach var="week" items="${batch.getWeeks()}">
 							<tr>
 								<td>Week ${week.getNum()}
-								<td>${week.getTopics().size()} topics
+								<td>${not empty week.getTopics().size()?week.getTopics().size():'0'} topics
 								<td><button class="btn btn-primary"
 										onclick="window.open('week?wid=${week.getId()}', '_self');">View</button>
 						</c:forEach>

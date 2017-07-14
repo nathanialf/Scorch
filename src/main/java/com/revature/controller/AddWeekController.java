@@ -36,19 +36,13 @@ public class AddWeekController {
 		Batch b = (Batch)session.getAttribute("batch");
 		//Add a new week to the weeks
 		List<Week> wks = b.getWeeks();
-//		List<Topic> newTopics = new ArrayList<Topic>();
 		Week wk = new Week(b, wks.size()+1, null);
-//		newTopics.add(new Topic(wk,"Default Topic"));
+		
 		wks.add(wk);
 		b.setWeeks(wks);
-//		
-//		bDao.updateBatch(b);
-		
+
 		wDao.insertWeek(wk);
 
-//		rDao.insertReview(new Review(
-//				(User)session.getAttribute("user"),
-//				wk,"EMPTY TRAINER REVIEW"));
 		//Update the batch
 		session.setAttribute("batch", b);
 		return "indivbatch";
