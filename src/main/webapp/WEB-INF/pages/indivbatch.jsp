@@ -31,7 +31,7 @@
 		<div class="jumbotron">
 			<h1>${batch.getName()}</h1>
 			<br>
-			<h3>Trainer: ${trainer.getFirstname()} ${trainer.getLastname()}</h3>
+			<h3>Trainer: ${trainerForBatchPage.getFirstname()} ${trainerForBatchPage.getLastname()}</h3>
 		</div>
 		<div class="col-sm-6">
 			<div style="text-align: center;">
@@ -63,11 +63,16 @@
 							<tr>
 								<td>Week ${week.getNum()}
 								<td>${week.getTopics().size()} topics
-								<td><button class="btn btn-primary" onclick="window.open('week?wid=${week.getId()}', '_self');">View</button>
+								<td><button class="btn btn-primary"
+										onclick="window.open('week?wid=${week.getId()}', '_self');">View</button>
 						</c:forEach>
 			</table>
-			<c:if test="${user.getId() == trainer.getId()}">
-			<button type="button" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-plus"></span> Add Week</button>
+			<c:if test="${user.getId() == trainerForBatchPage.getId()}">
+				<form method="post" action="weekadd">
+					<button type="submit" class="btn btn-primary btn-block">
+						<span class="glyphicon glyphicon-plus"></span> Add Week
+					</button>
+				</form>
 			</c:if>
 		</div>
 	</div>

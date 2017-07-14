@@ -33,7 +33,7 @@ public class Week {
 	private int id;
 	
 	@Autowired
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="BATCH_ID")
 	private Batch batch;
 	

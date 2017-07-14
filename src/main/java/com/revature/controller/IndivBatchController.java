@@ -38,10 +38,10 @@ public class IndivBatchController {
 		//System.out.println(id);
 		int i = Integer.parseInt(request.getParameter("id"));
 		Batch b = batchService.getBatch(i);
-		modelMap.addAttribute("batch", b);
+		session.setAttribute("batch", b);
 		User t = userService.getTrainer(b);
 		System.out.println(t);
-		modelMap.addAttribute("trainer", t);
+		session.setAttribute("trainerForBatchPage", t);
 		return "indivbatch";	
 	}
 }

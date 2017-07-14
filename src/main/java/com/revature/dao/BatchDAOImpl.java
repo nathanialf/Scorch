@@ -78,7 +78,7 @@ public class BatchDAOImpl implements BatchDAO {
 			tx = session.beginTransaction();
 
 			// Update batch with new changes...
-			session.update(batch);
+			session.merge(batch);
 
 			tx.commit();
 		} catch (HibernateException e) {

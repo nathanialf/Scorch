@@ -44,7 +44,7 @@ public class Batch {
 	private Date startDate;
 
 	@Autowired
-	@OneToMany(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(fetch= FetchType.EAGER)
 	@JoinColumn(name="WEEK_ID")
 	private List<Week> weeks;
 	
