@@ -39,38 +39,40 @@ public class WeekController {
 		BatchDAO bDao = new BatchDAOImpl();
 		BatchService bs = new BatchService();
 		User current = (User) session.getAttribute("user");
-		int myBatchId = bs.getBatchIdOfCurrentAssociate(current);
-		Batch myBatch = bDao.getBatchById(myBatchId);
 
-		// Get current week from a parameter
-		WeekDAO wDao = new WeekDAOImpl();
-		int weekId = Integer.parseInt(request.getParameter("wid"));
-		Week week = wDao.getWeekById(weekId);
-		int currentWeek = week.getNum();
-		TopicDAO tDAO = new TopicDAOImpl();
-		List<Topic> t = tDAO.getAllTopicsByWeek(week);
-		week.setTopics(t);
-		session.setAttribute("weekId", currentWeek);
-		modelMap.addAttribute("week", week);
-		
-		// Get the associates in the batch
-		Set<User> setOfAssociates = myBatch.getAssociates();
+		if (current.getRole().getName().equals("Associate")) {
+			int myBatchId = bs.getBatchIdOfCurrentAssociate(current);
+			Batch myBatch = bDao.getBatchById(myBatchId);
 
-		// Get only the batch reviews from all reviews
-		List<Review> reviews = rDao.getAllReviews();
+			// Get current week from a parameter
+			WeekDAO wDao = new WeekDAOImpl();
+			int weekId = Integer.parseInt(request.getParameter("wid"));
+			Week week = wDao.getWeekById(weekId);
+			int currentWeek = week.getNum();
+			TopicDAO tDAO = new TopicDAOImpl();
+			List<Topic> t = tDAO.getAllTopicsByWeek(week);
+			week.setTopics(t);
+			session.setAttribute("weekId", currentWeek);
+			modelMap.addAttribute("week", week);
 
-		List<Review> myBatchReviews = new ArrayList<Review>();
-		for (User a : setOfAssociates) {
-			for (Review r : reviews) {
-				if (r.getUser().getId() == a.getId() && r.getWeek().getId() == currentWeek) {
-					myBatchReviews.add(r);
+			// Get the associates in the batch
+			Set<User> setOfAssociates = myBatch.getAssociates();
+
+			// Get only the batch reviews from all reviews
+			List<Review> reviews = rDao.getAllReviews();
+
+			List<Review> myBatchReviews = new ArrayList<Review>();
+			for (User a : setOfAssociates) {
+				for (Review r : reviews) {
+					if (r.getUser().getId() == a.getId() && r.getWeek().getId() == currentWeek) {
+						myBatchReviews.add(r);
+					}
 				}
 			}
+
+			System.out.println(myBatchReviews);
+			modelMap.addAttribute("myBatchReviews", myBatchReviews);
 		}
-
-		System.out.println(myBatchReviews);
-		modelMap.addAttribute("myBatchReviews", myBatchReviews);
-
 		return "week";
 	}
 
@@ -85,7 +87,7 @@ public class WeekController {
 		Batch myBatch = bDao.getBatchById(myBatchId);
 
 		// Get current week from a parameter
-		int currentWeek = (int)session.getAttribute("weekId");
+		int currentWeek = (int) session.getAttribute("weekId");
 		review.setUser(current);
 		review.setWeek(wDao.getWeekById(currentWeek));
 		Week week = wDao.getWeekById(currentWeek);
@@ -96,21 +98,24 @@ public class WeekController {
 		modelMap.addAttribute("week", week);
 
 		List<Review> reviews = rDao.getAllReviews();
-		int updated = 0;
-		postUpdateExit: for (Review r : reviews) {
-			if (r.getUser() != null) {
-				if (r.getUser().getId() == current.getId() && r.getWeek().getId() == currentWeek) {
-					r.setReview(review.getReview());
-					rDao.updateReview(r);
-					updated = 1;
-					break postUpdateExit;
+
+		// Do not do HQL unless there is content in the review
+		if (review.getReview().length() != 0) { 
+			int updated = 0;
+			postUpdateExit: for (Review r : reviews) {
+				if (r.getUser() != null) {
+					if (r.getUser().getId() == current.getId() && r.getWeek().getId() == currentWeek) {
+						r.setReview(review.getReview());
+						rDao.updateReview(r);
+						updated = 1;
+						break postUpdateExit;
+					}
 				}
 			}
+			if (updated == 0) {
+				rDao.insertReview(review);
+			}
 		}
-		if (updated == 0) {
-			rDao.insertReview(review);
-		}
-
 		// Update to include the newly added review!
 		reviews = rDao.getAllReviews();
 
