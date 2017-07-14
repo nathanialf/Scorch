@@ -69,7 +69,7 @@
 		</div>
 
 		<%-- All batch reviews --%>
-		<c:forEach items="${ sessionScope.myBatchReviews }" var="rev">
+		<c:forEach items="${ requestScope.myBatchReviews }" var="rev">
 			<div class="container">
 				<div class="well">
 					<c:out value="${ rev.getReview() }"></c:out>
