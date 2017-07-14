@@ -23,6 +23,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="static/css/style.css" />
+<script src="static/js/scorch.js"></script>
 </head>
 
 
@@ -39,7 +40,7 @@
 
 	<div class="container" id="topic_container">
 		<c:forEach var="topic" items="${week.getTopics()}">
-			<div class="topic">
+			<div class="topic" id="${topic.getId()}">
 				<br>${topic.getTopic()}</div>
 		</c:forEach>
 	</div>
