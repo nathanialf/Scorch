@@ -24,6 +24,22 @@
 	padding:15px 0px
 }
 
+.topic{
+	text-align:center;
+	width:96px;
+	height:96px;
+	border-radius:50%;
+	border-width: 8px;
+	border-color:orange;
+	background-color:lightgray;
+	display:inline-block;
+	margin:16px;
+	border-style:solid;
+	cursor:pointer;
+	margin-bottom:50px;
+	padding:12px;
+}
+
 .custom-alert{
 	width:92%;
 	margin-left:4%;
@@ -39,5 +55,13 @@ input{
 	border-style:solid;
 	border-color:lightgray;
 	padding:3px;
+}
+
+textarea{
+	border-radius:4px;
+}
+
+#topic_container{
+	text-align:center;
 }
 

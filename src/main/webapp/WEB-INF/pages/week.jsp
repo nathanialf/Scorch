@@ -22,6 +22,7 @@
 <!-- Latest compiled JavaScript -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="static/css/style.css" />
 </head>
 
 
@@ -36,36 +37,39 @@
 		</div>
 	</div>
 
+	<div class="container" id="topic_container">
+		<c:forEach var="topic" items="${week.getTopics()}">
+			<div class="topic">
+				<br>${topic.getTopic()}</div>
+		</c:forEach>
+	</div>
+
 	<c:if test="${sessionScope.user.getRole().getName() == \"Associate\"}">
 		<%-- Create Review from Associate --%>
 		<div class="container">
-			<div class="jumbotron">
-				<h1>Comments for the week</h1>
+			<c:if test="${param.submitted}">
+				<c:if test="${empty param.review}" var="noReview" />
 
-				<c:if test="${param.submitted}">
-					<c:if test="${empty param.review}" var="noReview" />
-
-					<c:if test="${not (noReview)}">
-						<c:set value="${param.review}" var="review" scope="request" />
-					</c:if>
+				<c:if test="${not (noReview)}">
+					<c:set value="${param.review}" var="review" scope="request" />
 				</c:if>
+			</c:if>
 
-				<form method="post">
-					<input type="hidden" name="submitted" value="true" />
+			<form method="post">
+				<input type="hidden" name="submitted" value="true" />
 
-					<P>
-						Enter your review:
-						<textarea name="review"></textarea>
-						<br />
-						<c:if test="${noReview}">
-							<small><font color="red"> Note: Write out a review
-									first </font></small>
-						</c:if>
-					</p>
-
-					<input type="submit" value="Submit" />
-				</form>
-			</div>
+				<P>
+					Enter your review:<br>
+					<textarea name="review" class="col-sm-12"></textarea>
+					<br />
+					<c:if test="${noReview}">
+					<br><br>
+						<div class="alert alert-danger"> Write out a review before submitting</div>
+					</c:if>
+				</p>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+			<br>
 		</div>
 
 		<%-- All batch reviews --%>
@@ -77,8 +81,8 @@
 			</div>
 		</c:forEach>
 	</c:if>
-	
-	
+
+
 </body>
 
 </html>

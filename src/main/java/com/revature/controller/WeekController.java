@@ -15,12 +15,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.revature.bean.Batch;
 import com.revature.bean.Review;
+import com.revature.bean.Topic;
 import com.revature.bean.User;
 import com.revature.bean.Week;
 import com.revature.dao.BatchDAO;
 import com.revature.dao.BatchDAOImpl;
 import com.revature.dao.ReviewDAO;
 import com.revature.dao.ReviewDAOImpl;
+import com.revature.dao.TopicDAO;
+import com.revature.dao.TopicDAOImpl;
 import com.revature.dao.WeekDAO;
 import com.revature.dao.WeekDAOImpl;
 import com.revature.service.BatchService;
@@ -42,9 +45,14 @@ public class WeekController {
 		// Get current week from a parameter
 		WeekDAO wDao = new WeekDAOImpl();
 		int weekId = Integer.parseInt(request.getParameter("wid"));
-		int currentWeek = wDao.getWeekById(weekId).getNum();
+		Week week = wDao.getWeekById(weekId);
+		int currentWeek = week.getNum();
+		TopicDAO tDAO = new TopicDAOImpl();
+		List<Topic> t = tDAO.getAllTopicsByWeek(week);
+		week.setTopics(t);
 		session.setAttribute("weekId", currentWeek);
-
+		modelMap.addAttribute("week", week);
+		
 		// Get the associates in the batch
 		Set<User> setOfAssociates = myBatch.getAssociates();
 
@@ -80,6 +88,12 @@ public class WeekController {
 		int currentWeek = (int)session.getAttribute("weekId");
 		review.setUser(current);
 		review.setWeek(wDao.getWeekById(currentWeek));
+		Week week = wDao.getWeekById(currentWeek);
+		TopicDAO tDAO = new TopicDAOImpl();
+		List<Topic> t = tDAO.getAllTopicsByWeek(week);
+		week.setTopics(t);
+		session.setAttribute("weekId", currentWeek);
+		modelMap.addAttribute("week", week);
 
 		List<Review> reviews = rDao.getAllReviews();
 		int updated = 0;

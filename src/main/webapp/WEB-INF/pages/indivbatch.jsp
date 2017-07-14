@@ -63,10 +63,7 @@
 							<tr>
 								<td>Week ${week.getNum()}
 								<td>${week.getTopics().size()} topics
-								<td><form:form method="post" action="#">
-										<button class="btn btn-primary" type="submit">View</button>
-										<input type="hidden" name="id" value="${week.getId()}">
-									</form:form>
+								<td><button class="btn btn-primary" onclick="window.open('week?wid=${week.getId()}', '_self');">View</button>
 						</c:forEach>
 			</table>
 			<c:if test="${user.getId() == trainer.getId()}">
