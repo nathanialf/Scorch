@@ -45,6 +45,7 @@
 			<c:choose>
 			<c:when test="${user.getId() == trainer.getId()}">
 				<div class="topic">
+				
 			</c:when>
 			<c:otherwise>
 				<div class="topic" id="${topic.getId()}">

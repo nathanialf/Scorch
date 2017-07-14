@@ -11,12 +11,22 @@ $(document).ready(function() {
 					"<input type='hidden' name='id' value='"+document.getElementById("week-id").innerHTML+"'>" +
 					"<input type='text' name='topic' class='form-control' id='usr'>" +
 					"</div>" +
-					"<button type='submit' class='btn btn-primary'>Submit</button>" +
+					"<button type='submit' class='btn btn-warning'>Submit</button>" +
 					"</form>" +
 					"</div></div>";
 		}
 		else if (this.id != ""){
-			alert("Rating topic: " + this.id); 
+			document.getElementById("hidden-form").innerHTML = "<div class='container'><div class='well'>" +
+			"<form method='post' action='addrating'>" +
+			"<div class='form-group'>" +
+			"<label for='usr'>Topic:</label><br>" +
+			"<input type='number' name='rating' min='0' max='5' value='3'>" +
+			"<input type='hidden' name='topic' value='"+this.id+"'>" +
+			"<input type='hidden' name='id' value='"+document.getElementById("week-id").innerHTML+"'>" +
+			"</div>" + 
+			"<button type='submit' class='btn btn-warning'>Submit</button>" +
+			"</form>" +
+			"</div></div>"
 		}
 	});
 	

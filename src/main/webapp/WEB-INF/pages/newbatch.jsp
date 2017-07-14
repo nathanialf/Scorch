@@ -45,6 +45,8 @@
 	<c:if test="${sessionScope.user == null}">
 		<jsp:forward page="Login" />
 	</c:if>
+	
+		<jsp:include page="../../static/pages/navbar.jsp" />
 	<div class="container-fluid">
 
 		<div class="jumbotron">
@@ -56,7 +58,7 @@
 					sessionScope.user.getRole().getName() == \"Manager\" }">
 			<form method="POST">
 				<div class="container-fluid">
-					<button type="submit" class="btn btn-primary">Create Batch</button>
+					<button type="submit" class="btn btn-warning">Create Batch</button>
 
 					<div class="form-group col-md-3">
 						<input type="text" class="form-control" name="name">

@@ -7,11 +7,6 @@
 
 <body>
 	<div class="container">
-		<div class="jumbotron">
-			<h1>Welcome, ${user.getFirstname()} ${user.getLastname()}</h1>
-			<p>You are an Associate</p>
-			<p>Here you can view your current and previous weeks of training.</p>
-		</div>
 		<%
 			BatchDAO bDAO = new BatchDAOImpl();
 			TopicDAO tDAO = new TopicDAOImpl();

@@ -23,5 +23,6 @@
 				<span class="glyphicon glyphicon-log-out"></span>&nbsp;Log-Out
 			</button>
 		</form:form>
+		<span style="float:right;margin-top:14px;">${user.getFirstname()} ${user.getLastname()}&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;
 	</div>
 </nav>

@@ -63,13 +63,13 @@
 							<tr>
 								<td>Week ${week.getNum()}
 								<td>${not empty week.getTopics().size()?week.getTopics().size():'0'} topics
-								<td><button class="btn btn-primary"
+								<td><button class="btn btn-warning"
 										onclick="window.open('week?wid=${week.getId()}', '_self');">View</button>
 						</c:forEach>
 			</table>
 			<c:if test="${user.getId() == trainerForBatchPage.getId()}">
 				<form method="post" action="weekadd">
-					<button type="submit" class="btn btn-primary btn-block">
+					<button type="submit" class="btn btn-warning btn-block">
 						<span class="glyphicon glyphicon-plus"></span> Add Week
 					</button>
 				</form>

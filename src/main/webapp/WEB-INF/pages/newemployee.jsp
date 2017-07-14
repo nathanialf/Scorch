@@ -61,7 +61,7 @@
 					</c:forEach>
 				</select>
 			</div><br><br><br><br>
-			<input type="submit" class="btn btn-info" value="Submit">
+			<input type="submit" class="btn btn-warning" value="Submit">
 		</form:form>
 
 	</div>

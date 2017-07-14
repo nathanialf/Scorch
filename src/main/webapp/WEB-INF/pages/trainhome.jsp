@@ -9,11 +9,6 @@
 
 <body>
 	<div class="container">
-		<div class="jumbotron">
-			<h1>Welcome, ${user.getFirstname()} ${user.getLastname()}</h1>
-			<p>You are a(n) ${user.getRole().getName()}</p>
-			<p>Here you can view the current and previous weeks of training</p>
-		</div>
 		<%
 			TopicDAO tDAO = new TopicDAOImpl();
 			User user = (User)session.getAttribute("user");
@@ -41,7 +36,7 @@
 					}
 					out.println("</div>");
 					out.println("<div class='col-sm-2' style='padding:0px;'>");
-					out.println("<br><button class='btn btn-primary' onclick=\"window.open('week?wid=" + w.getId() +"', '_self');\">View</button>");
+					out.println("<br><button class='btn btn-warning' onclick=\"window.open('week?wid=" + w.getId() +"', '_self');\">View</button>");
 					out.println("</div></div>");
 				}
 			}
