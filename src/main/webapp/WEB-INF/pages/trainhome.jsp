@@ -28,7 +28,7 @@
 			BatchDAO bDAO = new BatchDAOImpl();
 			b = bDAO.getBatchById(b.getId());
 			if (b != null) {
-				out.println("<h2>" + b.getName() + "</h2><br>");
+				out.println("<h2>" + b.getName() + "<button type='button' class='btn btn-default' onclick='week' style='display:inline-block;'><span class='glyphicon glyphicon-chevron-right'></span> Current Week</button></h2><br>");
 				
 				for (Week w : b.getWeeks()) {
 					List<Topic> t = tDAO.getAllTopicsByWeek(w);
