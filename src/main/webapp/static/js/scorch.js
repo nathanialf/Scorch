@@ -38,4 +38,8 @@ $(document).ready(function() {
 	  		$('#hidden-pass-fields').prop('disabled', false).addClass('hidden');
 		}
 	});
+	
+	$('.topic').on('click', function() {
+	    $(this).toggleClass('clicked');
+	});
 });

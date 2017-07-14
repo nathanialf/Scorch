@@ -25,7 +25,7 @@
 		<div style="width:400px; margin:auto;border:solid lightgray 1px;border-radius:4px;margin-top:200px;">
 			<img src="static/img/revlogo.png" class="col-sm-12"
 				style="background-color: #EFEFEF; border-bottom: 1px solid lightgray;" onerror="this.src='../static/img/revlogo.png'"></img>
-			</img> <br> <br>
+			</img> <br> 
 			<c:if test="${errorMessage != null}">
 				<div class="alert alert-danger custom-alert">${errorMessage}</div>
 			</c:if>
@@ -42,7 +42,9 @@
 				<form:errors path="username" cssClass="alert alert-danger"
 					element="div" />
 				<br>
-				<input type="submit" class="login-button" value="Login">
+				<br>
+				<input type="submit" class="btn btn-warning btn-block" value="Login">
+				<br>
 			</form:form>
 			</div>
 		</div>

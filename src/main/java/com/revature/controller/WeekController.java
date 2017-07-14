@@ -65,8 +65,9 @@ public class WeekController {
 			//get batch by week
 			myBatch = week.getBatch();
 		}
-		
+
 		modelMap.addAttribute("trainer", userService.getTrainer(myBatch));
+		modelMap.addAttribute("weekBatch", myBatch);
 
 		// Get the associates in the batch
 		Set<User> setOfAssociates = myBatch.getAssociates();
@@ -132,6 +133,7 @@ public class WeekController {
 		// Update to include the newly added review!
 		reviews = rDao.getAllReviews();
 
+		modelMap.addAttribute("weekBatch", myBatch);
 		// Get the associates in the batch
 		Set<User> setOfAssociates = myBatch.getAssociates();
 

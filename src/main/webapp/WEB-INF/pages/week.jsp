@@ -33,8 +33,8 @@
 	<%-- Topics with combined rating go here --%>
 	<div class="container">
 		<div class="jumbotron">
-			<h1>The Week Page</h1>
-			<p>Let's do some reviewing...</p>
+			<h1>${weekBatch.getName()}</h1>
+			<p>Week ${week.getNum()}</p>
 		</div>
 	</div>
 	

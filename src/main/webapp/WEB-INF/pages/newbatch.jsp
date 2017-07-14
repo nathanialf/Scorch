@@ -47,7 +47,7 @@
 	</c:if>
 	
 		<jsp:include page="../../static/pages/navbar.jsp" />
-	<div class="container-fluid">
+	<div class="container">
 
 		<div class="jumbotron">
 			<h1>Batches</h1>
