@@ -21,12 +21,13 @@
 <!-- Latest compiled JavaScript -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="static/js/scorch.js"></script>
 </head>
 <body>
 	<c:if test="${sessionScope.user == null}">
 		<jsp:forward page="../Login" />
 	</c:if>
-	<jsp:include page="../../static/pages/navbar.jsp"/>
+	<jsp:include page="../../static/pages/navbar.jsp" />
 	<div class="container">
 		<div class="jumbotron">
 			<h2>Employee Profile</h2>
@@ -36,39 +37,42 @@
 				<span class="input-group-addon"><i
 					class="glyphicon glyphicon-user"></i></span> <input type="text"
 					name="firstname" class="form-control" placeholder="First Name"
-					value="${user.getFirstname()}"
-					required>
+					value="${user.getFirstname()}" required>
 			</div>
 			<br>
 			<div class="input-group col-md-6">
 				<span class="input-group-addon"><i
 					class="glyphicon glyphicon-user"></i></span> <input type="text"
 					name="lastname" class="form-control" placeholder="Last Name"
-					value="${user.getLastname()}"
-					required>
+					value="${user.getLastname()}" required>
 			</div>
 			<br>
 			<div class="input-group col-md-6">
 				<span class="input-group-addon"><i
 					class="glyphicon glyphicon-user"></i></span> <input type="text"
 					name="username" class="form-control" placeholder="Username"
-					value="${user.getUsername()}"
-					required>
+					value="${user.getUsername()}" required>
 			</div>
 			<br>
-			<div class="form-group col-md-6">
-				<select name="role" class="form-control" id="sel1">
-					<c:forEach var="role" items="${roles}">
-						<c:choose>
-							<c:when test="${role.getName() == user.getRole().getName()}">
-								<option value="${role.getId()}" selected>${role.getName()}</option>
-							</c:when>
-							<c:otherwise>
-								<option value="${role.getId()}">${role.getName()}</option>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-				</select>
+			<h4>
+				Update Password <input name="pwtoggle" type="checkbox">
+			</h4>
+
+			<div id="hidden-pass-fields" class="hidden">
+				<div class="input-group col-md-6">
+					<span class="input-group-addon"><i
+						class="glyphicon glyphicon-user"></i></span> <input type="text"
+						name="oldpass" class="form-control"
+						placeholder="Input Old Password">
+				</div>
+				<br>
+
+				<div class="input-group col-md-6">
+					<span class="input-group-addon"><i
+						class="glyphicon glyphicon-user"></i></span> <input type="text"
+						name="password" class="form-control"
+						placeholder="Input New Password">
+				</div>
 			</div>
 			<br>
 			<br>

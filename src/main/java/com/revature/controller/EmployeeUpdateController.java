@@ -2,6 +2,7 @@ package com.revature.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -24,29 +25,30 @@ public class EmployeeUpdateController {
 
 	@Autowired
 	UserService userService;
+
 	/*
-	@RequestMapping(method = RequestMethod.GET)
-	public String getEmployees(ModelMap modelMap, HttpSession session) {
-		
-		
-		return "profile";
-	}
-	*/
+	 * @RequestMapping(method = RequestMethod.GET) public String
+	 * getEmployees(ModelMap modelMap, HttpSession session) {
+	 * 
+	 * 
+	 * return "profile"; }
+	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public String doLogin(@Valid User user, BindingResult bindingResult, ModelMap modelMap, HttpSession session) {
-		sessionUser = (User)session.getAttribute("user");
-		
-		int roleid = Integer.parseInt(user.getRole().getName());
+	public String doLogin(@Valid User user, BindingResult bindingResult, HttpServletRequest request,
+			HttpSession session) {
+		sessionUser = (User) session.getAttribute("user");
+
 		sessionUser.setFirstname(user.getFirstname());
 		sessionUser.setLastname(user.getLastname());
 		sessionUser.setUsername(user.getUsername());
-		sessionUser.setRole(userService.getRole(roleid));
-		
+
+		if (request.getParameter("oldpass").equals(sessionUser.getPassword()))
+			sessionUser.setPassword(user.getPassword());
+		else
+			sessionUser.setPassword(sessionUser.getPassword());
+
 		session.setAttribute("user", userService.updateUser(sessionUser));
 
-		List<Role> roles = userService.allRoles();
-		modelMap.addAttribute("roles", roles);
-		
 		return "profile";
 	}
 }
