@@ -24,10 +24,18 @@
 				for (Week w : b.getWeeks()) {
 					List<Topic> t = tDAO.getAllTopicsByWeek(w);
 					out.println("<div class='well container'>"+
-					"<div class = 'col-sm-5' style='padding:0px;'>" + "<h2>Week: " + w.getNum() +"</h2></div>");
-					out.println("<div class='col-sm-5' style='padding:0px;'><strong>Topics:</strong><br>");
+					"<div class = 'col-sm-2' style='padding:0px;'>" + "<h2>Week: " + w.getNum() +"</h2></div>");
+					/*
+					<div class="container" id="topic_container">
+					<c:forEach var="topic" items="${week.getTopics()}">
+						<div class="topic">
+							<br>${topic.getTopic()}</div>
+					</c:forEach>
+				</div>*/
+					
+					out.println("<div class='col-sm-8' id='topic_container' style='padding:0px;'>");
 					for (Topic top : t) {
-						out.println(top.getTopic() + "<br>");
+						out.println("<div class='topic-sm'><br>" + top.getTopic() + "</div>");
 					}
 					out.println("</div>");
 					out.println("<div class='col-sm-2' style='padding:0px;'>");

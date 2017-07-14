@@ -40,6 +40,22 @@
 	padding:12px;
 }
 
+.topic-sm{
+	text-align:center;
+	width:64px;
+	height:64px;
+	font-size:14px;
+	border-radius:50%;
+	border-width: 4px;
+	border-color:orange;
+	background-color:lightgray;
+	display:inline-block;
+	margin:16px;
+	border-style:solid;
+	cursor:pointer;
+	padding:2px;
+}
+
 .custom-alert{
 	width:92%;
 	margin-left:4%;
@@ -63,5 +79,9 @@ textarea{
 
 #topic_container{
 	text-align:center;
+}
+
+.hidden{
+	display:none;
 }
 
