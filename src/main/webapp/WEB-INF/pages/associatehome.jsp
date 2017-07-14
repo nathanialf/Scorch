@@ -19,14 +19,20 @@
 			UserService userService = new UserService();
 			if (b != null) {
 				out.println("<h2>" + b.getName() + "</h2><br><h3>Trainer: " + userService.getTrainer(b).getFirstname() + " " + userService.getTrainer(b).getLastname() + "</h3><br>");
+				//out.println("<div class='well container'>");
+				
 				for (Week w : b.getWeeks()) {
 					List<Topic> t = tDAO.getAllTopicsByWeek(w);
-					out.println("<a href='#'><div class = 'well well-sm'>" + "Week: " + w.getNum() +"<br>");
+					out.println("<div class='well container'>"+
+					"<div class = 'col-sm-5' style='padding:0px;'>" + "<h2>Week: " + w.getNum() +"</h2></div>");
+					out.println("<div class='col-sm-5' style='padding:0px;'><strong>Topics:</strong><br>");
 					for (Topic top : t) {
 						out.println(top.getTopic() + "<br>");
 					}
-					out.println("<button onclick=\"window.open('week?wid=" + w.getId() +"', '_self');\">View</button><br>");
-					out.println("</div></a>");
+					out.println("</div>");
+					out.println("<div class='col-sm-2' style='padding:0px;'>");
+					out.println("<br><button class='btn btn-primary' onclick=\"window.open('week?wid=" + w.getId() +"', '_self');\">View</button>");
+					out.println("</div></div>");
 				}
 			}
 		%>
