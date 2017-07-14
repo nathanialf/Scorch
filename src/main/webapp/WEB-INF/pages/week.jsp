@@ -59,6 +59,9 @@
 		</div>
 	</c:if>
 	</div>
+	
+	<div id="hidden-form">
+	</div>
 
 	<%-- Create Review from Associate --%>
 	<div class="container">
