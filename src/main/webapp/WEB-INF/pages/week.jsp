@@ -40,22 +40,37 @@
 
 	<div class="container" id="topic_container">
 		<c:forEach var="topic" items="${week.getTopics()}">
-			<div class="topic" id="${topic.getId()}">
-				<br>${topic.getTopic()}</div>
-		</c:forEach>
+			<c:choose>
+			<c:when test="${user.getId() == trainer.getId()}">
+				<div class="topic">
+			</c:when>
+			<c:otherwise>
+				<div class="topic" id="${topic.getId()}">
+			</c:otherwise>
+			</c:choose>
+			<br>${topic.getTopic()}
+	</div>
+	
+	</c:forEach>
+	<c:if test="${user.getId() == trainer.getId()}">
+		<div class="topic" id="add">
+			<br>
+			<span class="glyphicon glyphicon-plus"></span>
+		</div>
+	</c:if>
 	</div>
 
-	<c:if test="${sessionScope.user.getRole().getName() == \"Associate\"}">
-		<%-- Create Review from Associate --%>
-		<div class="container">
-			<c:if test="${param.submitted}">
-				<c:if test="${empty param.review}" var="noReview" />
+	<%-- Create Review from Associate --%>
+	<div class="container">
+		<c:if test="${param.submitted}">
+			<c:if test="${empty param.review}" var="noReview" />
 
-				<c:if test="${not (noReview)}">
-					<c:set value="${param.review}" var="review" scope="request" />
-				</c:if>
+			<c:if test="${not (noReview)}">
+				<c:set value="${param.review}" var="review" scope="request" />
 			</c:if>
+		</c:if>
 
+		<c:if test="${sessionScope.user.getRole().getName() == \"Associate\"}">
 			<form method="post">
 				<input type="hidden" name="submitted" value="true" />
 
@@ -64,24 +79,27 @@
 					<textarea name="review" class="col-sm-12"></textarea>
 					<br />
 					<c:if test="${noReview}">
-					<br><br>
-						<div class="alert alert-danger"> Write out a review before submitting</div>
+						<br>
+						<br>
+						<div class="alert alert-danger">Write out a review before
+							submitting</div>
 					</c:if>
 				</p>
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
-			<br>
-		</div>
 
-		<%-- All batch reviews --%>
-		<c:forEach items="${ requestScope.myBatchReviews }" var="rev">
-			<div class="container">
-				<div class="well">
-					<c:out value="${ rev.getReview() }"></c:out>
-				</div>
+		</c:if>
+		<br>
+	</div>
+
+	<%-- All batch reviews --%>
+	<c:forEach items="${ requestScope.myBatchReviews }" var="rev">
+		<div class="container">
+			<div class="well">
+				<c:out value="${ rev.getReview() }"></c:out>
 			</div>
-		</c:forEach>
-	</c:if>
+		</div>
+	</c:forEach>
 
 
 </body>

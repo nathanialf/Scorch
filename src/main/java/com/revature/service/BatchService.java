@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.revature.bean.Batch;
 import com.revature.bean.User;
+import com.revature.bean.Week;
 import com.revature.dao.BatchDAO;
 import com.revature.dao.BatchDAOImpl;
 import com.revature.dao.UserDAO;
@@ -66,5 +67,13 @@ public class BatchService {
 			}
 		}
 		return batchIdImIn;
+	}
+	
+	public Batch getBatchByWeek(Week w){
+		Batch batch = null;
+		
+		
+		
+		return batch;
 	}
 }

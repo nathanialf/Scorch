@@ -3,7 +3,12 @@
  */
 $(document).ready(function() {
 	$(".topic").click(function() {
-		
+		if(this.id == "add"){
+			alert("Adding topic");
+		}
+		else if (this.id != ""){
+			alert("Rating topic: " + this.id); 
+		}
 	});
 	
 	//Listen to checkbox - toggle password fields 

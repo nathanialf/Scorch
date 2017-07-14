@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,10 +28,14 @@ import com.revature.dao.TopicDAOImpl;
 import com.revature.dao.WeekDAO;
 import com.revature.dao.WeekDAOImpl;
 import com.revature.service.BatchService;
+import com.revature.service.UserService;
 
 @Controller
 @RequestMapping(value = "/week")
 public class WeekController {
+	
+	@Autowired
+	UserService userService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String getPage(HttpSession session, ModelMap modelMap, HttpServletRequest request) {
@@ -39,40 +44,48 @@ public class WeekController {
 		BatchDAO bDao = new BatchDAOImpl();
 		BatchService bs = new BatchService();
 		User current = (User) session.getAttribute("user");
+		
+		// Get current week from a parameter
+		WeekDAO wDao = new WeekDAOImpl();
+		int weekId = Integer.parseInt(request.getParameter("wid"));
+		Week week = wDao.getWeekById(weekId);
+		int currentWeek = week.getNum();
+		TopicDAO tDAO = new TopicDAOImpl();
+		List<Topic> t = tDAO.getAllTopicsByWeek(week);
+		week.setTopics(t);
+		session.setAttribute("weekId", currentWeek);
+		modelMap.addAttribute("week", week);
 
+		Batch myBatch = null;
 		if (current.getRole().getName().equals("Associate")) {
 			int myBatchId = bs.getBatchIdOfCurrentAssociate(current);
-			Batch myBatch = bDao.getBatchById(myBatchId);
+			myBatch = bDao.getBatchById(myBatchId);
+		}
+		else{
+			//get batch by week
+			myBatch = week.getBatch();
+		}
+		
+		modelMap.addAttribute("trainer", userService.getTrainer(myBatch));
 
-			// Get current week from a parameter
-			WeekDAO wDao = new WeekDAOImpl();
-			int weekId = Integer.parseInt(request.getParameter("wid"));
-			Week week = wDao.getWeekById(weekId);
-			int currentWeek = week.getNum();
-			TopicDAO tDAO = new TopicDAOImpl();
-			List<Topic> t = tDAO.getAllTopicsByWeek(week);
-			week.setTopics(t);
-			session.setAttribute("weekId", currentWeek);
-			modelMap.addAttribute("week", week);
+		// Get the associates in the batch
+		Set<User> setOfAssociates = myBatch.getAssociates();
 
-			// Get the associates in the batch
-			Set<User> setOfAssociates = myBatch.getAssociates();
+		// Get only the batch reviews from all reviews
+		List<Review> reviews = rDao.getAllReviews();
 
-			// Get only the batch reviews from all reviews
-			List<Review> reviews = rDao.getAllReviews();
-
-			List<Review> myBatchReviews = new ArrayList<Review>();
-			for (User a : setOfAssociates) {
-				for (Review r : reviews) {
-					if (r.getUser().getId() == a.getId() && r.getWeek().getId() == currentWeek) {
-						myBatchReviews.add(r);
-					}
+		List<Review> myBatchReviews = new ArrayList<Review>();
+		for (User a : setOfAssociates) {
+			for (Review r : reviews) {
+				if (r.getUser().getId() == a.getId() && r.getWeek().getId() == currentWeek) {
+					myBatchReviews.add(r);
 				}
 			}
-
-			System.out.println(myBatchReviews);
-			modelMap.addAttribute("myBatchReviews", myBatchReviews);
 		}
+
+		System.out.println(myBatchReviews);
+		modelMap.addAttribute("myBatchReviews", myBatchReviews);
+
 		return "week";
 	}
 
@@ -100,7 +113,7 @@ public class WeekController {
 		List<Review> reviews = rDao.getAllReviews();
 
 		// Do not do HQL unless there is content in the review
-		if (review.getReview().length() != 0) { 
+		if (review.getReview().length() != 0) {
 			int updated = 0;
 			postUpdateExit: for (Review r : reviews) {
 				if (r.getUser() != null) {
