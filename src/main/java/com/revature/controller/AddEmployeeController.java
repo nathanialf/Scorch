@@ -1,5 +1,7 @@
 package com.revature.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -10,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.revature.bean.Role;
 import com.revature.bean.User;
 import com.revature.dao.RoleDAO;
 import com.revature.dao.RoleDAOImpl;
@@ -34,6 +37,8 @@ public class AddEmployeeController {
 		user.setRole(r);
 		*/
 		userService.addEmployee(user);
+		List<Role> roles = userService.allRoles();
+		modelMap.addAttribute("roles", roles);
 		return "newemployee";
 	}
 
@@ -46,6 +51,8 @@ public class AddEmployeeController {
 		user.setRole(r);
 		*/
 		userService.addEmployee(user);
+		List<Role> roles = userService.allRoles();
+		modelMap.addAttribute("roles", roles);
 		return "newemployee";
 	}
 }
