@@ -83,7 +83,7 @@
 		<c:forEach var="topic" items="${week.getTopics()}">
 			<c:set var="hit" value="0" />
 			<c:choose>
-				<c:when test="${user.getId() == trainer.getId() || user.getRole().getName() == \"Evaluator\"}">
+				<c:when test="${user.getId() == trainer.getId() || user.getRole().getName() == \"Evaluator\" || user.getRole().getName() == \"Manager\"}">
 					<c:forEach var="tr" items="${ratings}">
 						<c:set var="avg" value="1" />
 						<c:set var="num" value="0" />
@@ -202,6 +202,17 @@
 		</c:if>
 		<br>
 	</div>
+	
+	<c:if test="${user.getRole().getId() == 1 || user.getRole().getId() == 2}"></c:if>
+	<%-- All batch reviews --%>
+	<c:forEach items="${ requestScope.qcReviews }" var="rev">
+		<div class="container">
+			<div class="well">
+				<h4>QC</h4>
+				<c:out value="${ rev.getReview() }"></c:out>
+			</div>
+		</div>
+	</c:forEach>
 
 	<%-- All batch reviews --%>
 	<c:forEach items="${ requestScope.myBatchReviews }" var="rev">

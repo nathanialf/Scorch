@@ -1,11 +1,13 @@
 package com.revature.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import com.revature.bean.Review;
 import com.revature.bean.User;
 import com.revature.util.HibernateUtil;
 
@@ -159,6 +161,26 @@ public class UserDAOImpl implements UserDAO {
 
 		return users;
 
+	}
+	
+	public List<User> getManagement() {
+		List<User> users = null;
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+		
+		try {
+			tx = session.beginTransaction();
+			users = session.createQuery("FROM User WHERE ROLE_ID = 1 OR ROLE_ID = 2").list();		
+		} catch (HibernateException e) {
+			if(tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
+		return users;
 	}
 
 }

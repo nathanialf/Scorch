@@ -28,6 +28,8 @@ import com.revature.dao.TopicDAO;
 import com.revature.dao.TopicDAOImpl;
 import com.revature.dao.TopicRatingDAO;
 import com.revature.dao.TopicRatingDAOImpl;
+import com.revature.dao.UserDAO;
+import com.revature.dao.UserDAOImpl;
 import com.revature.dao.WeekDAO;
 import com.revature.dao.WeekDAOImpl;
 import com.revature.service.BatchService;
@@ -81,10 +83,14 @@ public class WeekController {
 		// Get the associates in the batch
 		Set<User> setOfAssociates = myBatch.getAssociates();
 
+		UserDAO uDAO = new UserDAOImpl();
+		
 		// Get only the batch reviews from all reviews
 		List<Review> reviews = rDao.getAllReviews();
-
 		List<Review> myBatchReviews = new ArrayList<Review>();
+		List<User> management = uDAO.getManagement();
+		List<Review> qcReviews = new ArrayList<Review>();
+		
 		for (User a : setOfAssociates) {
 			for (Review r : reviews) {
 				if (r.getUser().getId() == a.getId() && r.getWeek().getId() == week.getId()) {
@@ -92,9 +98,18 @@ public class WeekController {
 				}
 			}
 		}
+		
+		for(User m : management){
+			for(Review r : reviews){
+				if(r.getUser().getId() == m.getId() && r.getWeek().getId() == week.getId()){
+					qcReviews.add(r);
+				}
+			}
+		}
 
 		System.out.println(myBatchReviews);
 		modelMap.addAttribute("myBatchReviews", myBatchReviews);
+		modelMap.addAttribute("qcReviews", qcReviews);
 
 		return "week";
 	}
