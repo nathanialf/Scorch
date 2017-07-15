@@ -52,7 +52,7 @@ public class UserDAOTest {
 		System.out.println("---AFTER THE TEST---");
 	}
 	
-	
+	@Ignore
 	@Test
 	public void insertTrainer(){
 		UserDAO x = new UserDAOImpl();
