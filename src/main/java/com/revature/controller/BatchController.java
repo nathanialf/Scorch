@@ -1,6 +1,6 @@
 package com.revature.controller;
 
-import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,9 +37,30 @@ public class BatchController {
 		List<User> aUsers = batchService.getAssociates();
 		System.out.println(aUsers);
 		
+		List<User> tUsers = batchService.getTrainers();
+		
 		BatchDAO bDao = new BatchDAOImpl();
 		List<Batch> aBatches = bDao.getAllBatches();
 		
+
+		String[][] bidAndItsTrainer = new String[aBatches.size()][2];
+		int i = 0;
+		for(User t : tUsers){
+			Set<Batch> tempB = t.getBatches();
+			for(Batch b : aBatches) {
+				for(Batch tb : tempB) {
+					if(b.getId() == tb.getId()){
+						bidAndItsTrainer[i][0]= String.valueOf(b.getId());
+						bidAndItsTrainer[i][1]= t.getFirstname() + " " + t.getLastname();
+						i++;
+						
+					}
+				}
+			}
+		}
+		
+		
+		session.setAttribute("stringyTrainers", bidAndItsTrainer);
 		session.setAttribute("associates", aUsers);
 		session.setAttribute("batches", aBatches);
 		

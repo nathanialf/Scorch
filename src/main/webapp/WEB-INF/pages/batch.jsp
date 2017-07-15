@@ -78,7 +78,11 @@
 					<th><c:forEach items="${ sessionScope.batches }" var="b">
 							<tr>
 								<td>${ b.getName() }
-								<td>Some Trainer
+								<c:forEach items="${ sessionScope.stringyTrainers }" var="t">
+								<c:if test="${ b.getId() == t[0] }">
+								<td>${ t[1] }
+								</c:if>
+								</c:forEach>
 								<td>${ b.getAssociates().size() }
 								<td>${ b.getStartDate() }
 								<td><form:form method="post" action="batchindividual">

@@ -38,6 +38,20 @@ public class BatchService {
 
 		return users;
 	}
+	
+	
+	public List<User> getTrainers() {
+		UserDAO uDao = new UserDAOImpl();
+		List<User> users = uDao.getAllUsers();
+
+		// Selects users that are not associates
+		Predicate<User> userPredicate = p -> !p.getRole().getName().equals("Trainer");
+
+		// Removes any user that is part of the predicate
+		users.removeIf(userPredicate);
+
+		return users;
+	}
 
 	public Batch getBatch(int id) {
 		BatchDAO bDao = new BatchDAOImpl();
