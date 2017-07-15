@@ -82,20 +82,21 @@
 	<div class="container" id="topic_container">
 		<c:forEach var="topic" items="${week.getTopics()}">
 			<c:set var="hit" value="0" />
+			
 			<c:choose>
-				<c:when test="${user.getId() == trainer.getId() || user.getRole().getName() == \"Evaluator\" || user.getRole().getName() == \"Manager\"}">
+				<c:when
+					test="${user.getId() == trainer.getId() || user.getRole().getId() == 2 || user.getRole().getId() == 1}">
+					<c:set var="avg" value="1" />
+					<c:set var="num" value="0" />
 					<c:forEach var="tr" items="${ratings}">
-						<c:set var="avg" value="1" />
-						<c:set var="num" value="0" />
 						<c:if test="${topic.getId() == tr.getTopic().getId()}">
 							<c:set var="avg" value="${avg + tr.getRating()}" />
 							<c:set var="num" value="${num + 1}" />
 						</c:if>
 					</c:forEach>
-					<div class="c100 p${avg} orange topic">
+					<div
+						class="c100 p<fmt:formatNumber value="${avg/num}" maxFractionDigits="0"/> orange topic">
 						<span>${topic.getTopic()}</span>
-
-
 						<div class="slice">
 							<div class="bar"></div>
 							<div class="fill"></div>
@@ -139,10 +140,10 @@
 		<c:if test="${user.getId() == trainer.getId()}">
 			<div class="c100 p100 orange topic" id="add">
 				<span class="glyphicon glyphicon-plus"></span>
-								<div class="slice">
-									<div class="bar"></div>
-									<div class="fill"></div>
-								</div>
+				<div class="slice">
+					<div class="bar"></div>
+					<div class="fill"></div>
+				</div>
 			</div>
 		</c:if>
 	</div>
@@ -194,16 +195,17 @@
 							submitting</div>
 					</c:if>
 				</p>
-				<br>
-				<input type="hidden" name="batchid" value="${weekBatch.getId()}">
+				<br> <input type="hidden" name="batchid"
+					value="${weekBatch.getId()}">
 				<button type="submit" class="btn btn-warning">Submit</button>
 			</form>
 
 		</c:if>
 		<br>
 	</div>
-	
-	<c:if test="${user.getRole().getId() == 1 || user.getRole().getId() == 2}"></c:if>
+
+	<c:if
+		test="${user.getRole().getId() == 1 || user.getRole().getId() == 2}"></c:if>
 	<%-- All batch reviews --%>
 	<c:forEach items="${ requestScope.qcReviews }" var="rev">
 		<div class="container">

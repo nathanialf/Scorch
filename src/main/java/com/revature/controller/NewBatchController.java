@@ -74,17 +74,17 @@ public class NewBatchController {
 		System.out.println("The current trainer is:");
 		System.out.println(trainer.getUsername());
 
-		Set<Batch> b = new HashSet<>();
-		b.add(batch);
+		Set<Batch> b = trainer.getBatches();
 
-		trainer.setBatches(b);
 
 		batch.setAssociates(a);
 
 		// First MUST create the batch
 		batchService.createBatch(batch);
+		b.add(batch);
 		session.setAttribute("note", "You have added a batch");
 
+		trainer.setBatches(b);
 		// THEN Update the user
 		uDao.updateUser(trainer);
 

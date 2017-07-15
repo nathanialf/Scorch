@@ -71,12 +71,13 @@ public class WeekController {
 			//get batch by week
 			myBatch = week.getBatch();
 		}
+		System.out.println(myBatch);
 
 		TopicRatingDAO trDAO = new TopicRatingDAOImpl();
 		List<TopicRating> trs = trDAO.getAllTopicRatings();
 		System.out.println("RATINGS: " + trs.size());
 		modelMap.addAttribute("ratings", trs);
-
+System.out.println(userService.getTrainer(myBatch));
 		modelMap.addAttribute("trainer", userService.getTrainer(myBatch));
 		modelMap.addAttribute("weekBatch", myBatch);
 
