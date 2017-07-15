@@ -107,6 +107,25 @@
 			</form>
 
 		</c:if>
+		<c:if test="${sessionScope.user.getRole().getName() == \"Evaluator\"}">
+			<form method="post">
+				<input type="hidden" name="submitted" value="true" />
+
+				<P>
+					Enter your review:<br>
+					<textarea name="review" class="col-sm-12"></textarea>
+					<br />
+					<c:if test="${noReview}">
+						<br>
+						<br>
+						<div class="alert alert-danger">Write out a review before
+							submitting</div>
+					</c:if>
+				</p>
+				<button type="submit" class="btn btn-warning">Submit</button>
+			</form>
+
+		</c:if>
 		<br>
 	</div>
 
