@@ -44,6 +44,26 @@ public class LoginController {
 	public String getLoginPage(ModelMap modelMap, HttpSession session){
 		
 		if(session.getAttribute("user") != null){
+			
+			if(((User)session.getAttribute("user")).getRole().getName().equals("Evaluator") || ((User)session.getAttribute("user")).getRole().getName().equals("Manager")) {
+				BatchDAO bDao = new BatchDAOImpl();
+				BatchService bServ = new BatchService();
+				List<Batch> aBatches = bDao.getAllBatches();
+				for(Batch b : aBatches) {
+					WeekDAO wdao = new WeekDAOImpl();
+					List<Week> weeks = wdao.getAllWeeks();
+					List<Week> batchWeeks = new ArrayList<Week>();
+					for (Week w : weeks) {
+						if (w.getBatch().getId() == b.getId())
+							batchWeeks.add(w);
+					}
+					b.setWeeks(batchWeeks);
+				}
+				modelMap.addAttribute("batches", aBatches);
+				modelMap.addAttribute("userService", userService);
+			}
+			
+			
 			return "home";
 		}
 
@@ -88,7 +108,7 @@ public class LoginController {
 			System.out.println(user.getUsername());
 			modelMap.addAttribute("user", authUser);
 			session.setAttribute("user", authUser);
-			if(authUser.getRole().getName().equals("Evaluator")) {
+			if(authUser.getRole().getName().equals("Evaluator") || authUser.getRole().getName().equals("Manager")) {
 				BatchDAO bDao = new BatchDAOImpl();
 				BatchService bServ = new BatchService();
 				List<Batch> aBatches = bDao.getAllBatches();

@@ -58,7 +58,7 @@
 				</c:forEach>
 			</c:otherwise>
 			</c:choose>
-			<br>${topic.getTopic()}
+			<br>${topic.getTopic()}</div>
 		</c:forEach>
 	</div>
 	
