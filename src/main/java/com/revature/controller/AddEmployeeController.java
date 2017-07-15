@@ -46,6 +46,7 @@ public class AddEmployeeController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String getEmployeesGet(@Valid User user, BindingResult bindingResult, ModelMap modelMap, HttpSession session) {
+		User sessUser = (User) session.getAttribute("user");
 		session.setAttribute("note", null);
 		user.setActive(1);
 		user.setPassword("generic");
@@ -57,6 +58,7 @@ public class AddEmployeeController {
 		session.setAttribute("note", "You have added a new employee");
 		List<Role> roles = userService.allRoles();
 		modelMap.addAttribute("roles", roles);
+		session.setAttribute("user", sessUser);
 		return "newemployee";
 	}
 }

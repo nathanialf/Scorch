@@ -83,7 +83,7 @@
 		<c:forEach var="topic" items="${week.getTopics()}">
 			<c:set var="hit" value="0" />
 			<c:choose>
-				<c:when test="${user.getId() == trainer.getId()}">
+				<c:when test="${user.getId() == trainer.getId() || user.getRole().getName() == \"Evaluator\"}">
 					<c:forEach var="tr" items="${ratings}">
 						<c:set var="avg" value="1" />
 						<c:set var="num" value="0" />

@@ -87,7 +87,7 @@ public class WeekController {
 		List<Review> myBatchReviews = new ArrayList<Review>();
 		for (User a : setOfAssociates) {
 			for (Review r : reviews) {
-				if (r.getUser().getId() == a.getId() && r.getWeek().getId() == currentWeek) {
+				if (r.getUser().getId() == a.getId() && r.getWeek().getId() == week.getId()) {
 					myBatchReviews.add(r);
 				}
 			}
