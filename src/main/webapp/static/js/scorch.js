@@ -39,7 +39,9 @@ $(document).ready(function() {
 		}
 	});
 	
-	$('.topic').on('click', function() {
+	$('.progress-circle').on('click', function() {
 	    $(this).toggleClass('clicked');
 	});
+	
+	
 });

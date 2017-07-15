@@ -37,41 +37,46 @@
 			<p>Week ${week.getNum()}</p>
 		</div>
 	</div>
-	
-	<div id="week-id" style="display:none;">${week.getId()}</div>
+
+	<div id="week-id" style="display: none;">${week.getId()}</div>
 
 	<div class="container" id="topic_container">
 		<c:forEach var="topic" items="${week.getTopics()}">
 			<c:choose>
-			<c:when test="${user.getId() == trainer.getId()}">
-				<div class="topic">
-				
-			</c:when>
-			<c:otherwise>
-				<div class="topic" id="${topic.getId()}">
-				<c:forEach var="tr" items="${ratings}">
-					<c:if test="${topic.getId() == tr.getTopic().getId()}">
-						<c:if test="${tr.getUser().getId() == user.getId()}">
+				<c:when test="${user.getId() == trainer.getId()}">
+					<div class="topic">
+						<c:forEach var="tr" items="${ratings}">
+							<c:set var="avg" value="1"/>
+							<c:set var="num" value="0"/>
+							<c:if test="${topic.getId() == tr.getTopic().getId()}">
+								<c:set var="avg" value="${avg + tr.getRating()}" />
+								<c:set var="num" value="${num + 1}" />
+							</c:if>
+						</c:forEach>
+						${avg / num}
+				</c:when>
+				<c:otherwise>
+					<div class="topic" id="${topic.getId()}">
+						<c:forEach var="tr" items="${ratings}">
+							<c:if test="${topic.getId() == tr.getTopic().getId()}">
+								<c:if test="${tr.getUser().getId() == user.getId()}">
 							${tr.getRating()}
 						</c:if>
-					</c:if>
-				</c:forEach>
-			</c:otherwise>
+							</c:if>
+						</c:forEach>
+				</c:otherwise>
 			</c:choose>
 			<br>${topic.getTopic()}</div>
-		</c:forEach>
-	</div>
-	
+	</c:forEach>
+
 	<c:if test="${user.getId() == trainer.getId()}">
 		<div class="topic" id="add">
-			<br>
-			<span class="glyphicon glyphicon-plus"></span>
+			<br> <span class="glyphicon glyphicon-plus"></span>
 		</div>
 	</c:if>
 	</div>
-	
-	<div id="hidden-form">
-	</div>
+
+	<div id="hidden-form"></div>
 
 	<%-- Create Review from Associate --%>
 	<div class="container">
