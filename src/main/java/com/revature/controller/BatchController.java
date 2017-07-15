@@ -31,11 +31,10 @@ public class BatchController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String getBatchPage(HttpSession session){
-		System.out.println("GET: /batch");
+		session.setAttribute("note", null);
 		
 		
 		List<User> aUsers = batchService.getAssociates();
-		System.out.println(aUsers);
 		
 		List<User> tUsers = batchService.getTrainers();
 		
@@ -70,7 +69,7 @@ public class BatchController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public String doNewBatch(@Valid Batch batch, HttpSession session, HttpServletRequest request){
-		System.out.println("POST: /batch");
+		session.setAttribute("note", null);
 		
 		
 		//List<User> associates = (List<User>)session.getAttribute("associates");
@@ -85,12 +84,8 @@ public class BatchController {
 			a.add(uDao.getUserById(Integer.parseInt(option)));
 		}
 		
-		System.out.println("The Associates in a set:");
-		System.out.println(a);
 		
 		User trainer = (User)session.getAttribute("user");
-		System.out.println("The current trainer is:");
-		System.out.println(trainer.getUsername());
 		
 		Set<Batch> b = new HashSet<>();
 		b.add(batch);

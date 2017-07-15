@@ -26,3 +26,9 @@
 		<span style="float:right;margin-top:14px;">${user.getFirstname()} ${user.getLastname()}&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;
 	</div>
 </nav>
+
+
+	<c:if test="${note != null}">
+		<div class="container"><div class="alert alert-warning">${note}</div></div> 
+	</c:if>
+	

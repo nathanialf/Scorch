@@ -41,6 +41,7 @@ public class AddRatingContoller {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String getEmployeesPost(ModelMap modelMap, HttpSession session, HttpServletRequest request) {
+		session.setAttribute("note", null);
 		int id = Integer.parseInt(request.getParameter("topic"));
 		int rating = Integer.parseInt(request.getParameter("rating"));
 		int weekID = Integer.parseInt(request.getParameter("id"));
@@ -51,11 +52,14 @@ public class AddRatingContoller {
 		TopicRatingDAO trDAO = new TopicRatingDAOImpl();
 		
 		TopicRating existing = trDAO.getTopicRatingByUserandTopic((User) session.getAttribute("user"), top);
-		if(existing == null)
+		if(existing == null){
 			trDAO.insertTopicRating(new TopicRating(0, (User)session.getAttribute("user"), top, rating));
+			session.setAttribute("note", "You have added a rating for " + top.getTopic());
+		}
 		else{
 			existing.setRating(rating);
 			trDAO.updateTopicRating(existing);
+			session.setAttribute("note", "You have changed your rating for " + top.getTopic());
 		}
 		
 		
@@ -118,6 +122,7 @@ public class AddRatingContoller {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String getEmployeesGet(ModelMap modelMap, HttpSession session) {
+		session.setAttribute("note", null);
 		return "week";
 	}
 }

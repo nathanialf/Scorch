@@ -29,6 +29,7 @@ public class AddWeekController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String addWeek(ModelMap modelMap, HttpSession session) {
+		session.setAttribute("note", null);
 		WeekDAO wDao = new WeekDAOImpl();
 		ReviewDAO rDao = new ReviewDAOImpl();
 		BatchDAO bDao = new BatchDAOImpl();
@@ -42,6 +43,7 @@ public class AddWeekController {
 		b.setWeeks(wks);
 
 		wDao.insertWeek(wk);
+		session.setAttribute("note", "You have added a new week to " + b.getName());
 
 		//Update the batch
 		session.setAttribute("batch", b);

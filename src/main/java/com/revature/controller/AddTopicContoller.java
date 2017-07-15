@@ -38,12 +38,15 @@ public class AddTopicContoller {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String getEmployeesPost(ModelMap modelMap, HttpSession session, HttpServletRequest request) {
+		session.setAttribute("note", null);
 		String topic = request.getParameter("topic");
 		int id = Integer.parseInt(request.getParameter("id"));
 		WeekDAO wDAO = new WeekDAOImpl();
 		Week w = wDAO.getWeekById(id);
 		TopicDAO tDAO = new TopicDAOImpl();
 		tDAO.insertTopic(new Topic(w, topic));
+		session.setAttribute("note", "You have added " + topic + " as a new topic in Week " + w.getNum());
+		
 		
 		
 		
@@ -101,6 +104,7 @@ public class AddTopicContoller {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String getEmployeesGet(ModelMap modelMap, HttpSession session) {
+		session.setAttribute("note", null);
 		return "week";
 	}
 }

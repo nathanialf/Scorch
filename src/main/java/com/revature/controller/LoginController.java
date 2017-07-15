@@ -42,6 +42,7 @@ public class LoginController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String getLoginPage(ModelMap modelMap, HttpSession session){
+		session.setAttribute("note", null);
 		
 		if(session.getAttribute("user") != null){
 			
@@ -79,6 +80,7 @@ public class LoginController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public String doLogin(@Valid User user, BindingResult bindingResult, ModelMap modelMap, HttpSession session){
+		session.setAttribute("note", null);
 		
 		/*
 		 * @Valid

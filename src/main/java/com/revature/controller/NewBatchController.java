@@ -37,7 +37,7 @@ public class NewBatchController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String getBatchPage(HttpSession session) {
-		System.out.println("GET: /batch");
+		session.setAttribute("note", null);
 
 		List<User> aUsers = batchService.getAssociates();
 		System.out.println(aUsers);
@@ -53,7 +53,7 @@ public class NewBatchController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String doNewBatch(@Valid Batch batch, HttpSession session, HttpServletRequest request) {
-		System.out.println("POST: /batch");
+		session.setAttribute("note", null);
 
 		// List<User> associates =
 		// (List<User>)session.getAttribute("associates");
@@ -83,6 +83,7 @@ public class NewBatchController {
 
 		// First MUST create the batch
 		batchService.createBatch(batch);
+		session.setAttribute("note", "You have added a batch");
 
 		// THEN Update the user
 		uDao.updateUser(trainer);

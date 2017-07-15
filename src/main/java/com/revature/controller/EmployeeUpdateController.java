@@ -37,6 +37,7 @@ public class EmployeeUpdateController {
 	public String doLogin(@Valid User user, BindingResult bindingResult, HttpServletRequest request,
 			HttpSession session) {
 		sessionUser = (User) session.getAttribute("user");
+		session.setAttribute("note", null);
 
 		sessionUser.setFirstname(user.getFirstname());
 		sessionUser.setLastname(user.getLastname());
@@ -48,6 +49,7 @@ public class EmployeeUpdateController {
 			sessionUser.setPassword(sessionUser.getPassword());
 
 		session.setAttribute("user", userService.updateUser(sessionUser));
+		session.setAttribute("note", "Your account has been updated");
 
 		return "profile";
 	}

@@ -41,11 +41,16 @@
 			<table class="table table-hover">
 				<tr>
 					<th>Name
-					<th>Username <c:forEach var="assoc"
+					<th>Username
+					<th> 
+					<c:forEach var="assoc"
 							items="${batch.getAssociates()}">
 							<tr>
 								<td>${assoc.getFirstname()} ${assoc.getLastname()}
 								<td>${assoc.getUsername()}
+								<td><c:if test="${user.getId() == trainerForBatchPage.getId()}">
+									<button class="btn btn-warning" onclick="window.open('employeedrop?id=${assoc.getId()}', '_self');">Drop</button>
+								</c:if>
 						</c:forEach>
 			</table>
 		</div>

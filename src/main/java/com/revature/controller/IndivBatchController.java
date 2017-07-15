@@ -39,6 +39,7 @@ public class IndivBatchController {
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public String doBatch(ModelMap modelMap, HttpSession session, HttpServletRequest request) {
+		session.setAttribute("note", null);
 		// System.out.println(id);
 		int i = Integer.parseInt(request.getParameter("id"));
 		Batch b = batchService.getBatch(i);

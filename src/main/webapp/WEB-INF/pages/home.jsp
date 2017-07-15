@@ -13,29 +13,34 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Revature TAP</title>
 <!--  <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.css" />-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Latest compiled JavaScript -->
-<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="static/css/style.css"/>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="static/css/style.css" />
 </head>
 <body>
 	<c:if test="${sessionScope.user == null}">
-		<jsp:forward page="Login"/>
+		<jsp:forward page="Login" />
 	</c:if>
-	<jsp:include page="../../static/pages/navbar.jsp"/>
+
+	<jsp:include page="../../static/pages/navbar.jsp" />
+	
 	<c:if test="${sessionScope.user.getRole().getName() == \"Associate\"}">
-		<jsp:include page="associatehome.jsp"/>
+		<jsp:include page="associatehome.jsp" />
 	</c:if>
 	<c:if test="${sessionScope.user.getRole().getName() == \"Trainer\"}">
-		<jsp:include page="trainhome.jsp"/>
+		<jsp:include page="trainhome.jsp" />
 	</c:if>
 	<c:if test="${sessionScope.user.getRole().getName() == \"Evaluator\"}">
-		<jsp:include page="evalhome.jsp"/>
+		<jsp:include page="evalhome.jsp" />
 	</c:if>
 	<c:if test="${sessionScope.user.getRole().getName() == \"Manager\"}">
-		<jsp:include page="managerhome.jsp"/>
+		<jsp:include page="managerhome.jsp" />
 	</c:if>
 </body>
 </html>

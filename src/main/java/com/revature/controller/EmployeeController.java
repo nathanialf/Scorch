@@ -24,6 +24,7 @@ public class EmployeeController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String getEmployees(ModelMap modelMap, HttpSession session) {
 
+		session.setAttribute("note", null);
 		sessionUser = (User) session.getAttribute("user");
 		if (sessionUser == null)
 			System.out.println("null");
@@ -36,6 +37,7 @@ public class EmployeeController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String doLogin(@Valid User user, BindingResult bindingResult, ModelMap modelMap, HttpSession session) {
+		session.setAttribute("note", null);
 		return "employee";
 	}
 }

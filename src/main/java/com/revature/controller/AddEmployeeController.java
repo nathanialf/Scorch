@@ -27,6 +27,7 @@ public class AddEmployeeController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String getEmployeesPost(@Valid User user, BindingResult bindingResult, ModelMap modelMap, HttpSession session) {
+		session.setAttribute("note", null);
 		user.setActive(1);
 		user.setPassword("generic");
 		int roleid = Integer.parseInt(user.getRole().getName());
@@ -37,6 +38,7 @@ public class AddEmployeeController {
 		user.setRole(r);
 		*/
 		userService.addEmployee(user);
+		session.setAttribute("note", "You have add a new employee");
 		List<Role> roles = userService.allRoles();
 		modelMap.addAttribute("roles", roles);
 		return "newemployee";
@@ -44,6 +46,7 @@ public class AddEmployeeController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String getEmployeesGet(@Valid User user, BindingResult bindingResult, ModelMap modelMap, HttpSession session) {
+		session.setAttribute("note", null);
 		user.setActive(1);
 		user.setPassword("generic");
 		/*
@@ -51,6 +54,7 @@ public class AddEmployeeController {
 		user.setRole(r);
 		*/
 		userService.addEmployee(user);
+		session.setAttribute("note", "You have added a new employee");
 		List<Role> roles = userService.allRoles();
 		modelMap.addAttribute("roles", roles);
 		return "newemployee";

@@ -26,6 +26,7 @@ public class NewEmployeeController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String getEmployees(ModelMap modelMap, HttpSession session) {
+		session.setAttribute("note", null);
 
 		List<Role> roles = userService.allRoles();
 		modelMap.addAttribute("roles", roles);
@@ -35,6 +36,7 @@ public class NewEmployeeController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String getEmployeesPost(@Valid User user, BindingResult bindingResult, ModelMap modelMap, HttpSession session) {
+		session.setAttribute("note", null);
 
 		List<Role> roles = userService.allRoles();
 		modelMap.addAttribute("roles", roles);

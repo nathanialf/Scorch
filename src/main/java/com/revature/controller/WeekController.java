@@ -42,6 +42,7 @@ public class WeekController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String getPage(HttpSession session, ModelMap modelMap, HttpServletRequest request) {
+		session.setAttribute("note", null);
 		ReviewDAO rDao = new ReviewDAOImpl();
 		// Get My batch -> Which has a the set of Associates in my Batch
 		BatchDAO bDao = new BatchDAOImpl();
@@ -100,6 +101,7 @@ public class WeekController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String getPostPage(@Valid Review review, HttpSession session, ModelMap modelMap) {
+		session.setAttribute("note", null);
 		WeekDAO wDao = new WeekDAOImpl();
 		ReviewDAO rDao = new ReviewDAOImpl();
 		BatchService bs = new BatchService();
@@ -130,12 +132,14 @@ public class WeekController {
 						r.setReview(review.getReview());
 						rDao.updateReview(r);
 						updated = 1;
+						session.setAttribute("note", "You have updated your review for this week");
 						break postUpdateExit;
 					}
 				}
 			}
 			if (updated == 0) {
 				rDao.insertReview(review);
+				session.setAttribute("note", "You have added a review for this week");
 			}
 		}
 		// Update to include the newly added review!

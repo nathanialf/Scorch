@@ -39,7 +39,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	$('.progress-circle').on('click', function() {
+	$('.topic').on('click', function() {
 	    $(this).toggleClass('clicked');
 	});
 	
