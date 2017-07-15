@@ -45,12 +45,15 @@
 					<th> 
 					<c:forEach var="assoc"
 							items="${batch.getAssociates()}">
+							<c:if test="${assoc.getActive() == 1}">
+							
 							<tr>
 								<td>${assoc.getFirstname()} ${assoc.getLastname()}
 								<td>${assoc.getUsername()}
 								<td><c:if test="${user.getId() == trainerForBatchPage.getId()}">
 									<button class="btn btn-warning" onclick="window.open('employeedrop?id=${assoc.getId()}', '_self');">Drop</button>
 								</c:if>
+							</c:if>
 						</c:forEach>
 			</table>
 		</div>
