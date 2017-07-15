@@ -78,9 +78,10 @@
 					<th><c:forEach items="${ sessionScope.batches }" var="b">
 							<tr>
 								<td>${ b.getName() }
+								<td>
 								<c:forEach items="${ sessionScope.stringyTrainers }" var="t">
 								<c:if test="${ b.getId() == t[0] }">
-								<td>${ t[1] }
+								${ t[1] }
 								</c:if>
 								</c:forEach>
 								<td>${ b.getAssociates().size() }

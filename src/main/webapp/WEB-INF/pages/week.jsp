@@ -22,8 +22,11 @@
 <!-- Latest compiled JavaScript -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="static/css/circle.css">
+
 <link rel="stylesheet" href="static/css/style.css" />
 <script src="static/js/scorch.js"></script>
+
 </head>
 
 
@@ -39,7 +42,7 @@
 	</div>
 
 	<div id="week-id" style="display: none;">${week.getId()}</div>
-
+	<!-- 
 	<div class="container" id="topic_container">
 		<c:forEach var="topic" items="${week.getTopics()}">
 			<c:choose>
@@ -75,11 +78,79 @@
 		</div>
 	</c:if>
 	</div>
+-->
+	<div class="container" id="topic_container">
+		<c:forEach var="topic" items="${week.getTopics()}">
+			<c:set var="hit" value="0" />
+			<c:choose>
+				<c:when test="${user.getId() == trainer.getId()}">
+					<c:forEach var="tr" items="${ratings}">
+						<c:set var="avg" value="1" />
+						<c:set var="num" value="0" />
+						<c:if test="${topic.getId() == tr.getTopic().getId()}">
+							<c:set var="avg" value="${avg + tr.getRating()}" />
+							<c:set var="num" value="${num + 1}" />
+						</c:if>
+					</c:forEach>
+					<div class="c100 p${avg} orange topic">
+						<span>${topic.getTopic()}</span>
+
+
+						<div class="slice">
+							<div class="bar"></div>
+							<div class="fill"></div>
+						</div>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="tr" items="${ratings}">
+						<c:if
+							test="${topic.getId() == tr.getTopic().getId() && tr.getUser().getId() == user.getId()}">
+							<c:set var="foo" value="${(tr.getRating() / 5) * 100}" />
+							<div
+								class="c100 p<fmt:formatNumber value="${foo}" maxFractionDigits="0"/> orange topic"
+								id="${topic.getId()}">
+								<span>${topic.getTopic()}</span>
+								<div class="slice">
+									<div class="bar"></div>
+									<div class="fill"></div>
+								</div>
+								<c:set var="hit" value="1" />
+							</div>
+						</c:if>
+					</c:forEach>
+
+					<c:forEach var="tr" items="${ratings}">
+						<c:if test="${hit == 0}">
+							<div class="c100 p0 orange topic" id="${topic.getId()}">
+								<span>${topic.getTopic()}</span>
+								<div class="slice">
+									<div class="bar"></div>
+									<div class="fill"></div>
+								</div>
+							</div>
+							<c:set var="hit" value="1" />
+						</c:if>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+
+		<c:if test="${user.getId() == trainer.getId()}">
+			<div class="c100 p100 orange topic" id="add">
+				<span class="glyphicon glyphicon-plus"></span>
+								<div class="slice">
+									<div class="bar"></div>
+									<div class="fill"></div>
+								</div>
+			</div>
+		</c:if>
+	</div>
 
 	<div id="hidden-form"></div>
 
 	<%-- Create Review from Associate --%>
-	<div class="container">
+	<div class="container well">
 		<c:if test="${param.submitted}">
 			<c:if test="${empty param.review}" var="noReview" />
 
@@ -103,6 +174,7 @@
 							submitting</div>
 					</c:if>
 				</p>
+				<br>
 				<button type="submit" class="btn btn-warning">Submit</button>
 			</form>
 
@@ -122,6 +194,7 @@
 							submitting</div>
 					</c:if>
 				</p>
+				<br>
 				<button type="submit" class="btn btn-warning">Submit</button>
 			</form>
 

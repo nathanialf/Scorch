@@ -24,34 +24,22 @@
 	padding: 15px 0px
 }
 
+#topic_container{
+	text-align:center;
+}
+
 .topic {
 	text-align: center;
-	width: 96px;
-	height: 96px;
-	border-radius: 50%;
-	border-width: 8px;
-	border-color: orange;
-	background-color: lightgray;
 	display: inline-block;
 	margin: 16px;
-	border-style: solid;
 	cursor: pointer;
 	margin-bottom: 50px;
-	padding: 12px 0px;
-	transition: background-color 0.5s ease, width 0.5s ease, height 0.5s ease, transform 0.5s ease;
 }
 
 .topic:hover {
-	background-color: orange;
-	transition: background-color 0.5s ease, width 0.5s ease, height 0.5s ease, transform 0.5s ease;
 }
 
 .topic.clicked{
-	transition: background-color 0.5s ease, width 0.5s ease, height 0.5s ease, transform 0.5s ease;
-	width:84px;
-	height:84px;
-	margin-bottom:56px;
-	padding: 6px 0px;
 }
 
 .topic-sm {
