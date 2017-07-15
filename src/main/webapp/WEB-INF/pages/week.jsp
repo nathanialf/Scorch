@@ -195,6 +195,7 @@
 					</c:if>
 				</p>
 				<br>
+				<input type="hidden" name="batchid" value="${weekBatch.getId()}">
 				<button type="submit" class="btn btn-warning">Submit</button>
 			</form>
 

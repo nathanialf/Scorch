@@ -100,14 +100,19 @@ public class WeekController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String getPostPage(@Valid Review review, HttpSession session, ModelMap modelMap) {
+	public String getPostPage(@Valid Review review, HttpSession session, ModelMap modelMap, HttpServletRequest request) {
 		session.setAttribute("note", null);
 		WeekDAO wDao = new WeekDAOImpl();
 		ReviewDAO rDao = new ReviewDAOImpl();
 		BatchService bs = new BatchService();
 		BatchDAO bDao = new BatchDAOImpl();
 		User current = (User) session.getAttribute("user");
-		int myBatchId = bs.getBatchIdOfCurrentAssociate(current);
+		int myBatchId = 0;
+		if(current.getRole().getName().equals("Associate"))
+			myBatchId = bs.getBatchIdOfCurrentAssociate(current);
+		else{
+			myBatchId = Integer.parseInt(request.getParameter("batchid"));
+		}
 		Batch myBatch = bDao.getBatchById(myBatchId);
 
 		// Get current week from a parameter
