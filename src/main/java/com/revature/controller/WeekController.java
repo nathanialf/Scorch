@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.revature.bean.Batch;
 import com.revature.bean.Review;
 import com.revature.bean.Topic;
+import com.revature.bean.TopicRating;
 import com.revature.bean.User;
 import com.revature.bean.Week;
 import com.revature.dao.BatchDAO;
@@ -25,6 +26,8 @@ import com.revature.dao.ReviewDAO;
 import com.revature.dao.ReviewDAOImpl;
 import com.revature.dao.TopicDAO;
 import com.revature.dao.TopicDAOImpl;
+import com.revature.dao.TopicRatingDAO;
+import com.revature.dao.TopicRatingDAOImpl;
 import com.revature.dao.WeekDAO;
 import com.revature.dao.WeekDAOImpl;
 import com.revature.service.BatchService;
@@ -65,6 +68,11 @@ public class WeekController {
 			//get batch by week
 			myBatch = week.getBatch();
 		}
+
+		TopicRatingDAO trDAO = new TopicRatingDAOImpl();
+		List<TopicRating> trs = trDAO.getAllTopicRatings();
+		System.out.println("RATINGS: " + trs.size());
+		modelMap.addAttribute("ratings", trs);
 
 		modelMap.addAttribute("trainer", userService.getTrainer(myBatch));
 		modelMap.addAttribute("weekBatch", myBatch);
@@ -132,6 +140,11 @@ public class WeekController {
 		}
 		// Update to include the newly added review!
 		reviews = rDao.getAllReviews();
+
+		TopicRatingDAO trDAO = new TopicRatingDAOImpl();
+		List<TopicRating> trs = trDAO.getAllTopicRatings();
+		System.out.println("RATINGS: " + trs.size());
+		modelMap.addAttribute("ratings", trs);
 
 		modelMap.addAttribute("weekBatch", myBatch);
 		// Get the associates in the batch

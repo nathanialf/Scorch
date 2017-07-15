@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="com.revature.bean.*"%>
+<%@ page import="com.revature.bean.*, com.revature.dao.*, java.util.*"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -49,6 +49,13 @@
 			</c:when>
 			<c:otherwise>
 				<div class="topic" id="${topic.getId()}">
+				<c:forEach var="tr" items="${ratings}">
+					<c:if test="${topic.getId() == tr.getTopic().getId()}">
+						<c:if test="${tr.getUser().getId() == user.getId()}">
+							${tr.getRating()}
+						</c:if>
+					</c:if>
+				</c:forEach>
 			</c:otherwise>
 			</c:choose>
 			<br>${topic.getTopic()}
@@ -91,7 +98,7 @@
 							submitting</div>
 					</c:if>
 				</p>
-				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="submit" class="btn btn-warning">Submit</button>
 			</form>
 
 		</c:if>

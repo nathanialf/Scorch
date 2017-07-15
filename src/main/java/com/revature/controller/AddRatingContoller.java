@@ -49,7 +49,14 @@ public class AddRatingContoller {
 		TopicDAO tDAO = new TopicDAOImpl();
 		Topic top = tDAO.getTopicById(id);
 		TopicRatingDAO trDAO = new TopicRatingDAOImpl();
-		trDAO.insertTopicRating(new TopicRating(0, (User)session.getAttribute("user"), top, rating));
+		
+		TopicRating existing = trDAO.getTopicRatingByUserandTopic((User) session.getAttribute("user"), top);
+		if(existing == null)
+			trDAO.insertTopicRating(new TopicRating(0, (User)session.getAttribute("user"), top, rating));
+		else{
+			existing.setRating(rating);
+			trDAO.updateTopicRating(existing);
+		}
 		
 		
 		
@@ -78,8 +85,12 @@ public class AddRatingContoller {
 			//get batch by week
 			myBatch = week.getBatch();
 		}
+		List<TopicRating> trs = trDAO.getAllTopicRatings();
+		System.out.println("RATINGS: " + trs.size());
+		modelMap.addAttribute("ratings", trs);
 		
 		modelMap.addAttribute("trainer", userService.getTrainer(myBatch));
+		modelMap.addAttribute("weekBatch", myBatch);
 
 		// Get the associates in the batch
 		Set<User> setOfAssociates = myBatch.getAssociates();

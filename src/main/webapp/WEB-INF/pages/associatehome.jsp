@@ -27,7 +27,7 @@
 					}
 					out.println("</div>");
 					out.println("<div class='col-sm-2' style='padding:0px;'>");
-					out.println("<br><button class='btn btn-primary' onclick=\"window.open('week?wid=" + w.getId() +"', '_self');\">View</button>");
+					out.println("<br><button class='btn btn-warning' onclick=\"window.open('week?wid=" + w.getId() +"', '_self');\">View</button>");
 					out.println("</div></div>");
 				}
 			}
