@@ -1,5 +1,8 @@
 package com.revature.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -11,7 +14,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.revature.bean.Batch;
 import com.revature.bean.User;
+import com.revature.bean.Week;
+import com.revature.dao.BatchDAO;
+import com.revature.dao.BatchDAOImpl;
+import com.revature.dao.WeekDAO;
+import com.revature.dao.WeekDAOImpl;
+import com.revature.service.BatchService;
 import com.revature.service.UserService;
 
 @Controller
@@ -78,6 +88,23 @@ public class LoginController {
 			System.out.println(user.getUsername());
 			modelMap.addAttribute("user", authUser);
 			session.setAttribute("user", authUser);
+			if(authUser.getRole().getName().equals("Evaluator")) {
+				BatchDAO bDao = new BatchDAOImpl();
+				BatchService bServ = new BatchService();
+				List<Batch> aBatches = bDao.getAllBatches();
+				for(Batch b : aBatches) {
+					WeekDAO wdao = new WeekDAOImpl();
+					List<Week> weeks = wdao.getAllWeeks();
+					List<Week> batchWeeks = new ArrayList<Week>();
+					for (Week w : weeks) {
+						if (w.getBatch().getId() == b.getId())
+							batchWeeks.add(w);
+					}
+					b.setWeeks(batchWeeks);
+				}
+				modelMap.addAttribute("batches", aBatches);
+				modelMap.addAttribute("userService", userService);
+			}
 			return "home";
 		}else{
 			modelMap.addAttribute("errorMessage", "username/password incorrect");

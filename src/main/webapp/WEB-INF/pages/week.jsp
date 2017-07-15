@@ -59,9 +59,9 @@
 			</c:otherwise>
 			</c:choose>
 			<br>${topic.getTopic()}
+		</c:forEach>
 	</div>
 	
-	</c:forEach>
 	<c:if test="${user.getId() == trainer.getId()}">
 		<div class="topic" id="add">
 			<br>
