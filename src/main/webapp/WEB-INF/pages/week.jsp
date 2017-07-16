@@ -82,7 +82,7 @@
 	<div class="container" id="topic_container">
 		<c:forEach var="topic" items="${week.getTopics()}">
 			<c:set var="hit" value="0" />
-			
+
 			<c:choose>
 				<c:when
 					test="${user.getId() == trainer.getId() || user.getRole().getId() == 2 || user.getRole().getId() == 1}">
@@ -95,7 +95,7 @@
 						</c:if>
 					</c:forEach>
 					<div
-						class="c100 p<fmt:formatNumber value="${avg/num}" maxFractionDigits="0"/> orange topic">
+						class="c100 p<fmt:formatNumber value="${(num / avg) * 100}" maxFractionDigits="0"/> orange topic">
 						<span>${topic.getTopic()}</span>
 						<div class="slice">
 							<div class="bar"></div>
@@ -151,7 +151,7 @@
 	<div id="hidden-form"></div>
 
 	<%-- Create Review from Associate --%>
-	<div class="container well">
+	<div class="container">
 		<c:if test="${param.submitted}">
 			<c:if test="${empty param.review}" var="noReview" />
 
@@ -161,45 +161,47 @@
 		</c:if>
 
 		<c:if test="${sessionScope.user.getRole().getName() == \"Associate\"}">
-			<form method="post">
-				<input type="hidden" name="submitted" value="true" />
+			<div class="well">
+				<form method="post">
+					<input type="hidden" name="submitted" value="true" />
 
-				<P>
-					Enter your review:<br>
-					<textarea name="review" class="col-sm-12"></textarea>
-					<br />
-					<c:if test="${noReview}">
-						<br>
-						<br>
-						<div class="alert alert-danger">Write out a review before
-							submitting</div>
-					</c:if>
-				</p>
-				<br>
-				<button type="submit" class="btn btn-warning">Submit</button>
-			</form>
-
+					<P>
+						Enter your review:<br>
+						<textarea name="review" class="col-sm-12"></textarea>
+						<br />
+						<c:if test="${noReview}">
+							<br>
+							<br>
+							<div class="alert alert-danger">Write out a review before
+								submitting</div>
+						</c:if>
+					</p>
+					<br>
+					<button type="submit" class="btn btn-warning">Submit</button>
+				</form>
+			</div>
 		</c:if>
 		<c:if test="${sessionScope.user.getRole().getName() == \"Evaluator\"}">
-			<form method="post">
-				<input type="hidden" name="submitted" value="true" />
+			<div class="well">
+				<form method="post">
+					<input type="hidden" name="submitted" value="true" />
 
-				<P>
-					Enter your review:<br>
-					<textarea name="review" class="col-sm-12"></textarea>
-					<br />
-					<c:if test="${noReview}">
-						<br>
-						<br>
-						<div class="alert alert-danger">Write out a review before
-							submitting</div>
-					</c:if>
-				</p>
-				<br> <input type="hidden" name="batchid"
-					value="${weekBatch.getId()}">
-				<button type="submit" class="btn btn-warning">Submit</button>
-			</form>
-
+					<P>
+						Enter your review:<br>
+						<textarea name="review" class="col-sm-12"></textarea>
+						<br />
+						<c:if test="${noReview}">
+							<br>
+							<br>
+							<div class="alert alert-danger">Write out a review before
+								submitting</div>
+						</c:if>
+					</p>
+					<br> <input type="hidden" name="batchid"
+						value="${weekBatch.getId()}">
+					<button type="submit" class="btn btn-warning">Submit</button>
+				</form>
+			</div>
 		</c:if>
 		<br>
 	</div>
