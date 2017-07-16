@@ -3,6 +3,7 @@ package com.revature.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -12,6 +13,7 @@ import com.revature.bean.Week;
 import com.revature.util.HibernateUtil;
 
 public class TopicDAOImpl implements TopicDAO {
+	final static Logger logger = Logger.getLogger(TopicDAOImpl.class);
 
 	@Override
 	public int insertTopic(Topic t) {
@@ -23,6 +25,7 @@ public class TopicDAOImpl implements TopicDAO {
 			tx = session.beginTransaction();
 			id = (Integer) session.save(t);
 			tx.commit();
+			logger.info("Created Topic "+t);
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -44,7 +47,7 @@ public class TopicDAOImpl implements TopicDAO {
 		try {
 			tx = session.beginTransaction();
 			topic = (Topic) session.get(Topic.class, id);
-
+			logger.info("Retrieved Topic By Id "+id);
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -66,7 +69,7 @@ public class TopicDAOImpl implements TopicDAO {
 		try {
 			tx = session.beginTransaction();
 			topics = session.createQuery("FROM Topic").list();
-
+			logger.info("Retrieved All Topics");
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -95,7 +98,7 @@ public class TopicDAOImpl implements TopicDAO {
 					weekTops.add(t);
 				}
 			}
-			
+			logger.info("Retrieved Topics By Week "+w);
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -117,6 +120,7 @@ public class TopicDAOImpl implements TopicDAO {
 			tx = session.beginTransaction();
 			session.update(t);
 			tx.commit();
+			logger.info("Updated Topic "+t);
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -138,7 +142,7 @@ public class TopicDAOImpl implements TopicDAO {
 			tx = session.beginTransaction();
 			session.delete(t);
 			tx.commit();
-
+			logger.info("Deleted Topic "+t);
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();

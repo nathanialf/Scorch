@@ -2,6 +2,7 @@ package com.revature.dao;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -12,6 +13,7 @@ import com.revature.bean.User;
 import com.revature.util.HibernateUtil;
 
 public class TopicRatingDAOImpl implements TopicRatingDAO{
+	final static Logger logger = Logger.getLogger(TopicRatingDAOImpl.class);
 
 	@Override
 	public int insertTopicRating(TopicRating t) {
@@ -23,6 +25,7 @@ public class TopicRatingDAOImpl implements TopicRatingDAO{
 			tx = session.beginTransaction();
 			id = (Integer) session.save(t);
 			tx.commit();
+			logger.info("Created Topic Rating "+t);
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -44,7 +47,7 @@ public class TopicRatingDAOImpl implements TopicRatingDAO{
 		try {
 			tx = session.beginTransaction();
 			rating = (TopicRating) session.get(TopicRating.class, id);
-
+			logger.info("Retrieved Topic Rating By Id "+id);
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -67,6 +70,7 @@ public class TopicRatingDAOImpl implements TopicRatingDAO{
 			tx = session.beginTransaction();
 			ratings = session.createQuery("FROM TopicRating").list();
 			System.out.println(ratings.size());
+			logger.info("Retrieved All Topic Ratings");
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -88,6 +92,7 @@ public class TopicRatingDAOImpl implements TopicRatingDAO{
 			tx = session.beginTransaction();
 			session.update(t);
 			tx.commit();
+			logger.info("Updated Topic Rating "+t);
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -108,7 +113,7 @@ public class TopicRatingDAOImpl implements TopicRatingDAO{
 			tx = session.beginTransaction();
 			session.delete(t);
 			tx.commit();
-
+			logger.info("Deleted Topic Rating "+t);
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -136,7 +141,7 @@ public class TopicRatingDAOImpl implements TopicRatingDAO{
 					break;
 				}
 			}
-			
+			logger.info("Retrieved Topic Rating By User "+user+" and Topic "+topic);
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();

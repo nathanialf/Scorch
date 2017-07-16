@@ -3,6 +3,7 @@ package com.revature.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -10,10 +11,11 @@ import org.hibernate.Transaction;
 import com.revature.bean.Batch;
 import com.revature.bean.User;
 import com.revature.bean.Week;
-import com.revature.service.UserService;
 import com.revature.util.HibernateUtil;
 
 public class BatchDAOImpl implements BatchDAO {
+
+	final static Logger logger = Logger.getLogger(BatchDAOImpl.class);
 
 	@Override
 	public Batch getBatchById(int batchId) {
@@ -29,6 +31,7 @@ public class BatchDAOImpl implements BatchDAO {
 					batchWeeks.add(w);
 			}
 			batch.setWeeks(batchWeeks);
+			logger.info("Retrieved Batch By Id "+batchId);
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		} finally {
@@ -57,6 +60,7 @@ public class BatchDAOImpl implements BatchDAO {
 
 			batchId = (Integer) session.save(batch);
 			tx.commit();
+			logger.info("Created Batch "+batch);
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -81,6 +85,7 @@ public class BatchDAOImpl implements BatchDAO {
 			session.merge(batch);
 
 			tx.commit();
+			logger.info("Updated Batch "+batch);
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -100,7 +105,7 @@ public class BatchDAOImpl implements BatchDAO {
 		try {
 			tx = session.beginTransaction();
 			batches = session.createQuery("FROM Batch").list();
-
+			logger.info("Retrieved All Batches");
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -123,7 +128,7 @@ public class BatchDAOImpl implements BatchDAO {
 			tx = session.beginTransaction();
 			session.delete(batch);
 			tx.commit();
-
+			logger.info("Deleted Batch "+batch);
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -170,7 +175,7 @@ public class BatchDAOImpl implements BatchDAO {
 			// batch = (Batch) session.createQuery("FROM Batch WHERE id in
 			// (select Batch.id from BATCH_ASSOC where User.id =
 			// :id)").setInteger("id", u.getId());
-
+			logger.info("Selected Batch By User "+u);
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();

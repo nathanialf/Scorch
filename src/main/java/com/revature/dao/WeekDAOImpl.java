@@ -2,15 +2,16 @@ package com.revature.dao;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.revature.bean.User;
 import com.revature.bean.Week;
 import com.revature.util.HibernateUtil;
 
 public class WeekDAOImpl implements WeekDAO {
+	final static Logger logger = Logger.getLogger(WeekDAOImpl.class);
 
 	@Override
 	public int insertWeek(Week week) {
@@ -22,6 +23,7 @@ public class WeekDAOImpl implements WeekDAO {
 			tx = session.beginTransaction();
 			id = (Integer) session.save(week);
 			tx.commit();
+			logger.info("Created Week "+week);
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -43,7 +45,7 @@ public class WeekDAOImpl implements WeekDAO {
 		try {
 			tx = session.beginTransaction();
 			week = (Week) session.get(Week.class, id);
-
+			logger.info("Retrieved Week By Id "+id);
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -65,6 +67,7 @@ public class WeekDAOImpl implements WeekDAO {
 			tx = session.beginTransaction();
 			session.update(week);
 			tx.commit();
+			logger.info("Updated Week "+week);
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -85,7 +88,7 @@ public class WeekDAOImpl implements WeekDAO {
 		try {
 			tx = session.beginTransaction();
 			weeks = session.createQuery("FROM Week").list();
-
+			logger.info("Retrieved All Weeks");
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();

@@ -11,6 +11,17 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/beans.xml</param-value>
 	</context-param>
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/log4j.properties</param-value>
+	</context-param>
+
+
+
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+
 
 	<!-- Next we hookup the spring mvc listener. this will take all requests 
 		and forward them to our dispatcher servlet. NORE: this is pulling from the 
@@ -36,7 +47,7 @@
 		<servlet-name>SpringDispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
+
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>

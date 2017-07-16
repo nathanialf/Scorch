@@ -2,15 +2,16 @@ package com.revature.dao;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.revature.bean.Batch;
 import com.revature.bean.Role;
 import com.revature.util.HibernateUtil;
 
 public class RoleDAOImpl implements RoleDAO {
+	final static Logger logger = Logger.getLogger(RoleDAOImpl.class);
 
 	@Override
 	public int insertRole(Role r) {
@@ -22,6 +23,7 @@ public class RoleDAOImpl implements RoleDAO {
 			tx = session.beginTransaction();
 			id = (Integer) session.save(r);
 			tx.commit();
+			logger.info("Created Role "+r);
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -40,6 +42,7 @@ public class RoleDAOImpl implements RoleDAO {
 		Role role = null;
 		try {
 			role = (Role) session.get(Role.class, id);
+			logger.info("Retrieved Role By Id "+id);
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		} finally {
@@ -56,6 +59,7 @@ public class RoleDAOImpl implements RoleDAO {
 		
 		try {
 			roles = session.createCriteria(Role.class).list();
+			logger.info("Retrieved All Roles");
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		} finally {
@@ -75,6 +79,7 @@ public class RoleDAOImpl implements RoleDAO {
 			session.update(r);
 			
 			tx.commit();
+			logger.info("Updated Role "+r);
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -94,7 +99,7 @@ public class RoleDAOImpl implements RoleDAO {
             tx = session.beginTransaction();
             session.delete(r);
             tx.commit();
-            
+            logger.info("Deleted Role "+r);
         }
         catch(HibernateException e) {
             if(tx != null) {
