@@ -53,14 +53,15 @@ public class BatchService {
 		BatchDAO bDao = new BatchDAOImpl();
 		System.out.println(bDao.getAllBatches());
 		List<Batch> batches = bDao.getAllBatches();
-		
-		firstBatch:
-		for (Batch b : batches) {
+
+		firstBatch: for (Batch b : batches) {
 			Set<User> userPile = b.getAssociates();
 			for (User u : userPile) {
-				if (u.getId() == currentAssociate.getId()) {
-					batchIdImIn = b.getId();
-					break firstBatch;
+				if (u != null) {
+					if (u.getId() == currentAssociate.getId()) {
+						batchIdImIn = b.getId();
+						break firstBatch;
+					}
 				}
 			}
 		}

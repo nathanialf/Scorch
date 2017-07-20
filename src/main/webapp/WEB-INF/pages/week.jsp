@@ -26,50 +26,59 @@
 
 
 <body>
-	<jsp:include page="../../static/pages/navbar.jsp"/>
-	
+	<jsp:include page="../../static/pages/navbar.jsp" />
+
 	<%-- Topics with combined rating go here --%>
 	<div class="container">
 		<div class="jumbotron">
 			<h1>The Week Page</h1>
 			<p>Let's do some reviewing...</p>
 		</div>
-		<p>This is some text.</p>
-		<p>This is another text.</p>
 	</div>
 
-	<%-- Create Review from Associate --%>
-	<div class="container">
-		<div class="jumbotron">
-			<h1>Comments for the week</h1>
+	<c:if test="${sessionScope.user.getRole().getName() == \"Associate\"}">
+		<%-- Create Review from Associate --%>
+		<div class="container">
+			<div class="jumbotron">
+				<h1>Comments for the week</h1>
 
-			<c:if test="${param.submitted}">
-				<c:if test="${empty param.review}" var="noReview" />
+				<c:if test="${param.submitted}">
+					<c:if test="${empty param.review}" var="noReview" />
 
-				<c:if
-					test="${not (noReview)}">
-					<c:set value="${param.review}" var="review" scope="request" />
-				</c:if>
-			</c:if>
-
-			<form method="post">
-				<input type="hidden" name="submitted" value="true" />
-
-				<P>
-					Enter your review: 
-					<textarea name="review"></textarea><br />
-					<c:if test="${noReview}">
-						<small><font color="red"> Note: Write out a review first </font></small>
+					<c:if test="${not (noReview)}">
+						<c:set value="${param.review}" var="review" scope="request" />
 					</c:if>
-				</p>
+				</c:if>
 
-				<input type="submit" value="Submit" />
-			</form>
+				<form method="post">
+					<input type="hidden" name="submitted" value="true" />
+
+					<P>
+						Enter your review:
+						<textarea name="review"></textarea>
+						<br />
+						<c:if test="${noReview}">
+							<small><font color="red"> Note: Write out a review
+									first </font></small>
+						</c:if>
+					</p>
+
+					<input type="submit" value="Submit" />
+				</form>
+			</div>
 		</div>
-	</div>
-	
-	<%-- All reviews --%>
 
+		<%-- All batch reviews --%>
+		<c:forEach items="${ sessionScope.myBatchReviews }" var="rev">
+			<div class="container">
+				<div class="well">
+					<c:out value="${ rev.getReview() }"></c:out>
+				</div>
+			</div>
+		</c:forEach>
+	</c:if>
+	
+	
 </body>
 
 </html>

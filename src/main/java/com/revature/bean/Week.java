@@ -90,6 +90,6 @@ public class Week {
 
 	@Override
 	public String toString() {
-		return "Week [id=" + id + ", num=" + num + ", topics=" + topics + "]";
+		return "Week [id=" + id + ", num=" + num + "]";
 	}
 }
